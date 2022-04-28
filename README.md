@@ -1,5 +1,5 @@
 # <img src="docs/cn.svg" width="22" height="22"> Caliban.Nano
-[![Build Status](![Azure DevOps builds](https://img.shields.io/azure-devops/build/cuhsat/Caliban.Nano/2?logo=windows&style=for-the-badge))](https://dev.azure.com/cuhsat/Caliban.Nano)
+[![Build Status](https://img.shields.io/azure-devops/build/cuhsat/Caliban.Nano/2?logo=windows&logoColor=white&style=for-the-badge)](https://dev.azure.com/cuhsat/Caliban.Nano)
 [![NuGet Package](https://img.shields.io/nuget/v/Caliban.Nano.svg?logo=nuget&logoColor=white&style=for-the-badge&colorB=green)](https://www.nuget.org/packages/Caliban.Nano)
 
 A very tiny, but very powerful MVVM .NET 6 framework, using convenience over configuration with no further dependencies.
