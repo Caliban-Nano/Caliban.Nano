@@ -9,7 +9,7 @@
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>cuhsat</Authors>
-    <Description>A very tiny, but very powerful MVVM .NET 6 framework, using convenience over configuration with no further dependencies.</Description>
+    <Description>A very tiny, but very powerful MVVM .NET 6 framework</Description>
     <Copyright>Christian Uhsat</Copyright>
     <PackageProjectUrl>https://github.com/Caliban-Nano</PackageProjectUrl>
     <PackageIcon>cn.png</PackageIcon>
