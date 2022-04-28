@@ -7,7 +7,7 @@ A very tiny, but very powerful MVVM framework for .NET 6, using convenience over
 
 # How to get
 
-Latest package is available over [nuget](https://www.nuget.org/packages/Caliburn.Micro/).
+Latest package is available over [nuget](https://www.nuget.org/packages/Caliban.Nano).
 
 ```powershell
 PM> Install-Package Caliban.Nano
