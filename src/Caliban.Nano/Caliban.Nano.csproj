@@ -13,7 +13,7 @@
     <Copyright>MIT License</Copyright>
     <PackageProjectUrl>https://github.com/Caliban-Nano</PackageProjectUrl>
     <PackageIcon>cn.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReadmeFile></PackageReadmeFile>
     <RepositoryUrl>https://github.com/Caliban-Nano/Caliban.Nano.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <NeutralLanguage>en</NeutralLanguage>
@@ -29,10 +29,6 @@
 
   <ItemGroup>
     <None Include="..\..\docs\cn.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="..\..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
