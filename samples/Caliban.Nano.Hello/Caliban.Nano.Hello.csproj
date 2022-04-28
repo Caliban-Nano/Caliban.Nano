@@ -7,7 +7,12 @@
     <UseWPF>true</UseWPF>
     <BaseOutputPath>..\..\artifacts</BaseOutputPath>
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+    <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="app.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Caliban.Nano\Caliban.Nano.csproj" />
