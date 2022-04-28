@@ -12,7 +12,7 @@ PM> Install-Package Caliban.Nano
 ```
 
 # How to start
-The fastest way to get started, is to take a look at the [Hello Project](samples/) included, showing most of the frameworks features.
+The fastest way to get started, is to take a look at the [Hello Project](samples/Caliban.Nano.Hello/) included, showing most of the frameworks features.
 
 # Features
 
