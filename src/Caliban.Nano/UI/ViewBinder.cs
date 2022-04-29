@@ -140,7 +140,7 @@ namespace Caliban.Nano.UI
             {
                 var op = source.GetType().GetProperty(path);
 
-                if (op is null && BindingUtils.IsGuarded(path))
+                if (op is null && BindingUtils.IsGuard(path))
                 {
                     return true; // Ignore missing guards
                 }
@@ -174,7 +174,7 @@ namespace Caliban.Nano.UI
 
         private static class BindingUtils
         {
-            public static bool IsGuarded(string path) => path.StartsWith("Can");
+            public static bool IsGuard(string path) => path.StartsWith("Can");
             public static string GetPathWithGuard(string name) => $"Can{name}";
             public static string GetPathWithView(string name) => $"{name}.View";
             public static DependencyProperty? GetDependencyProperty(string property, Type type)
