@@ -138,11 +138,11 @@ namespace Caliban.Nano.UI
 
             private static bool Bind(FrameworkElement target, object source, string property, string path)
             {
-                var sp = source.GetType().GetProperty(path);
+                var op = source.GetType().GetProperty(path);
 
-                if (sp is null && !path.Contains('.'))
+                if (op is null && BindingUtils.IsGuarded(path))
                 {
-                    return true;
+                    return true; // Ignore missing guards
                 }
 
                 var dp = BindingUtils.GetDependencyProperty(property, target.GetType());
@@ -153,7 +153,7 @@ namespace Caliban.Nano.UI
                     {
                         Source = source,
                         Path = new PropertyPath(path),
-                        Mode = sp?.CanWrite ?? false
+                        Mode = op?.CanWrite ?? false
                             ? BindingMode.TwoWay
                             : BindingMode.OneWay,
 
@@ -174,6 +174,7 @@ namespace Caliban.Nano.UI
 
         private static class BindingUtils
         {
+            public static bool IsGuarded(string path) => path.StartsWith("Can");
             public static string GetPathWithGuard(string name) => $"Can{name}";
             public static string GetPathWithView(string name) => $"{name}.View";
             public static DependencyProperty? GetDependencyProperty(string property, Type type)
