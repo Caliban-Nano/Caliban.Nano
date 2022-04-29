@@ -138,6 +138,13 @@ namespace Caliban.Nano.UI
 
             private static bool Bind(FrameworkElement target, object source, string property, string path)
             {
+                var sp = source.GetType().GetProperty(path);
+
+                if (sp is null && !path.Contains('.'))
+                {
+                    return true;
+                }
+
                 var dp = BindingUtils.GetDependencyProperty(property, target.GetType());
 
                 if (BindingOperations.GetBindingExpression(target, dp) is null)
@@ -146,7 +153,7 @@ namespace Caliban.Nano.UI
                     {
                         Source = source,
                         Path = new PropertyPath(path),
-                        Mode = source.GetType().GetProperty(path)?.CanWrite ?? false
+                        Mode = sp?.CanWrite ?? false
                             ? BindingMode.TwoWay
                             : BindingMode.OneWay,
 

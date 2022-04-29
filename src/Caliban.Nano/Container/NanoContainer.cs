@@ -51,14 +51,12 @@ namespace Caliban.Nano.Container
             {
                 if (!GetValue(type, out instance) || instance is null)
                 {
-                    var ctors = type.GetConstructors();
+                    var ctor = GetConstructor(type);
 
-                    if (ctors.Length != 1)
+                    if (ctor is null)
                     {
-                        throw new NanoContainerException($"Type {type.Name} has more than one constructor");
+                        throw new NanoContainerException($"Type {type.Name} has no constructor");
                     }
-
-                    var ctor = ctors.Single();
 
                     instance = ctor.Invoke(GetParameters(ctor));
 
@@ -121,11 +119,24 @@ namespace Caliban.Nano.Container
             }
         }
 
+        private ConstructorInfo? GetConstructor(Type type)
+        {
+            lock (_storage)
+            {
+                return type.GetConstructors()
+                    .OrderBy(c => c.GetParameters().Count(p => _storage.ContainsKey(p.ParameterType)))
+                    .LastOrDefault();
+            }
+        }
+
         private object?[] GetParameters(ConstructorInfo info)
         {
-            return info.GetParameters()
-                .Select(p => GetValue(p.ParameterType, out var value) ? value : null)
-                .ToArray();
+            lock (_storage)
+            {
+                return info.GetParameters()
+                    .Select(p => _storage.TryGetValue(p.ParameterType, out var value) ? value : null)
+                    .ToArray();
+            }
         }
     }
 }

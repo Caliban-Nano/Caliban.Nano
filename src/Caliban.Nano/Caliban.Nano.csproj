@@ -9,16 +9,18 @@
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>cuhsat</Authors>
-    <Description>A very tiny, but very powerful MVVM .NET 6 framework</Description>
-    <Copyright>Christian Uhsat</Copyright>
-    <PackageProjectUrl>https://github.com/Caliban-Nano</PackageProjectUrl>
-    <PackageIcon>cn.png</PackageIcon>
-    <PackageReadmeFile></PackageReadmeFile>
+    <Description>A very tiny, but very powerful MVVM framework</Description>
+    <Copyright>Copyright ©️ 2022 Christian Uhsat</Copyright>
+    <PackageProjectUrl>https://caliban.uhsat.de</PackageProjectUrl>
+    <PackageIcon>Logo.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/Caliban-Nano/Caliban.Nano.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Company>Caliban.Nano</Company>
+    <PackageTags>caliban;nano;wpf;mvvm;framework;dependency-injection;event-aggregation;service-locator;automatic-binding</PackageTags>
+    <VersionPrefix>1.1.0</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,7 +30,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\docs\cn.png">
+    <None Include="..\..\docs\Logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>

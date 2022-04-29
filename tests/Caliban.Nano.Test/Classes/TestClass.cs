@@ -1,4 +1,6 @@
-﻿namespace Caliban.Nano.Test.Classes
+﻿using System;
+
+namespace Caliban.Nano.Test.Classes
 {
     /// <summary>
     /// Internal test class.
@@ -11,6 +13,11 @@
         public IDependency? D { get; private set; } = null;
 
         private readonly IDependency? _a = null;
+
+        public TestClass(IDependency _)
+        {
+            throw new Exception("Wrong constructor");
+        }
 
         public TestClass(IDependency? a = null, IDependency? b = null)
         {
