@@ -11,14 +11,8 @@ namespace Caliban.Nano.UI
         /// <summary>
         /// List of known assemblies.
         /// </summary>
-        public static readonly List<Assembly> Assemblies
+        public static readonly List<Assembly> Sources
             = new() { typeof(TypeFinder).Assembly };
-
-        /// <summary>
-        /// List of known namespaces.
-        /// </summary>
-        public static readonly List<string> Namespaces
-            = new() { "Caliban.Nano" };
 
         /// <summary>
         /// Type name transformation rule.
@@ -50,20 +44,18 @@ namespace Caliban.Nano.UI
         /// <exception cref="TypeLoadException">Thrown if the type could not be loaded.</exception>
         public static object FindType(string name)
         {
-            foreach (var assembly in Assemblies)
-            {
-                foreach (var @namespace in Namespaces)
-                {
-                    var type = assembly.GetType($"{@namespace}.{name}");
+            var type = Sources
+                .SelectMany(x => x.GetTypes())
+                .Where(x => x.Name == name)
+                .Where(x => x.IsClass)
+                .FirstOrDefault();
 
-                    if (type is not null)
-                    {
-                        return IoC.Resolve(type);
-                    }
-                }
+            if (type is null)
+            {
+                throw new TypeLoadException($"Type {name} could not be found");
             }
 
-            throw new TypeLoadException(name);
+            return IoC.Resolve(type);
         }
     }
 }

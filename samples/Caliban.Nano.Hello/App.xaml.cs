@@ -14,9 +14,7 @@ namespace Caliban.Nano.Hello
         void OnStartup(object sender, StartupEventArgs e)
         {
             new Bootstrap()
-                .AddAssembly(Assembly.GetExecutingAssembly())
-                .AddNamespace("Caliban.Nano.Hello.Shell")
-                .AddNamespace("Caliban.Nano.Hello.Hello")
+                .AddSource(Assembly.GetExecutingAssembly())
                 .Register<IEventAggregator>(new EventAggregator())
                 .Show<ShellViewModel>();
         }

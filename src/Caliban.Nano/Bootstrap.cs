@@ -32,24 +32,12 @@ namespace Caliban.Nano
         /// </summary>
         /// <param name="assembly">The new assembly.</param>
         /// <returns>The bootstrap instance.</returns>
-        public Bootstrap AddAssembly([NotNull] Assembly assembly)
+        public Bootstrap AddSource([NotNull] Assembly assembly)
         {
-            TypeFinder.Assemblies.Add(assembly);
+            TypeFinder.Sources.Add(assembly);
 
             return this;
         }   
-
-        /// <summary>
-        /// Adds a namespace to the type finder.
-        /// </summary>
-        /// <param name="namespace">The new namespace.</param>
-        /// <returns>The bootstrap instance.</returns>
-        public Bootstrap AddNamespace([NotNull] string @namespace)
-        {
-            TypeFinder.Namespaces.Add(@namespace);
-
-            return this;
-        }
 
         /// <summary>
         /// Registers an instance for a type at the used container.

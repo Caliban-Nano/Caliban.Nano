@@ -15,8 +15,7 @@ namespace Caliban.Nano.Test.UI
 
             IoC.Resolve = container.Resolve;
 
-            TypeFinder.Assemblies.Add(GetType().Assembly);
-            TypeFinder.Namespaces.Add("Caliban.Nano.Test.Classes");
+            TypeFinder.Sources.Add(GetType().Assembly);
         }
 
         [TestMethod]
