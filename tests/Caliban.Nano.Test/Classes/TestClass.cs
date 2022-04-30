@@ -16,7 +16,7 @@ namespace Caliban.Nano.Test.Classes
 
         public TestClass(IDependency _)
         {
-            throw new Exception("Wrong constructor");
+            throw new InvalidOperationException("Wrong constructor");
         }
 
         public TestClass(IDependency? a = null, IDependency? b = null)

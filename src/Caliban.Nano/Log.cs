@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using Caliban.Nano.Contracts;
-using Caliban.Nano.Exceptions;
 
 namespace Caliban.Nano
 {
@@ -18,7 +17,7 @@ namespace Caliban.Nano
                 {
                     return _logger ??= IoC.Get<ILogger>();
                 }
-                catch (NanoContainerException)
+                catch (TypeLoadException)
                 {
                     return _logger = new TraceLogger();
                 }

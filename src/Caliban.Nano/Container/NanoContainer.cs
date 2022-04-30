@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Caliban.Nano.Contracts;
-using Caliban.Nano.Exceptions;
 
 namespace Caliban.Nano.Container
 {
@@ -55,14 +54,14 @@ namespace Caliban.Nano.Container
 
                     if (ctor is null)
                     {
-                        throw new NanoContainerException($"Type {type.Name} has no constructor");
+                        throw new TypeLoadException($"Type {type.Name} has no constructor");
                     }
 
                     instance = ctor.Invoke(GetParameters(ctor));
 
                     if (instance is null)
                     {
-                        throw new NanoContainerException($"Type {type.Name} could not be created");
+                        throw new TypeLoadException($"Type {type.Name} could not be created");
                     }
                 }
             }

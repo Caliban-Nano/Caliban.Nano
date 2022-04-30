@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using System.Text.RegularExpressions;
-using Caliban.Nano.Exceptions;
 
 namespace Caliban.Nano.UI
 {
@@ -48,7 +47,7 @@ namespace Caliban.Nano.UI
         /// </summary>
         /// <param name="name">The type name.</param>
         /// <returns>An injected instance.</returns>
-        /// <exception cref="TypeNotFoundException">Thrown if the type could not be found.</exception>
+        /// <exception cref="TypeLoadException">Thrown if the type could not be loaded.</exception>
         public static object FindType(string name)
         {
             foreach (var assembly in Assemblies)
@@ -64,7 +63,7 @@ namespace Caliban.Nano.UI
                 }
             }
 
-            throw new TypeNotFoundException(name);
+            throw new TypeLoadException(name);
         }
     }
 }

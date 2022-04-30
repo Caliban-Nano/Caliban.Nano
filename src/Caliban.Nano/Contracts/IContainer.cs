@@ -17,6 +17,7 @@ namespace Caliban.Nano.Contracts
         /// </summary>
         /// <typeparam name="T">The type.</typeparam>
         /// <returns>The resolved or created instance.</returns>
+        /// <exception cref="TypeLoadException">Thrown if the type could not be loaded.</exception>
         object Resolve<T>();
 
         /// <summary>
@@ -24,6 +25,7 @@ namespace Caliban.Nano.Contracts
         /// </summary>
         /// <param name="request">The requested type.</param>
         /// <returns>The resolved or created instance.</returns>
+        /// <exception cref="TypeLoadException">Thrown if the request could not be loaded.</exception>
         object Resolve([NotNull] object request);
 
         /// <summary>
