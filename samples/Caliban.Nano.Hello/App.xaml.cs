@@ -14,7 +14,6 @@ namespace Caliban.Nano.Hello
         void OnStartup(object sender, StartupEventArgs e)
         {
             new Bootstrap()
-                .AddSource(Assembly.GetExecutingAssembly())
                 .Register<IEventAggregator>(new EventAggregator())
                 .Show<ShellViewModel>();
         }

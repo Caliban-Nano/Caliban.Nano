@@ -12,7 +12,7 @@ namespace Caliban.Nano.UI
         /// List of known assemblies.
         /// </summary>
         public static readonly List<Assembly> Sources
-            = new() { typeof(TypeFinder).Assembly };
+            = new() { };
 
         /// <summary>
         /// Type name transformation rule.

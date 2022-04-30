@@ -11,11 +11,9 @@ namespace Caliban.Nano.Test.UI
         [TestInitialize]
         public void Setup()
         {
-            var container = new NanoContainer();
-
-            IoC.Resolve = container.Resolve;
-
             TypeFinder.Sources.Add(GetType().Assembly);
+
+            IoC.Resolve = new NanoContainer().Resolve;
         }
 
         [TestMethod]

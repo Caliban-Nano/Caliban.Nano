@@ -22,6 +22,8 @@ namespace Caliban.Nano
         /// <param name="container">The used container.</param>
         public Bootstrap(IContainer? container = null)
         {
+            TypeFinder.Sources.Add(Assembly.GetCallingAssembly());
+
             Container = container ?? new NanoContainer();
 
             IoC.Resolve = Container.Resolve;
