@@ -11,8 +11,7 @@ namespace Caliban.Nano.UI
         /// <summary>
         /// List of known assemblies.
         /// </summary>
-        public static readonly List<Assembly> Sources
-            = new() { };
+        public static readonly List<Assembly> Sources = new();
 
         /// <summary>
         /// Type name transformation rule.
