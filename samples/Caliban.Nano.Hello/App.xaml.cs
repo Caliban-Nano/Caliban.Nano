@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using System.Windows;
+﻿using System.Windows;
 using Caliban.Nano.Contracts;
 using Caliban.Nano.Events;
 using Caliban.Nano.Hello.Shell;
