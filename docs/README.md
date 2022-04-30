@@ -99,14 +99,14 @@ Decouple view models with the built in composition pattern.
 ```
 
 ```cs
-public CompanyViewModel() : ViewModel
+public CarViewModel() : ViewModel.OneActive
 {
-    LoadUserAsync();
+    SwitchDriverAsync();
 }
 
-public async void LoadUserAsync()
+public async void SwitchDriverAsync()
 {
-    await Activate(new UserViewModel());
+    await ActivateItem(new PersonViewModel());
 }
 ```
 

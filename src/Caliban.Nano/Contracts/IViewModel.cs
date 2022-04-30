@@ -21,13 +21,13 @@
         bool CanClose { get; }
 
         /// <summary>
-        /// Executed asynchronously on activation.
+        /// Executed on activation (async).
         /// </summary>
         /// <returns>True if activation was successful.</returns>
         Task<bool> OnActivate();
 
         /// <summary>
-        /// Executed asynchronously on deactivation.
+        /// Executed on deactivation (async).
         /// </summary>
         /// <returns>True if deactivation was successful.</returns>
         Task<bool> OnDeactivate();

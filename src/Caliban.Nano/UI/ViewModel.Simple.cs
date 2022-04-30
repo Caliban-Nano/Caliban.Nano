@@ -3,9 +3,9 @@
 namespace Caliban.Nano.UI
 {
     /// <summary>
-    /// A base view model using the composition pattern.
+    /// A base base view model.
     /// </summary>
-    public abstract class ViewModel : Conductor, IViewModel
+    public abstract partial class ViewModel : NotifyBase, IViewModel
     {
         /// <inheritdoc />
         public object View { get; protected set; }

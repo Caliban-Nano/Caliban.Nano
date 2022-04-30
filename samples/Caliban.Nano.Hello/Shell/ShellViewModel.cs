@@ -5,7 +5,7 @@ using Caliban.Nano.UI;
 
 namespace Caliban.Nano.Hello.Shell
 {
-    public class ShellViewModel : ViewModel, IWindow, IHandle<string>
+    public class ShellViewModel : ViewModel.OneActive, IWindow, IHandle<string>
     {
         public IEventAggregator Events { get; init; }
         public string DisplayName => "Hello";
@@ -20,7 +20,7 @@ namespace Caliban.Nano.Hello.Shell
 
         public async void LoadAsync()
         {
-            await Activate(new HelloViewModel());
+            await ActivateItem(new HelloViewModel());
         }
 
         public void Handle(string name)
