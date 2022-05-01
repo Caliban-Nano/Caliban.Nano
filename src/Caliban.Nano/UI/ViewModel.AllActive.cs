@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using Caliban.Nano.Contracts;
 
 namespace Caliban.Nano.UI
