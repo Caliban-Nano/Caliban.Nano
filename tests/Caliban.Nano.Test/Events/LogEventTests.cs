@@ -1,4 +1,4 @@
-using Caliban.Nano.Events;
+﻿using Caliban.Nano.Events;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Caliban.Nano.Test.Events

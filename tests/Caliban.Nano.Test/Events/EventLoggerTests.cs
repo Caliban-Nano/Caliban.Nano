@@ -1,4 +1,4 @@
-using Caliban.Nano.Contracts;
+﻿using Caliban.Nano.Contracts;
 using Caliban.Nano.Events;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

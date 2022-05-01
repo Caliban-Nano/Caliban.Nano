@@ -22,7 +22,7 @@ namespace Caliban.Nano.Test.Events
 
             var count = 0;
 
-            void handler(int value)
+            void handler(object? sender, int value)
             {
                 count += value;
             }

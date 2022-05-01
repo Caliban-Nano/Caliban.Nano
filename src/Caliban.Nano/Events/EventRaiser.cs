@@ -3,21 +3,23 @@
     /// <summary>
     /// A simple class for raising an event externally.
     /// </summary>
-    /// <typeparam name="T">The event argument type.</typeparam>
+    /// <typeparam name="T">The event arguments type.</typeparam>
     public class EventRaiser<T>
     {
         /// <summary>
-        /// Enclosed event with one argument.
+        /// Enclosed event handler.
         /// </summary>
-        protected event Action<T>? Event;
+        /// <typeparam name="T">The event arguments type.</typeparam>
+        protected event EventHandler<T>? Event;
 
         /// <summary>
         /// Attaches an event handler to the enclosed event.
         /// </summary>
         /// <param name="@this">The event raiser.</param>
         /// <param name="handler">The event handler.</param>
+        /// <typeparam name="T">The event arguments type.</typeparam>
         /// <returns>Returns the given event raiser.</returns>
-        public static EventRaiser<T> operator +(EventRaiser<T> @this, Action<T> handler)
+        public static EventRaiser<T> operator +(EventRaiser<T> @this, EventHandler<T> handler)
         {
             @this.Event += handler;
 
@@ -29,8 +31,9 @@
         /// </summary>
         /// <param name="@this">The event raiser.</param>
         /// <param name="handler">The event handler.</param>
+        /// <typeparam name="T">The event arguments type.</typeparam>
         /// <returns>Returns the given event raiser.</returns>
-        public static EventRaiser<T> operator -(EventRaiser<T> @this, Action<T> handler)
+        public static EventRaiser<T> operator -(EventRaiser<T> @this, EventHandler<T> handler)
         {
             @this.Event -= handler;
 
@@ -40,10 +43,10 @@
         /// <summary>
         /// Raises the enclosed event.
         /// </summary>
-        /// <param name="arg">The event argument.</param>
-        public void Raise(T arg)
+        /// <param name="e">The event arguments.</param>
+        public void Raise(T e)
         {
-            Event?.Invoke(arg);
+            Event?.Invoke(this, e);
         }
     }
 }
