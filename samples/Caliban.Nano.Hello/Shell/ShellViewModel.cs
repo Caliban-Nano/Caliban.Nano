@@ -15,10 +15,10 @@ namespace Caliban.Nano.Hello.Shell
             Events = events;
             Events.Subscribe<string>(this);
 
-            LoadAsync();
+            HelloAsync();
         }
 
-        public async void LoadAsync()
+        public async void HelloAsync()
         {
             await ActivateItem(new HelloViewModel());
         }
