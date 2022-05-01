@@ -12,7 +12,7 @@ namespace Caliban.Nano.Test.Container
         private static IContainer? Container { get; set; }
 
         [TestInitialize]
-        public void Setup()
+        public void Initialize()
         {
             Container = new NanoContainer();
         }

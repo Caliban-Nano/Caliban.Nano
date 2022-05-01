@@ -4,21 +4,20 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Caliban.Nano.Test.UI
 {
     [TestClass]
-    public class NotifyBaseTests : NotifyBase
+    public class NotifyBaseTests
     {
-        [TestInitialize]
-        public void Setup()
+        private class Notify : NotifyBase
         {
-            PropertyChanged += (sender, e) =>
-            {
-                Assert.AreEqual(e.PropertyName, "Test");
-            };
+            public void Test() => NotifyPropertyChanged();
         }
 
         [TestMethod]
         public void NotifyPropertyChangedTest()
         {
-            NotifyPropertyChanged("Test");
+            var notify = new Notify();
+
+            notify.PropertyChanged += (_, e) => Assert.AreEqual(e.PropertyName, "Test");
+            notify.Test();
         }
     }
 }

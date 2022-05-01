@@ -12,13 +12,23 @@ namespace Caliban.Nano.Test.UI
         private ViewModel? Test;
 
         [TestInitialize]
-        public void Setup()
+        public void Initialize()
         {
             TypeFinder.Sources.Add(GetType().Assembly);
 
             IoC.Resolve = new NanoContainer().Resolve;
 
             Test = new TestViewModel();
+        }
+
+        [TestMethod]
+        public void ConstructorTest()
+        {
+            Assert.IsNotNull(Test?.View);
+
+            Assert.IsFalse(Test?.IsActive);
+
+            Assert.IsTrue(Test?.CanClose);
         }
 
         [TestMethod]

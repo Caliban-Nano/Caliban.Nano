@@ -9,7 +9,7 @@ namespace Caliban.Nano.Test.UI
     public class TypeFinderTests
     {
         [TestInitialize]
-        public void Setup()
+        public void Initialize()
         {
             TypeFinder.Sources.Add(GetType().Assembly);
 

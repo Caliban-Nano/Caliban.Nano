@@ -14,7 +14,7 @@ namespace Caliban.Nano.Test.Events
         private static readonly Action<object> Handler = (_) => { };
 
         [TestInitialize]
-        public void Setup()
+        public void Initialize()
         {
             Events = new EventAggregator();
         }
