@@ -5,7 +5,7 @@ namespace Caliban.Nano.Test.Classes
     /// <summary>
     /// Internal test class.
     /// </summary>
-    internal class TestClass : IDependency
+    internal sealed class TestClass : IDependency
     {
         public IDependency? A => _a;
         public IDependency? B { get; set; } = null;

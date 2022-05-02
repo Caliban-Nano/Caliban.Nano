@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Caliban.Nano.Test.Events
 {
     [TestClass]
-    public class EventAggregatorTests
+    public sealed class EventAggregatorTests
     {
         private IEventAggregator? Events { get; set; }
 

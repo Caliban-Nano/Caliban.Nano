@@ -4,9 +4,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Caliban.Nano.Test.UI
 {
     [TestClass]
-    public class NotifyBaseTests
+    public sealed class NotifyBaseTests
     {
-        private class Notify : NotifyBase
+        private sealed class Notify : NotifyBase
         {
             public void Test() => NotifyPropertyChanged();
         }

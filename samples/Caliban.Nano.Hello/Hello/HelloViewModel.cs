@@ -3,7 +3,7 @@ using Caliban.Nano.UI;
 
 namespace Caliban.Nano.Hello.Hello
 {
-    public class HelloViewModel : ViewModel
+    public sealed class HelloViewModel : ViewModel
     {
         public IEventAggregator? Events { get; set; }
         public bool CanSayHello => !string.IsNullOrEmpty(Input);

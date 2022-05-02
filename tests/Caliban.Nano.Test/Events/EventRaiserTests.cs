@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Caliban.Nano.Test.Events
 {
     [TestClass]
-    public class EventRaiserTests
+    public sealed class EventRaiserTests
     {
         private EventRaiser<int>? EventRaiser { get; set; }
 

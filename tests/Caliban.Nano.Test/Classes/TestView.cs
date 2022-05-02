@@ -3,5 +3,5 @@
     /// <summary>
     /// Internal pseudo test view.
     /// </summary>
-    internal class TestView { }
+    internal sealed class TestView { }
 }

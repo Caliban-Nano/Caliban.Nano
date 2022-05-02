@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Caliban.Nano.Test.UI
 {
     [TestClass]
-    public class TypeFinderTests
+    public sealed class TypeFinderTests
     {
         [TestInitialize]
         public void Initialize()

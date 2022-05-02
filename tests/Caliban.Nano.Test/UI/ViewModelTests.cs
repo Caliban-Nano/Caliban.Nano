@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Caliban.Nano.Test.UI
 {
     [TestClass]
-    public class ViewModelTests
+    public sealed class ViewModelTests
     {
         private ViewModel? Test;
 

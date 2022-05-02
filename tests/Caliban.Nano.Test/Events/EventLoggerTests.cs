@@ -8,9 +8,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Caliban.Nano.Test.Events
 {
     [TestClass]
-    public class EventLoggerTests
+    public sealed class EventLoggerTests
     {
-        private class Logger : ILogger
+        private sealed class Logger : ILogger
         {
             public void Info(string message)
                 => throw new NotImplementedException();

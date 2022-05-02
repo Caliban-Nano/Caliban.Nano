@@ -4,13 +4,13 @@
     /// A simple class for raising an event externally.
     /// </summary>
     /// <typeparam name="T">The event arguments type.</typeparam>
-    public class EventRaiser<T>
+    public sealed class EventRaiser<T>
     {
         /// <summary>
         /// Enclosed event handler.
         /// </summary>
         /// <typeparam name="T">The event arguments type.</typeparam>
-        protected event EventHandler<T>? Event;
+        private event EventHandler<T>? Event;
 
         /// <summary>
         /// Attaches an event handler to the enclosed event.

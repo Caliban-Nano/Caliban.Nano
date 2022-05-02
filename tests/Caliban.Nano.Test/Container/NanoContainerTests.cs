@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Caliban.Nano.Test.Container
 {
     [TestClass]
-    public class NanoContainerTests
+    public sealed class NanoContainerTests
     {
         private IContainer? Container { get; set; }
 

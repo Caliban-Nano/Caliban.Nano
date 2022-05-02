@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Caliban.Nano.Test.Events
 {
     [TestClass]
-    public class LogEventTests
+    public sealed class LogEventTests
     {
         [TestMethod]
         public void LogEventTest()

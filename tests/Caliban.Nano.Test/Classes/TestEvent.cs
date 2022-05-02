@@ -3,7 +3,7 @@
     /// <summary>
     /// Internal test event.
     /// </summary>
-    internal class TestEvent
+    internal sealed class TestEvent
     {
         public readonly object EventArg;
 
