@@ -13,11 +13,14 @@ Compose your app with loosely coupled objects that will inject by creation.
 
 ### Constructors
 ```cs
-public IBattery Battery { get; init; }
-
-public Remote(IBattery battery)
+public class Remove
 {
-    Battery = battery;
+    public IBattery Battery { get; init; }
+
+    public Remote(IBattery battery)
+    {
+        Battery = battery;
+    }
 }
 ```
 
@@ -99,7 +102,7 @@ Decouple view models with the built in composition pattern.
 ```
 
 ```cs
-public CarViewModel() : ViewModel.OneActive
+public CarViewModel() : ViewModel.ActiveOne
 {
     SwitchDriverAsync();
 }
@@ -110,7 +113,7 @@ public async void SwitchDriverAsync()
 }
 ```
 
-## View + ViewModel Matching
+## View and ViewModel Matching
 Match your views and view models automatically by consistent naming alone.
 
 ```cs
@@ -135,5 +138,5 @@ new Bootstrap().Register<ILogger>(new Logger());
 ```
 
 ```cs
-var log = IoC.Get<ILogger>();
+var logger = IoC.Get<ILogger>();
 ```
