@@ -7,7 +7,7 @@ namespace Caliban.Nano.Test.Events
     [TestClass]
     public class EventRaiserTests
     {
-        private static EventRaiser<int>? EventRaiser { get; set; }
+        private EventRaiser<int>? EventRaiser { get; set; }
 
         [TestInitialize]
         public void Initialize()

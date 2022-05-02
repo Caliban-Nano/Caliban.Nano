@@ -9,9 +9,9 @@ namespace Caliban.Nano.Test.Events
     [TestClass]
     public class EventAggregatorTests
     {
-        private static IEventAggregator? Events { get; set; }
+        private IEventAggregator? Events { get; set; }
 
-        private static readonly Action<object> Handler = (_) => { };
+        private readonly Action<object> Handler = (_) => { };
 
         [TestInitialize]
         public void Initialize()
