@@ -8,7 +8,7 @@ namespace Caliban.Nano.UI
         /// <summary>
         /// A composition conductor for single active view models.
         /// </summary>
-        public abstract class OneActive : ViewModel
+        public abstract class ActiveOne : ViewModel
         {
             /// <summary>
             /// Occures when the active item changed.
@@ -28,7 +28,7 @@ namespace Caliban.Nano.UI
             /// <summary>
             /// Initializes a new instance of this class with bounded event.
             /// </summary>
-            public OneActive()
+            public ActiveOne()
             {
                 ActiveChanged += (_) => NotifyPropertyChanged(() => ActiveItem);
             }

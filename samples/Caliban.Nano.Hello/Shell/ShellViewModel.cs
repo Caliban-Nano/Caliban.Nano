@@ -5,7 +5,7 @@ using Caliban.Nano.UI;
 
 namespace Caliban.Nano.Hello.Shell
 {
-    public class ShellViewModel : ViewModel.OneActive, IWindow, IHandle<string>
+    public class ShellViewModel : ViewModel.ActiveOne, IWindow, IHandle<string>
     {
         public IEventAggregator Events { get; init; }
         public string DisplayName => "Hello";
