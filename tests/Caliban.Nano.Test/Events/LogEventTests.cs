@@ -11,6 +11,8 @@ namespace Caliban.Nano.Test.Events
         {
             var log = new LogEvent("test");
 
+            Assert.AreEqual($"{log}", "test");
+
             Assert.AreEqual(log.Message, "test");
         }
     }

@@ -18,5 +18,14 @@
         {
             Message = message;
         }
+
+        /// <summary>
+        /// Returns the log message.
+        /// </summary>
+        /// <returns>The log message.</returns>
+        public override string ToString()
+        {
+            return Message;
+        }
     }
 }
