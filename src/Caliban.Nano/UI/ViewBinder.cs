@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
 namespace Caliban.Nano.UI
@@ -97,6 +98,7 @@ namespace Caliban.Nano.UI
                 AddResolver<RadioButton>(BindProperty("IsChecked")); 
                 AddResolver<Calendar>(BindProperty("SelectedDate"));
                 AddResolver<DatePicker>(BindProperty("SelectedDate"));
+                AddResolver<Selector>(BindItem("SelectedItem"));
                 AddResolver<ItemsControl>(BindProperty("ItemsSource"));
                 AddResolver<DocumentViewer>(BindProperty("Document"));
                 AddResolver<ContentControl>(BindView("Content"));
@@ -124,6 +126,11 @@ namespace Caliban.Nano.UI
             private static Resolver BindGuard(string name)
             {
                 return (t, s) => Bind(t, s, name, BindingUtils.GetPathWithGuard(t.Name));
+            }
+
+            private static Resolver BindItem(string name)
+            {
+                return (t, s) => Bind(t, s, name, BindingUtils.GetPathWithItem(t.Name));
             }
 
             private static Resolver BindView(string name)
@@ -176,7 +183,8 @@ namespace Caliban.Nano.UI
         {
             public static bool IsGuard(string path) => path.StartsWith("Can");
             public static string GetPathWithGuard(string name) => $"Can{name}";
-            public static string GetPathWithView(string name) => $"{name}.View";
+            public static string GetPathWithItem(string name) => $"{name}Selected";
+            public static string GetPathWithView(string name) => $"{name}.View";            
             public static DependencyProperty? GetDependencyProperty(string property, Type type)
                 => DependencyPropertyDescriptor.FromName(property, type, type)?.DependencyProperty;
         }
