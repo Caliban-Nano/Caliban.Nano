@@ -1,4 +1,4 @@
-# ![](docs/Inline.png) Caliban.Nano
+# ![](docs/img/Inline.png) Caliban.Nano
 
 [![Build Status](https://img.shields.io/azure-devops/build/cuhsat/Caliban.Nano/3?logo=azuredevops&logoColor=white&style=for-the-badge&colorB=44CC11)](https://dev.azure.com/cuhsat/Caliban.Nano)
 [![NuGet Package](https://img.shields.io/nuget/v/Caliban.Nano.svg?logo=nuget&logoColor=white&style=for-the-badge&colorB=44CC11)](https://www.nuget.org/packages/Caliban.Nano)
