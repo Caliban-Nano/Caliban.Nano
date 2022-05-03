@@ -13,7 +13,7 @@ namespace Caliban.Nano.Events.EventLogger
         /// </summary>
         /// <param name="logger">The logger instance.</param>
         /// <param name="message">The log message.</param>
-        public static void Raise(this ILogger logger, [NotNull] string message)
+        public static void Raise(this ILogger _, [NotNull] string message)
         {
             var events = IoC.Get<IEventAggregator>();
             
@@ -23,7 +23,7 @@ namespace Caliban.Nano.Events.EventLogger
             }
             else
             {
-                Log.Intern("IEventAggregator could not resolved");
+                Log.This($"{nameof(IEventAggregator)} could not be resolved");
             }
         }
     }

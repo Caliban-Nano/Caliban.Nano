@@ -172,7 +172,7 @@ namespace Caliban.Nano.UI
                 }
                 else
                 {
-                    Log.Intern($"Binding for {target.Name}.{property} already exists");
+                    Log.This($"Binding for {target.Name}.{property} already exists");
                 }
 
                 return true;
