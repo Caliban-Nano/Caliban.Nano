@@ -4,7 +4,7 @@ using Caliban.Nano.Contracts;
 using Caliban.Nano.Test.Classes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Caliban.Nano.Test.Container
+namespace Caliban.Nano.Tests.Container
 {
     [TestClass]
     public sealed class NanoContainerTests
@@ -40,7 +40,8 @@ namespace Caliban.Nano.Test.Container
             ArgumentNullException.ThrowIfNull(Container);
 
             Container.Register<TestClass>(new TestClass());
-            Container.Resolved += (test) => {
+            Container.Resolved += (test) =>
+            {
                 Assert.IsNotNull(test);
                 Assert.IsInstanceOfType(test, typeof(TestClass));
             };
