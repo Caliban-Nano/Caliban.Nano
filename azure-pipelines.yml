@@ -15,7 +15,6 @@ variables:
   buildConfiguration: 'Release'
   dotNetFramework: 'net6.0'
   dotNetVersion: '6.0.x'
-  advice.detachedHead: false
 
 steps:
 - task: DotNetCoreCLI@2
