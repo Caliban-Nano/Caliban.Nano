@@ -48,16 +48,16 @@ namespace Caliban.Nano.Container
 
             if (request is Type type)
             {
-                if (!GetValue(type, out instance) || instance is null)
+                if (!LockGetValue(type, out instance) || instance is null)
                 {
-                    var ctor = GetConstructor(type);
+                    var ctor = SelectConstructor(type);
 
                     if (ctor is null)
                     {
                         throw new TypeLoadException($"Type {type.Name} has no constructor");
                     }
 
-                    instance = ctor.Invoke(GetParameters(ctor));
+                    instance = ctor.Invoke(DetermineParameters(ctor));
 
                     if (instance is null)
                     {
@@ -72,7 +72,7 @@ namespace Caliban.Nano.Container
 
             foreach (var property in properties.Where(p => p.CanWrite))
             {
-                if (GetValue(property.PropertyType, out var value))
+                if (LockGetValue(property.PropertyType, out var value))
                 {
                     property.SetValue(instance, value);
                 }
@@ -110,7 +110,7 @@ namespace Caliban.Nano.Container
             }
         }
 
-        private bool GetValue(Type type, out object? value)
+        private bool LockGetValue(Type type, out object? value)
         {
             lock (_storage)
             {
@@ -118,7 +118,7 @@ namespace Caliban.Nano.Container
             }
         }
 
-        private ConstructorInfo? GetConstructor(Type type)
+        private ConstructorInfo? SelectConstructor(Type type)
         {
             lock (_storage)
             {
@@ -128,7 +128,7 @@ namespace Caliban.Nano.Container
             }
         }
 
-        private object?[] GetParameters(ConstructorInfo info)
+        private object?[] DetermineParameters(ConstructorInfo info)
         {
             lock (_storage)
             {
