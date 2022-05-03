@@ -3,7 +3,7 @@
     /// <summary>
     /// A simple log event class.
     /// </summary>
-    public sealed class LogEvent
+    public class LogEvent
     {
         /// <summary>
         /// The log message.

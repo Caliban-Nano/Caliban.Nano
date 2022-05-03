@@ -1,16 +1,16 @@
 ﻿namespace Caliban.Nano.Events
 {
     /// <summary>
-    /// A simple class for raising an event externally.
+    /// A simple wrapper for raising an event externally.
     /// </summary>
     /// <typeparam name="T">The event arguments type.</typeparam>
-    public sealed class EventRaiser<T>
+    public class EventRaiser<T>
     {
         /// <summary>
         /// Enclosed event handler.
         /// </summary>
         /// <typeparam name="T">The event arguments type.</typeparam>
-        private event EventHandler<T>? Event;
+        public event EventHandler<T>? Event;
 
         /// <summary>
         /// Attaches an event handler to the enclosed event.
@@ -44,7 +44,7 @@
         /// Raises the enclosed event.
         /// </summary>
         /// <param name="e">The event arguments.</param>
-        public void Raise(T e)
+        public virtual void Raise(T e)
         {
             Event?.Invoke(this, e);
         }
