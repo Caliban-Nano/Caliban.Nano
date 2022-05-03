@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Caliban.Nano", "src\Caliban
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Caliban.Nano.Hello", "samples\Caliban.Nano.Hello\Caliban.Nano.Hello.csproj", "{4493FE82-0551-49D1-ABC7-A872B1C0AD9D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Caliban.Nano.Test", "tests\Caliban.Nano.Test\Caliban.Nano.Test.csproj", "{9C130090-A3A3-4078-87AE-78ED9AE13C7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Caliban.Nano.Tests", "tests\Caliban.Nano.Tests\Caliban.Nano.Tests.csproj", "{9C130090-A3A3-4078-87AE-78ED9AE13C7F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{68E6C28E-970B-43FE-B234-B7C99590BEF9} = {68E6C28E-970B-43FE-B234-B7C99590BEF9}
 	EndProjectSection
