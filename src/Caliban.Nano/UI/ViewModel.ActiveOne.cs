@@ -77,11 +77,6 @@ namespace Caliban.Nano.UI
                 {
                     Items.Remove(item);
                 }
-        
-                if (!await (Items.LastOrDefault()?.OnActivate() ?? Task.FromResult(true)))
-                {
-                    return false;
-                }
 
                 ActiveChanged.Invoke(item);
 
