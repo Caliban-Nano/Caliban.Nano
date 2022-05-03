@@ -40,32 +40,54 @@ namespace Caliban.Nano
     /// </summary>
     public sealed class TraceLogger : ILogger, IHandle<LogEvent>
     {
+        /// <summary>
+        /// Initializes a new instance of this class.
+        /// </summary>
+        public TraceLogger()
+        {
+            Trace.AutoFlush = true;
+        }
+
         /// <inheritdoc />
         public void Handle(LogEvent message)
-            => Trace.WriteLine($"[event] {message}");
+        {
+            Trace.TraceInformation($"[event] {message}");
+        }
 
         /// <inheritdoc />
         public void Info(string message)
-            => Trace.WriteLine($"[info] {message}");
+        {
+            Trace.TraceInformation($"[info] {message}");
+        }
 
         /// <inheritdoc />
         public void Warn(string message)
-            => Trace.WriteLine($"[warn] {message}");
+        {
+            Trace.TraceWarning($"[warn] {message}");
+        }
 
         /// <inheritdoc />
         public void Error(string message)
-            => Trace.WriteLine($"[error] {message}");
+        {
+            Trace.TraceError($"[error] {message}");
+        }
 
         /// <inheritdoc />
-        public void Error(string format, params object[] args)
-            => Trace.WriteLine($"[error] {string.Format(format, args)}");
-
+        public void Error(string format, params object?[] args)
+        {
+            Trace.TraceError($"[error] {string.Format(format, args)}");
+        }
+            
         /// <inheritdoc />
         public void Error(Exception exception)
-            => Trace.WriteLine($"[error] {exception.Message}");
+        {
+            Trace.TraceError($"[error] {exception.Message}");
+        }
 
         /// <inheritdoc />
-        public void Error(Exception exception, string format, params object[] args)
-            => Trace.WriteLine($"[error] {exception.Message}: {string.Format(format, args)}");
+        public void Error(Exception exception, string format, params object?[] args)
+        {
+            Trace.TraceError($"[error] {exception.Message}: {string.Format(format, args)}");
+        }
     }
 }
