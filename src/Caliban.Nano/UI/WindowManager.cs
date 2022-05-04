@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using Caliban.Nano.Contracts;
 
@@ -7,6 +8,7 @@ namespace Caliban.Nano.UI
     /// <summary>
     /// A window manager for single window applications.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public static class WindowManager
     {
         /// <summary>
