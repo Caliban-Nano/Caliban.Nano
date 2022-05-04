@@ -8,7 +8,6 @@ namespace Caliban.Nano.UI
     /// <summary>
     /// A window manager for single window applications.
     /// </summary>
-    [ExcludeFromCodeCoverage]
     public static class WindowManager
     {
         /// <summary>
@@ -17,6 +16,7 @@ namespace Caliban.Nano.UI
         /// <typeparam name="T">The view model type.</typeparam>
         /// <param name="settings">The window settings.</param>
         /// <returns>An asynchronous task.</returns>
+        [ExcludeFromCodeCoverage]
         public static async Task ShowWindowAsync<T>(Dictionary<string, object>? settings = null) where T : IViewModel
         {
             var viewModel = IoC.Get<T>();
@@ -39,16 +39,36 @@ namespace Caliban.Nano.UI
 
             view.Closing += OnWindowClosing;
 
-            await viewModel.OnActivate();
+            if (await viewModel.OnActivate())
+            {
+                view.Show();
+            }
+        }
 
-            view.Show();
+        /// <summary>
+        /// Tries to close the main window.
+        /// </summary>
+        /// <returns>An asynchronous task.</returns>
+        [ExcludeFromCodeCoverage]
+        public static async Task CloseWindowAsync()
+        {
+            var view = Application.Current.MainWindow;
+
+            if (view.DataContext is IViewModel viewModel)
+            {
+                if (await viewModel.OnDeactivate())
+                {
+                    view.Close();
+                }
+            }                        
         }
 
         private static void OnWindowClosing(object? sender, CancelEventArgs e)
         {
-            var viewModel = (sender as Window)?.DataContext as IViewModel;
-
-            e.Cancel = !viewModel?.CanClose ?? true;
+            if ((sender as Window)?.DataContext is IViewModel viewModel)
+            {
+                e.Cancel = !viewModel.CanClose;
+            };
         }
     }
 }
