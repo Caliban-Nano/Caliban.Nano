@@ -1,8 +1,8 @@
 # ![](docs/img/Inline.png) Caliban.Nano
 
-[![Build Status](https://img.shields.io/azure-devops/build/cuhsat/Caliban.Nano/3?logo=azuredevops&logoColor=white&style=for-the-badge&colorB=44CC11)](https://dev.azure.com/cuhsat/Caliban.Nano)
-[![NuGet Package](https://img.shields.io/nuget/v/Caliban.Nano.svg?logo=nuget&logoColor=white&style=for-the-badge&colorB=44CC11)](https://www.nuget.org/packages/Caliban.Nano)
-[![GitHub](https://img.shields.io/github/license/Caliban-Nano/Caliban.Nano?color=44CC11&logo=github&logoColor=white&style=for-the-badge)](https://www.github.com/Caliban-Nano/Caliban.Nano)
+[![Build Status](https://img.shields.io/azure-devops/build/cuhsat/Caliban.Nano/3?logo=windows&logoColor=ffffff&style=for-the-badge&colorB=44cc11)](https://dev.azure.com/cuhsat/Caliban.Nano)
+[![NuGet Package](https://img.shields.io/nuget/v/Caliban.Nano.svg?logo=nuget&logoColor=ffffff&style=for-the-badge&colorB=44cc11)](https://www.nuget.org/packages/Caliban.Nano)
+[![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/cuhsat/Caliban.Nano/3?color=44cc11&logo=azuredevops&logoColor=ffffff&style=for-the-badge)](https://dev.azure.com/cuhsat/Caliban.Nano/_build)
 
 A very tiny, but very powerful MVVM framework, using convenience over configuration, with no further dependencies.
 
