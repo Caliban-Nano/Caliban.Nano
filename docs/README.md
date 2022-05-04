@@ -13,7 +13,7 @@ Compose your app with loosely coupled objects that will inject by creation.
 
 ### Constructors
 ```cs
-public class Remove
+public class Remote
 {
     public IBattery Battery { get; init; }
 
