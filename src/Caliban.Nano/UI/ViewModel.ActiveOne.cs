@@ -40,7 +40,7 @@ namespace Caliban.Nano.UI
             /// <returns>True if the activation was successful.</returns>
             public virtual async Task<bool> ActivateItem(IViewModel item)
             {
-                if (!await (ActiveItem?.OnDeactivate() ?? Task.FromResult(true)))
+                if (ActiveItem is not null && !await ActiveItem.OnDeactivate())
                 {
                     return false;
                 }

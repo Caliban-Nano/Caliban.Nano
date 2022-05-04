@@ -6,25 +6,29 @@ namespace Caliban.Nano.Tests.Classes
     internal sealed class TestViewModel : ViewModel { }
     internal sealed class TestActiveAllViewModel : ViewModel.ActiveAll { }
     internal sealed class TestActiveOneViewModel : ViewModel.ActiveOne { }
-    internal sealed class TestFailViewModel : ViewModel
+    internal sealed class TestFailingViewModel : ViewModel
     {
-        private readonly bool _failOnActivate;
-        private readonly bool _failOnDeactivate;
+        private bool Activate { get; init; }
+        private bool Deactivate { get; init; }
 
-        public TestFailViewModel(bool failOnActivate = true, bool failOnDeactive = true)
+        public TestFailingViewModel(bool activate = false, bool deactivate = false)
         {
-            _failOnActivate = failOnActivate;
-            _failOnDeactivate = failOnDeactive;
+            Activate = activate;
+            Deactivate = deactivate;
         }
 
         public override Task<bool> OnActivate()
         {
-            return Task.FromResult(_failOnActivate);
+            IsActive = true;
+
+            return Task.FromResult(Activate);
         }
 
         public override Task<bool> OnDeactivate()
         {
-            return Task.FromResult(_failOnDeactivate);
+            IsActive = false;
+
+            return Task.FromResult(Deactivate);
         }
     }
 }
