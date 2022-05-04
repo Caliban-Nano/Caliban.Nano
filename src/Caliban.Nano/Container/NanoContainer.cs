@@ -58,11 +58,6 @@ namespace Caliban.Nano.Container
                     }
 
                     instance = ctor.Invoke(DetermineParameters(ctor));
-
-                    if (instance is null)
-                    {
-                        throw new TypeLoadException($"Type {type.Name} could not be created");
-                    }
                 }
             }
 
