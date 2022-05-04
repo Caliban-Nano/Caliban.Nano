@@ -15,13 +15,11 @@ namespace Caliban.Nano.Events.EventLogger
         /// <param name="message">The log message.</param>
         public static void Raise(this ILogger _, [NotNull] string message)
         {
-            var events = IoC.Get<IEventAggregator>();
-            
-            if (events is not null)
+            try
             {
-                events.Publish(new LogEvent(message));
+                IoC.Get<IEventAggregator>().Publish(new LogEvent(message));
             }
-            else
+            catch (TypeLoadException)
             {
                 Log.This($"{nameof(IEventAggregator)} could not be resolved");
             }
