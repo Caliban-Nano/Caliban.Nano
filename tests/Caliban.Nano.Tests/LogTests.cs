@@ -13,16 +13,15 @@ namespace Caliban.Nano.Tests
         [TestMethod]
         public void ThisTest()
         {
+            using var test = new StringWriter();
+
             IoC.Resolve = new NanoContainer().Resolve;
 
-            using (var test = new StringWriter())
-            {
-                Trace.Listeners.Add(new TextWriterTraceListener(test));
+            Trace.Listeners.Add(new TextWriterTraceListener(test));
 
-                Log.This("test");
+            Log.This("test");
 
-                Assert.IsTrue(test.ToString().Contains("[info] [caliban.nano] test"));
-            }
+            Assert.IsTrue(test.ToString().Contains("[info] [caliban.nano] test"));
         }
     }
 
@@ -40,108 +39,116 @@ namespace Caliban.Nano.Tests
         [TestMethod]
         public void HandleEventTest()
         {
-            using (var test = new StringWriter())
-            {
-                Trace.Listeners.Add(new TextWriterTraceListener(test));
+            ArgumentNullException.ThrowIfNull(Logger);
 
-                var events = new EventAggregator();
+            using var test = new StringWriter();
 
-                events.Subscribe<LogEvent>(Logger!);
-                events.Publish(new LogEvent("test"));
+            Trace.Listeners.Add(new TextWriterTraceListener(test));
 
-                Assert.IsTrue(test.ToString().Contains("[event] test"));
-            }
+            var events = new EventAggregator();
+
+            events.Subscribe<LogEvent>(Logger);
+            events.Publish(new LogEvent("test"));
+
+            Assert.IsTrue(test.ToString().Contains("[event] test"));
         }
 
         [TestMethod]
         public void HandleTest()
         {
-            using (var test = new StringWriter())
-            {
-                Trace.Listeners.Add(new TextWriterTraceListener(test));
+            ArgumentNullException.ThrowIfNull(Logger);
 
-                Logger?.Handle(new LogEvent("test"));
+            using var test = new StringWriter();
+            
+            Trace.Listeners.Add(new TextWriterTraceListener(test));
 
-                Assert.IsTrue(test.ToString().Contains("[event] test"));
-            }
+            Logger.Handle(new LogEvent("test"));
+
+            Assert.IsTrue(test.ToString().Contains("[event] test"));
         }
 
         [TestMethod]
         public void InfoTest()
         {
-            using (var test = new StringWriter())
-            {
-                Trace.Listeners.Add(new TextWriterTraceListener(test));
+            ArgumentNullException.ThrowIfNull(Logger);
 
-                Logger?.Info("test");
+            using var test = new StringWriter();
+            
+            Trace.Listeners.Add(new TextWriterTraceListener(test));
 
-                Assert.IsTrue(test.ToString().Contains("[info] test"));
-            }
+            Logger.Info("test");
+
+            Assert.IsTrue(test.ToString().Contains("[info] test"));
         }
 
         [TestMethod]
         public void WarnTest()
         {
-            using (var test = new StringWriter())
-            {
-                Trace.Listeners.Add(new TextWriterTraceListener(test));
+            ArgumentNullException.ThrowIfNull(Logger);
+            
+            using var test = new StringWriter();
+            
+            Trace.Listeners.Add(new TextWriterTraceListener(test));
 
-                Logger?.Warn("test");
+            Logger.Warn("test");
 
-                Assert.IsTrue(test.ToString().Contains("[warn] test"));
-            }
+            Assert.IsTrue(test.ToString().Contains("[warn] test"));
         }
 
         [TestMethod]
         public void ErrorTest()
         {
-            using (var test = new StringWriter())
-            {
-                Trace.Listeners.Add(new TextWriterTraceListener(test));
+            ArgumentNullException.ThrowIfNull(Logger);
 
-                Logger?.Error("test");
+            using var test = new StringWriter();
+            
+            Trace.Listeners.Add(new TextWriterTraceListener(test));
 
-                Assert.IsTrue(test.ToString().Contains("[error] test"));
-            }
+            Logger.Error("test");
+
+            Assert.IsTrue(test.ToString().Contains("[error] test"));
         }
 
         [TestMethod]
         public void ErrorFormatTest()
         {
-            using (var test = new StringWriter())
-            {
-                Trace.Listeners.Add(new TextWriterTraceListener(test));
+            ArgumentNullException.ThrowIfNull(Logger);
 
-                Logger?.Error("{0}", new[] { "test" });
+            using var test = new StringWriter();
+            
+            Trace.Listeners.Add(new TextWriterTraceListener(test));
 
-                Assert.IsTrue(test.ToString().Contains("[error] test"));
-            }
+            Logger.Error("{0}", new[] { "test" });
+
+            Assert.IsTrue(test.ToString().Contains("[error] test"));
         }
 
         [TestMethod]
         public void ErrorExceptionTest()
         {
-            using (var test = new StringWriter())
-            {
-                Trace.Listeners.Add(new TextWriterTraceListener(test));
+            ArgumentNullException.ThrowIfNull(Logger);
 
-                Logger?.Error(new Exception("test"));
+            using var test = new StringWriter();
+            
+            Trace.Listeners.Add(new TextWriterTraceListener(test));
 
-                Assert.IsTrue(test.ToString().Contains("[error] test"));
-            }
+            Logger.Error(new Exception("test"));
+
+            Assert.IsTrue(test.ToString().Contains("[error] test"));
         }
 
         [TestMethod]
         public void ErrorExceptionFormatTest()
         {
-            using (var test = new StringWriter())
-            {
-                Trace.Listeners.Add(new TextWriterTraceListener(test));
+            ArgumentNullException.ThrowIfNull(Logger);
+            
+            using var test = new StringWriter();
+            
+            Trace.Listeners.Add(new TextWriterTraceListener(test));
 
-                Logger?.Error(new Exception("test1"), "{0}", new[] { "test2" });
+            Logger.Error(new Exception("test1"), "{0}", new[] { "test2" });
 
-                Assert.IsTrue(test.ToString().Contains("[error] test1: test2"));
-            }
+            Assert.IsTrue(test.ToString().Contains("[error] test1: test2"));
         }
     }
 }

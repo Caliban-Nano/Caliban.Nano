@@ -1,7 +1,7 @@
 ﻿using System;
 using Caliban.Nano.Container;
 using Caliban.Nano.Contracts;
-using Caliban.Nano.Test.Classes;
+using Caliban.Nano.Tests.Classes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Caliban.Nano.Tests
@@ -11,7 +11,8 @@ namespace Caliban.Nano.Tests
     {
         private IContainer? Container { get; set; }
 
-        private void Initialize()
+        [TestInitialize]
+        public void Initialize()
         {
             Container = new NanoContainer();
 
@@ -19,19 +20,13 @@ namespace Caliban.Nano.Tests
         }
 
         [TestMethod]
-        public void ExceptionTest()
-        {
-            Assert.ThrowsException<NotImplementedException>(() => IoC.Get<TestClass>());
-        }
-
-        [TestMethod]
         public void ResolveTest()
         {
-            Initialize();
+            ArgumentNullException.ThrowIfNull(Container);
 
             var test = new TestClass();
 
-            Container?.Register<TestClass>(test);
+            Container.Register<TestClass>(test);
 
             Assert.AreEqual(IoC.Resolve(typeof(TestClass)), test);
         }
@@ -39,11 +34,11 @@ namespace Caliban.Nano.Tests
         [TestMethod]
         public void GetTest()
         {
-            Initialize();
+            ArgumentNullException.ThrowIfNull(Container);
 
             var test = new TestClass();
 
-            Container?.Register<TestClass>(test);
+            Container.Register<TestClass>(test);
 
             Assert.AreEqual(IoC.Get<TestClass>(), test);
         }
