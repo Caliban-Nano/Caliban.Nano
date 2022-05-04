@@ -1,8 +1,5 @@
-﻿namespace Caliban.Nano.Test.Classes
+﻿namespace Caliban.Nano.Tests.Classes
 {
-    /// <summary>
-    /// Internal test event.
-    /// </summary>
     internal sealed class TestEvent
     {
         public readonly object EventArg;

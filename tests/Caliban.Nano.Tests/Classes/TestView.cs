@@ -1,9 +1,7 @@
-﻿namespace Caliban.Nano.Test.Classes
+﻿namespace Caliban.Nano.Tests.Classes
 {
-    /// <summary>
-    /// Internal pseudo test view.
-    /// </summary>
     internal sealed class TestView { }
     internal sealed class TestActiveAllView { }
     internal sealed class TestActiveOneView { }
+    internal sealed class TestAlwaysFailView { }
 }

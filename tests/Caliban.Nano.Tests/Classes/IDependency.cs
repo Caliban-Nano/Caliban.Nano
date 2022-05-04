@@ -1,7 +1,4 @@
-﻿namespace Caliban.Nano.Test.Classes
+﻿namespace Caliban.Nano.Tests.Classes
 {
-    /// <summary>
-    /// Internal dependency interface.
-    /// </summary>
     internal interface IDependency { }
 }

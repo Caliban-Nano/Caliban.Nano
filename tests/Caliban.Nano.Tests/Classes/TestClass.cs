@@ -1,16 +1,15 @@
 ﻿using System;
+using Caliban.Nano.UI;
 
-namespace Caliban.Nano.Test.Classes
+namespace Caliban.Nano.Tests.Classes
 {
-    /// <summary>
-    /// Internal test class.
-    /// </summary>
-    internal sealed class TestClass : IDependency
+    internal sealed class TestClass : NotifyBase, IDependency
     {
         public IDependency? A => _a;
         public IDependency? B { get; set; } = null;
         public IDependency? C { get; init; } = null;
         public IDependency? D { get; private set; } = null;
+        public void Test() => NotifyPropertyChanged();
 
         private readonly IDependency? _a = null;
 
