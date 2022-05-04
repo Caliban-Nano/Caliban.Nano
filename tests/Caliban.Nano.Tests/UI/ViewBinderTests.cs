@@ -12,11 +12,14 @@ namespace Caliban.Nano.Tests.UI
         {
             ViewBinder.Scope.Clear();
 
+            var resolver = new ViewBinder.Resolver((_, _) => true);
+
             Assert.AreEqual(ViewBinder.Scope.Count, 0);
 
-            ViewBinder.AddResolver<Control>(new ViewBinder.Resolver((_, _) => true));
+            ViewBinder.AddResolver<Control>(resolver);
 
             Assert.AreEqual(ViewBinder.Scope.Count, 1);
+            Assert.AreEqual(ViewBinder.Scope[0].Item2, resolver);
         }
 
         [TestMethod]

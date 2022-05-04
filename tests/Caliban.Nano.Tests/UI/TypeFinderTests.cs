@@ -1,5 +1,6 @@
-﻿using Caliban.Nano.Container;
-using Caliban.Nano.Test.Classes;
+﻿using System;
+using Caliban.Nano.Container;
+using Caliban.Nano.Tests.Classes;
 using Caliban.Nano.UI;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -41,6 +42,12 @@ namespace Caliban.Nano.Tests.UI
 
             Assert.IsNotNull(test);
             Assert.IsInstanceOfType(test, typeof(TestClass));
+        }
+
+        [TestMethod]
+        public void FindTypeExceptionTest()
+        {
+            Assert.ThrowsException<TypeLoadException>(() => TypeFinder.FindType("unknown"));
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using Caliban.Nano.Container;
 using Caliban.Nano.Contracts;
-using Caliban.Nano.Test.Classes;
+using Caliban.Nano.Tests.Classes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Caliban.Nano.Tests.Container
@@ -93,6 +93,29 @@ namespace Caliban.Nano.Tests.Container
 
             Assert.IsNotNull(test.D);
             Assert.IsInstanceOfType(test.D, typeof(TestClass));
+        }
+
+        [TestMethod]
+        public void ResolveTypeTest()
+        {
+            ArgumentNullException.ThrowIfNull(Container);
+
+            Container.Register<IDependency>(new TestClass());
+
+            Assert.IsTrue(Container.IsRegistered<IDependency>());
+
+            var instance = Container.Resolve<TestClass>();
+
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, typeof(TestClass));
+        }
+
+        [TestMethod]
+        public void ResolveFailedTest()
+        {
+            ArgumentNullException.ThrowIfNull(Container);
+
+            Assert.ThrowsException<TypeLoadException>(() => Container.Resolve<IDependency>());
         }
 
         [TestMethod]

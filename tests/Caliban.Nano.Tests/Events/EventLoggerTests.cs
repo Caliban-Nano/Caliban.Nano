@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using Caliban.Nano.Container;
 using Caliban.Nano.Contracts;
 using Caliban.Nano.Events;
 using Caliban.Nano.Events.EventLogger;
+using Caliban.Nano.Tests.Classes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Caliban.Nano.Tests.Events
@@ -10,31 +13,12 @@ namespace Caliban.Nano.Tests.Events
     [TestClass]
     public sealed class EventLoggerTests
     {
-        private sealed class Logger : ILogger
-        {
-            public void Info(string message)
-                => throw new NotImplementedException();
-            public void Warn(string message)
-                => throw new NotImplementedException();
-            public void Error(string message)
-                => throw new NotImplementedException();
-            public void Error(string format, params object[] args)
-                => throw new NotImplementedException();
-            public void Error(Exception exception)
-                => throw new NotImplementedException();
-            public void Error(Exception exception, string format, params object[] args)
-                => throw new NotImplementedException();
-        }
-
         private IContainer? Container { get; set; }
 
         [TestInitialize]
         public void Initialize()
         {
-            var events = new EventAggregator();
-
             Container = new NanoContainer();
-            Container.Register<IEventAggregator>(events);
 
             IoC.Resolve = Container.Resolve;
         }
@@ -42,14 +26,36 @@ namespace Caliban.Nano.Tests.Events
         [TestMethod]
         public void RaiseTest()
         {
-            var events = IoC.Get<IEventAggregator>();
-            var logger = new Logger();
+            ArgumentNullException.ThrowIfNull(Container);
+
+            var events = new EventAggregator();
+            var logger = new TestLogger();
+
+            Container.Register<IEventAggregator>(events);
             
             events.Subscribe<LogEvent>((LogEvent e) => {
                 Assert.AreEqual(e.Message, "test");
             });
 
             logger.Raise("test");
+        }
+
+        [TestMethod]
+        public void RaiseFailedTest()
+        {
+            ArgumentNullException.ThrowIfNull(Container);
+
+            using var test = new StringWriter();
+
+            Trace.Listeners.Add(new TextWriterTraceListener(test));
+
+            var logger = new TestLogger();
+
+            logger.Raise("test");
+
+            Log.This("test");
+
+            Assert.IsTrue(test.ToString().Contains("IEventAggregator could not be resolved"));
         }
     }
 }

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
+using Caliban.Nano.Container;
 using Caliban.Nano.Contracts;
 using Caliban.Nano.Events;
-using Caliban.Nano.Test.Classes;
+using Caliban.Nano.Tests.Classes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Caliban.Nano.Tests.Events
@@ -73,7 +76,7 @@ namespace Caliban.Nano.Tests.Events
         [TestMethod]
         public void PublishTest()
         {
-            Action<TestEvent> handler = (e) => Assert.AreEqual(e.EventArg, "Hello");
+            Action<TestEvent> handler = (e) => Assert.AreEqual(e.EventArg, "Test");
 
             ArgumentNullException.ThrowIfNull(Events);
 
@@ -81,7 +84,27 @@ namespace Caliban.Nano.Tests.Events
 
             Assert.IsTrue(Events.HasHandler<TestEvent>());
 
-            Events.Publish(new TestEvent("Hello"));
+            Events.Publish(new TestEvent("Test"));
+        }
+
+        [TestMethod]
+        public void PublishFailedTest()
+        {
+            ArgumentNullException.ThrowIfNull(Events);
+
+            using var test = new StringWriter();
+
+            Trace.Listeners.Add(new TextWriterTraceListener(test));
+
+            IoC.Resolve = new NanoContainer().Resolve;
+
+            Events.Subscribe<TestEvent>(new object());
+
+            Assert.IsTrue(Events.HasHandler<TestEvent>());
+
+            Events.Publish(new TestEvent("Test"));
+
+            Assert.IsTrue(test.ToString().Contains("Handler System.Object is not supported"));
         }
     }
 }
