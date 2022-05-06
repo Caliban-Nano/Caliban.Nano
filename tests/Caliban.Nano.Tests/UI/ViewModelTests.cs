@@ -156,7 +156,7 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test = new TestFailingViewModel();
+                var test = new TestActiveFailViewModel();
 
                 Assert.IsFalse(await Test.ActivateItem(test));
             }
@@ -216,7 +216,7 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test = new TestFailingViewModel();
+                var test = new TestActiveFailViewModel();
 
                 Assert.IsFalse(await Test.DeactivateItem(test));
             }
@@ -311,8 +311,8 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test1 = new TestFailingViewModel(true, false);
-                var test2 = new TestFailingViewModel(false, true);
+                var test1 = new TestActiveFailViewModel(true, false);
+                var test2 = new TestActiveFailViewModel(false, true);
 
                 Assert.IsTrue(await Test.ActivateItem(test1));
                 Assert.IsFalse(await Test.ActivateItem(test1));
@@ -374,7 +374,7 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test = new TestFailingViewModel();
+                var test = new TestActiveFailViewModel();
 
                 Assert.IsFalse(await Test.DeactivateItem(test));
             }
