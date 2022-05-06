@@ -38,15 +38,15 @@ steps:
     testRunTitle: 'Unit Tests'
 
  - task: reportgenerator@4
-    displayName: "Merge code coverage reports"
+    displayName: 'Merge code coverage reports'
     inputs:
-      reports: "**/coverage.cobertura.xml"
-      targetdir: "$(Build.ArtifactStagingDirectory)/coverlet"
-      reporttypes: "Cobertura"
-      verbosity: "Verbose"
+      reports: '**/coverage.cobertura.xml'
+      targetdir: '$(Build.ArtifactStagingDirectory)/coverlet'
+      reporttypes: 'Cobertura'
+      verbosity: 'Verbose'
 
   - task: PublishCodeCoverageResults@1
-    displayName: "Publish code coverage results"
+    displayName: 'Publish code coverage results'
     inputs:
-      codeCoverageTool: Cobertura
-      summaryFileLocation: "$(Build.ArtifactStagingDirectory)/coverlet/Cobertura.xml"
+      codeCoverageTool: 'Cobertura'
+      summaryFileLocation: '$(Build.ArtifactStagingDirectory)/coverlet/Cobertura.xml'
