@@ -37,8 +37,16 @@ steps:
     arguments: '--configuration $(buildConfiguration) --collect:"XPlat Code Coverage" /p:Exclude="[Caliban.Nano.Hello]*%2c[Caliban.Nano.Tests]*"'
     testRunTitle: 'Unit Tests'
 
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish code coverage'
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: '**/*coverage.cobertura.xml'
+ - task: reportgenerator@4
+    displayName: "Merge code coverage reports"
+    inputs:
+      reports: "**/coverage.cobertura.xml"
+      targetdir: "$(Build.ArtifactStagingDirectory)/coverlet"
+      reporttypes: "Cobertura"
+      verbosity: "Verbose"
+
+  - task: PublishCodeCoverageResults@1
+    displayName: "Publish code coverage results"
+    inputs:
+      codeCoverageTool: Cobertura
+      summaryFileLocation: "$(Build.ArtifactStagingDirectory)/coverlet/Cobertura.xml"
