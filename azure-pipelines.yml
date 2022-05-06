@@ -37,7 +37,7 @@ steps:
     arguments: '--configuration $(buildConfiguration) --collect:"XPlat Code Coverage" /p:Exclude="[Caliban.Nano.Hello]*%2c[Caliban.Nano.Tests]*"'
     testRunTitle: 'Unit Tests'
 
-- task: PublishCodeCoverageResultsV2@1
+- task: PublishCodeCoverageResults@1
   displayName: 'Publish code coverage'
   inputs:
     codeCoverageTool: 'Cobertura'
