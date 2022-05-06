@@ -90,7 +90,7 @@ namespace Caliban.Nano.UI
             public static void Default()
             {
                 AddResolver<Control>(BindGuard("IsEnabled"));
-                AddResolver<Button>(BindEvent("Click"));
+                AddResolver<Button>(BindButton());
                 AddResolver<Image>(BindProperty("Source"));
                 AddResolver<Label>(BindProperty("Content"));
                 AddResolver<TextBox>(BindProperty("Text"));
@@ -106,6 +106,25 @@ namespace Caliban.Nano.UI
                 AddResolver<ContentControl>(BindView("Content"));
             }
 
+            [ExcludeFromCodeCoverage]
+            private static Resolver BindButton()
+            {
+                return (t, s) =>
+                {
+                    var method = s.GetType().GetMethod(t.Name);
+
+                    if (method is not null && t is ButtonBase button)
+                    {
+                        button.Command = new Command<object>(
+                            (_) => method.Invoke(s, null)
+                        );
+                    }
+
+                    return false; // Prevent content control binding
+                };
+            }
+
+            [ExcludeFromCodeCoverage]
             private static Resolver BindEvent(string name)
             {
                 return (t, s) =>
@@ -117,29 +136,33 @@ namespace Caliban.Nano.UI
                         var @event = t.GetType().GetEvent(name);
 
                         @event?.AddEventHandler(t, new RoutedEventHandler(
-                            (_, _) => method.Invoke(s, null)
+                            (sender, e) => method.Invoke(s, new[] { sender, e })
                         ));
                     }
 
-                    return false;
+                    return true;
                 };
             }
 
+            [ExcludeFromCodeCoverage]
             private static Resolver BindGuard(string name)
             {
                 return (t, s) => Bind(t, s, name, BindingUtils.GetPathWithGuard(t.Name));
             }
 
+            [ExcludeFromCodeCoverage]
             private static Resolver BindItem(string name)
             {
                 return (t, s) => Bind(t, s, name, BindingUtils.GetPathWithItem(t.Name));
             }
 
+            [ExcludeFromCodeCoverage]
             private static Resolver BindView(string name)
             {
                 return (t, s) => Bind(t, s, name, BindingUtils.GetPathWithView(t.Name));
             }
 
+            [ExcludeFromCodeCoverage]
             private static Resolver BindProperty(string name)
             {
                 return (t, s) => Bind(t, s, name, t.Name);

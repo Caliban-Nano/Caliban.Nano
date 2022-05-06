@@ -59,5 +59,22 @@ namespace Caliban.Nano.Tests.UI
 
             test.CanExecuteChanged -= handler;
         }
+
+        [TestMethod]
+        public void RaiseCanExecuteChangedTest()
+        {
+            var test = new Command<object>(
+                (_) => Assert.IsTrue(true),
+                (_) => true
+            );
+
+            test.CanExecuteChanged += (sender, e) =>
+            {
+                Assert.IsNotNull(sender);
+                Assert.IsNotNull(e);
+            };
+
+            test.RaiseCanExecuteChanged();
+        }
     }
 }
