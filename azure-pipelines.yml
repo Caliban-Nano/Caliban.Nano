@@ -34,10 +34,10 @@ steps:
   inputs:
     command: 'test'
     projects: '**/*tests.csproj'
-    arguments: '--configuration $(buildConfiguration) --collect "XPlat Code Coverage" -- Exclude="Caliban.Nano\..*"'
+    arguments: '--configuration $(buildConfiguration) --collect "Code Coverage" -- Exclude="Caliban.Nano\..*"'
     testRunTitle: 'Unit Tests'
 
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'Cobertura'
-    summaryFileLocation:  $(System.DefaultWorkingDirectory)/**/*.coverage
+    summaryFileLocation:  $(System.DefaultWorkingDirectory)/**/coverage.cobertura.xml
