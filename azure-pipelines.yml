@@ -26,27 +26,19 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:
-    command: 'build'
+    command: build
     projects: '**/*.sln'
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet test'
   inputs:
-    command: 'test'
+    command: test
     projects: '**/*tests.csproj'
     arguments: '--configuration $(buildConfiguration) --collect:"XPlat Code Coverage" /p:Exclude="[Caliban.Nano.Hello]*%2c[Caliban.Nano.Tests]*"'
     testRunTitle: 'Unit Tests'
 
- - task: reportgenerator@4
-    displayName: 'Merge code coverage reports'
-    inputs:
-      reports: '**/coverage.cobertura.xml'
-      targetdir: '$(Build.ArtifactStagingDirectory)/coverlet'
-      reporttypes: 'Cobertura'
-      verbosity: 'Verbose'
-
-  - task: PublishCodeCoverageResults@1
-    displayName: 'Publish code coverage results'
-    inputs:
-      codeCoverageTool: 'Cobertura'
-      summaryFileLocation: '$(Build.ArtifactStagingDirectory)/coverlet/Cobertura.xml'
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage'
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
