@@ -34,7 +34,7 @@ steps:
   inputs:
     command: 'test'
     projects: '**/*tests.csproj'
-    arguments: '--configuration $(buildConfiguration) --collect "Code Coverage" -- Exclude="Caliban.Nano\..*"'
+    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutput="./coverage.json" /p:Exclude="Caliban.Nano.*"'
     testRunTitle: 'Unit Tests'
 
 - task: PublishCodeCoverageResults@1
