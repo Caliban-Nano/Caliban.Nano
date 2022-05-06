@@ -62,322 +62,322 @@ namespace Caliban.Nano.Tests.UI
 
             Assert.IsFalse(Test.IsActive);
         }
-    }
 
-    [TestClass]
-    public sealed class ViewModelActiveAllTests
-    {
-        private ViewModel.ActiveAll? Test { get; set; }
-
-        [TestInitialize]
-        public void Initialize()
+        [TestClass]
+        public sealed class ActiveAllTests
         {
-            TypeFinder.Sources.Add(GetType().Assembly);
+            private ViewModel.ActiveAll? Test { get; set; }
 
-            IoC.Resolve = new NanoContainer().Resolve;
-
-            Test = new TestActiveAllViewModel();
-        }
-
-        [TestMethod]
-        public async Task ActiveChangedTest()
-        {
-            ArgumentNullException.ThrowIfNull(Test);
-            
-            var test = new TestViewModel();
-
-            Test.ActiveChanged += (item) =>
+            [TestInitialize]
+            public void Initialize()
             {
-                Assert.IsNotNull(item);
-                Assert.AreEqual(item, test);
-                Assert.IsInstanceOfType(item, typeof(TestViewModel));
-            };
+                TypeFinder.Sources.Add(GetType().Assembly);
 
-            Assert.IsTrue(await Test.ActivateItem(test));
+                IoC.Resolve = new NanoContainer().Resolve;
 
-            Assert.IsTrue(await Test.DeactivateItem(test));
-        }
+                Test = new TestActiveAllViewModel();
+            }
 
-        [TestMethod]
-        public async Task ActiveItemsTest()
-        {
-            ArgumentNullException.ThrowIfNull(Test);
-            
-            var test1 = new TestViewModel();
-            var test2 = new TestViewModel();
-
-            Assert.IsFalse(Test.ActiveItems.Contains(test1));
-            Assert.IsFalse(Test.ActiveItems.Contains(test2));
-
-            Assert.IsTrue(await Test.ActivateItem(test1));
-            Assert.IsTrue(await Test.ActivateItem(test2));
-
-            Assert.IsTrue(Test.ActiveItems.Contains(test1));
-            Assert.IsTrue(Test.ActiveItems.Contains(test2));
-        }
-
-        [TestMethod]
-        public async Task ItemsTest()
-        {
-            ArgumentNullException.ThrowIfNull(Test);
-
-            var test = new TestViewModel();
-
-            Assert.IsFalse(Test.Items.Contains(test));
-
-            Assert.IsTrue(await Test.ActivateItem(test));
-
-            Assert.IsTrue(Test.Items.Contains(test));
-        }
-
-        [TestMethod]
-        public async Task ActivateItemTest()
-        {
-            ArgumentNullException.ThrowIfNull(Test);
-            
-            var test1 = new TestViewModel();
-            var test2 = new TestViewModel();
-
-            Assert.IsFalse(test1.IsActive);
-            Assert.IsFalse(test2.IsActive);
-
-            Assert.IsTrue(await Test.ActivateItem(test1));
-
-            Assert.IsTrue(test1.IsActive);
-            Assert.IsFalse(test2.IsActive);
-
-            Assert.IsTrue(await Test.ActivateItem(test2));
-
-            Assert.IsTrue(test1.IsActive);
-            Assert.IsTrue(test2.IsActive);
-        }
-
-        [TestMethod]
-        public async Task ActivateItemFailedTest()
-        {
-            ArgumentNullException.ThrowIfNull(Test);
-
-            var test = new TestFailingViewModel();
-
-            Assert.IsFalse(await Test.ActivateItem(test));
-        }
-
-        [TestMethod]
-        public async Task DeactivateItemTest()
-        {
-            ArgumentNullException.ThrowIfNull(Test);
-
-            var test1 = new TestViewModel();
-            var test2 = new TestViewModel();
-
-            Assert.IsFalse(test1.IsActive);
-            Assert.IsFalse(test2.IsActive);
-
-            Assert.IsTrue(await Test.ActivateItem(test1));
-
-            Assert.IsTrue(test1.IsActive);
-            Assert.IsFalse(test2.IsActive);
-
-            Assert.IsTrue(await Test.ActivateItem(test2));
-
-            Assert.IsTrue(test1.IsActive);
-            Assert.IsTrue(test2.IsActive);
-
-            Assert.IsTrue(await Test.DeactivateItem(test1));
-
-            Assert.IsFalse(test1.IsActive);
-            Assert.IsTrue(test2.IsActive);
-
-            Assert.IsTrue(await Test.DeactivateItem(test2));
-
-            Assert.IsFalse(test1.IsActive);
-            Assert.IsFalse(test2.IsActive);
-        }
-
-        [TestMethod]
-        public async Task DeactivateItemCloseTest()
-        {
-            ArgumentNullException.ThrowIfNull(Test);
-
-            var test = new TestViewModel();
-
-            Assert.IsFalse(Test.Items.Contains(test));
-
-            Assert.IsTrue(await Test.ActivateItem(test));
-
-            Assert.IsTrue(Test.Items.Contains(test));
-
-            Assert.IsTrue(await Test.DeactivateItem(test, true));
-
-            Assert.IsFalse(Test.Items.Contains(test));
-        }
-
-        [TestMethod]
-        public async Task DeactivateItemFailedTest()
-        {
-            ArgumentNullException.ThrowIfNull(Test);
-
-            var test = new TestFailingViewModel();
-
-            Assert.IsFalse(await Test.DeactivateItem(test));
-        }
-    }
-
-    [TestClass]
-    public sealed class ViewModelActiveOneTests
-    {
-        private ViewModel.ActiveOne? Test { get; set; }
-
-        [TestInitialize]
-        public void Initialize()
-        {
-            TypeFinder.Sources.Add(GetType().Assembly);
-
-            IoC.Resolve = new NanoContainer().Resolve;
-
-            Test = new TestActiveOneViewModel();
-        }
-
-        [TestMethod]
-        public async Task ActiveChangedTest()
-        {
-            ArgumentNullException.ThrowIfNull(Test);
-
-            var test = new TestViewModel();
-
-            Test!.ActiveChanged += (item) =>
+            [TestMethod]
+            public async Task ActiveChangedTest()
             {
-                Assert.IsNotNull(item);
-                Assert.AreEqual(item, test);
-                Assert.IsInstanceOfType(item, typeof(TestViewModel));
-            };
+                ArgumentNullException.ThrowIfNull(Test);
 
-            Assert.IsTrue(await Test.ActivateItem(test));
+                var test = new TestViewModel();
 
-            Assert.IsTrue(await Test.DeactivateItem(test));
+                Test.ActiveChanged += (item) =>
+                {
+                    Assert.IsNotNull(item);
+                    Assert.AreEqual(item, test);
+                    Assert.IsInstanceOfType(item, typeof(TestViewModel));
+                };
+
+                Assert.IsTrue(await Test.ActivateItem(test));
+
+                Assert.IsTrue(await Test.DeactivateItem(test));
+            }
+
+            [TestMethod]
+            public async Task ActiveItemsTest()
+            {
+                ArgumentNullException.ThrowIfNull(Test);
+
+                var test1 = new TestViewModel();
+                var test2 = new TestViewModel();
+
+                Assert.IsFalse(Test.ActiveItems.Contains(test1));
+                Assert.IsFalse(Test.ActiveItems.Contains(test2));
+
+                Assert.IsTrue(await Test.ActivateItem(test1));
+                Assert.IsTrue(await Test.ActivateItem(test2));
+
+                Assert.IsTrue(Test.ActiveItems.Contains(test1));
+                Assert.IsTrue(Test.ActiveItems.Contains(test2));
+            }
+
+            [TestMethod]
+            public async Task ItemsTest()
+            {
+                ArgumentNullException.ThrowIfNull(Test);
+
+                var test = new TestViewModel();
+
+                Assert.IsFalse(Test.Items.Contains(test));
+
+                Assert.IsTrue(await Test.ActivateItem(test));
+
+                Assert.IsTrue(Test.Items.Contains(test));
+            }
+
+            [TestMethod]
+            public async Task ActivateItemTest()
+            {
+                ArgumentNullException.ThrowIfNull(Test);
+
+                var test1 = new TestViewModel();
+                var test2 = new TestViewModel();
+
+                Assert.IsFalse(test1.IsActive);
+                Assert.IsFalse(test2.IsActive);
+
+                Assert.IsTrue(await Test.ActivateItem(test1));
+
+                Assert.IsTrue(test1.IsActive);
+                Assert.IsFalse(test2.IsActive);
+
+                Assert.IsTrue(await Test.ActivateItem(test2));
+
+                Assert.IsTrue(test1.IsActive);
+                Assert.IsTrue(test2.IsActive);
+            }
+
+            [TestMethod]
+            public async Task ActivateItemFailedTest()
+            {
+                ArgumentNullException.ThrowIfNull(Test);
+
+                var test = new TestActiveFailViewModel();
+
+                Assert.IsFalse(await Test.ActivateItem(test));
+            }
+
+            [TestMethod]
+            public async Task DeactivateItemTest()
+            {
+                ArgumentNullException.ThrowIfNull(Test);
+
+                var test1 = new TestViewModel();
+                var test2 = new TestViewModel();
+
+                Assert.IsFalse(test1.IsActive);
+                Assert.IsFalse(test2.IsActive);
+
+                Assert.IsTrue(await Test.ActivateItem(test1));
+
+                Assert.IsTrue(test1.IsActive);
+                Assert.IsFalse(test2.IsActive);
+
+                Assert.IsTrue(await Test.ActivateItem(test2));
+
+                Assert.IsTrue(test1.IsActive);
+                Assert.IsTrue(test2.IsActive);
+
+                Assert.IsTrue(await Test.DeactivateItem(test1));
+
+                Assert.IsFalse(test1.IsActive);
+                Assert.IsTrue(test2.IsActive);
+
+                Assert.IsTrue(await Test.DeactivateItem(test2));
+
+                Assert.IsFalse(test1.IsActive);
+                Assert.IsFalse(test2.IsActive);
+            }
+
+            [TestMethod]
+            public async Task DeactivateItemCloseTest()
+            {
+                ArgumentNullException.ThrowIfNull(Test);
+
+                var test = new TestViewModel();
+
+                Assert.IsFalse(Test.Items.Contains(test));
+
+                Assert.IsTrue(await Test.ActivateItem(test));
+
+                Assert.IsTrue(Test.Items.Contains(test));
+
+                Assert.IsTrue(await Test.DeactivateItem(test, true));
+
+                Assert.IsFalse(Test.Items.Contains(test));
+            }
+
+            [TestMethod]
+            public async Task DeactivateItemFailedTest()
+            {
+                ArgumentNullException.ThrowIfNull(Test);
+
+                var test = new TestActiveFailViewModel();
+
+                Assert.IsFalse(await Test.DeactivateItem(test));
+            }
         }
 
-        [TestMethod]
-        public async Task ActiveItemTest()
+        [TestClass]
+        public sealed class ActiveOneTests
         {
-            ArgumentNullException.ThrowIfNull(Test);
+            private ViewModel.ActiveOne? Test { get; set; }
 
-            var test = new TestViewModel();
+            [TestInitialize]
+            public void Initialize()
+            {
+                TypeFinder.Sources.Add(GetType().Assembly);
 
-            Assert.IsNull(Test.ActiveItem);
+                IoC.Resolve = new NanoContainer().Resolve;
 
-            Assert.IsTrue(await Test.ActivateItem(test));
+                Test = new TestActiveOneViewModel();
+            }
 
-            Assert.AreEqual(Test.ActiveItem, test);
-        }
+            [TestMethod]
+            public async Task ActiveChangedTest()
+            {
+                ArgumentNullException.ThrowIfNull(Test);
 
-        [TestMethod]
-        public async Task ItemsTest()
-        {
-            ArgumentNullException.ThrowIfNull(Test);
+                var test = new TestViewModel();
 
-            var test = new TestViewModel();
+                Test!.ActiveChanged += (item) =>
+                {
+                    Assert.IsNotNull(item);
+                    Assert.AreEqual(item, test);
+                    Assert.IsInstanceOfType(item, typeof(TestViewModel));
+                };
 
-            Assert.IsFalse(Test.Items.Contains(test));
+                Assert.IsTrue(await Test.ActivateItem(test));
 
-            Assert.IsTrue(await Test.ActivateItem(test));
+                Assert.IsTrue(await Test.DeactivateItem(test));
+            }
 
-            Assert.IsTrue(Test.Items.Contains(test));
-        }
+            [TestMethod]
+            public async Task ActiveItemTest()
+            {
+                ArgumentNullException.ThrowIfNull(Test);
 
-        [TestMethod]
-        public async Task ActivateItemTest()
-        {
-            ArgumentNullException.ThrowIfNull(Test);
+                var test = new TestViewModel();
 
-            var test1 = new TestViewModel();
-            var test2 = new TestViewModel();
+                Assert.IsNull(Test.ActiveItem);
 
-            Assert.IsFalse(test1.IsActive);
-            Assert.IsFalse(test2.IsActive);
+                Assert.IsTrue(await Test.ActivateItem(test));
 
-            Assert.IsTrue(await Test.ActivateItem(test1));
+                Assert.AreEqual(Test.ActiveItem, test);
+            }
 
-            Assert.IsTrue(test1.IsActive);
-            Assert.IsFalse(test2.IsActive);
+            [TestMethod]
+            public async Task ItemsTest()
+            {
+                ArgumentNullException.ThrowIfNull(Test);
 
-            Assert.IsTrue(await Test.ActivateItem(test2));
+                var test = new TestViewModel();
 
-            Assert.IsFalse(test1.IsActive);
-            Assert.IsTrue(test2.IsActive);
-        }
+                Assert.IsFalse(Test.Items.Contains(test));
 
-        [TestMethod]
-        public async Task ActivateItemFailedTest()
-        {
-            ArgumentNullException.ThrowIfNull(Test);
+                Assert.IsTrue(await Test.ActivateItem(test));
 
-            var test1 = new TestFailingViewModel(true, false);
-            var test2 = new TestFailingViewModel(false, true);
+                Assert.IsTrue(Test.Items.Contains(test));
+            }
 
-            Assert.IsTrue(await Test.ActivateItem(test1));
-            Assert.IsFalse(await Test.ActivateItem(test1));
-            Assert.IsFalse(await Test.ActivateItem(test2));
-        }
+            [TestMethod]
+            public async Task ActivateItemTest()
+            {
+                ArgumentNullException.ThrowIfNull(Test);
 
-        [TestMethod]
-        public async Task DeactivateItemTest()
-        {
-            ArgumentNullException.ThrowIfNull(Test);
+                var test1 = new TestViewModel();
+                var test2 = new TestViewModel();
 
-            var test1 = new TestViewModel();
-            var test2 = new TestViewModel();
+                Assert.IsFalse(test1.IsActive);
+                Assert.IsFalse(test2.IsActive);
 
-            Assert.IsFalse(test1.IsActive);
-            Assert.IsFalse(test2.IsActive);
+                Assert.IsTrue(await Test.ActivateItem(test1));
 
-            Assert.IsTrue(await Test.ActivateItem(test1));
+                Assert.IsTrue(test1.IsActive);
+                Assert.IsFalse(test2.IsActive);
 
-            Assert.IsTrue(test1.IsActive);
-            Assert.IsFalse(test2.IsActive);
+                Assert.IsTrue(await Test.ActivateItem(test2));
 
-            Assert.IsTrue(await Test.ActivateItem(test2));
+                Assert.IsFalse(test1.IsActive);
+                Assert.IsTrue(test2.IsActive);
+            }
 
-            Assert.IsFalse(test1.IsActive);
-            Assert.IsTrue(test2.IsActive);
+            [TestMethod]
+            public async Task ActivateItemFailedTest()
+            {
+                ArgumentNullException.ThrowIfNull(Test);
 
-            Assert.IsTrue(await Test.DeactivateItem(test1));
+                var test1 = new TestActiveFailViewModel(true, false);
+                var test2 = new TestActiveFailViewModel(false, true);
 
-            Assert.IsFalse(test1.IsActive);
-            Assert.IsTrue(test2.IsActive);
+                Assert.IsTrue(await Test.ActivateItem(test1));
+                Assert.IsFalse(await Test.ActivateItem(test1));
+                Assert.IsFalse(await Test.ActivateItem(test2));
+            }
 
-            Assert.IsTrue(await Test.DeactivateItem(test2));
+            [TestMethod]
+            public async Task DeactivateItemTest()
+            {
+                ArgumentNullException.ThrowIfNull(Test);
 
-            Assert.IsFalse(test1.IsActive);
-            Assert.IsFalse(test2.IsActive);
-        }
+                var test1 = new TestViewModel();
+                var test2 = new TestViewModel();
 
-        [TestMethod]
-        public async Task DeactivateItemCloseTest()
-        {
-            ArgumentNullException.ThrowIfNull(Test);
+                Assert.IsFalse(test1.IsActive);
+                Assert.IsFalse(test2.IsActive);
 
-            var test = new TestViewModel();
+                Assert.IsTrue(await Test.ActivateItem(test1));
 
-            Assert.IsFalse(Test.Items.Contains(test));
+                Assert.IsTrue(test1.IsActive);
+                Assert.IsFalse(test2.IsActive);
 
-            Assert.IsTrue(await Test.ActivateItem(test));
+                Assert.IsTrue(await Test.ActivateItem(test2));
 
-            Assert.IsTrue(Test.Items.Contains(test));
+                Assert.IsFalse(test1.IsActive);
+                Assert.IsTrue(test2.IsActive);
 
-            Assert.IsTrue(await Test.DeactivateItem(test, true));
+                Assert.IsTrue(await Test.DeactivateItem(test1));
 
-            Assert.IsFalse(Test.Items.Contains(test));
-        }
+                Assert.IsFalse(test1.IsActive);
+                Assert.IsTrue(test2.IsActive);
 
-        [TestMethod]
-        public async Task DeactivateItemFailedTest()
-        {
-            ArgumentNullException.ThrowIfNull(Test);
+                Assert.IsTrue(await Test.DeactivateItem(test2));
 
-            var test = new TestFailingViewModel();
+                Assert.IsFalse(test1.IsActive);
+                Assert.IsFalse(test2.IsActive);
+            }
 
-            Assert.IsFalse(await Test.DeactivateItem(test));
+            [TestMethod]
+            public async Task DeactivateItemCloseTest()
+            {
+                ArgumentNullException.ThrowIfNull(Test);
+
+                var test = new TestViewModel();
+
+                Assert.IsFalse(Test.Items.Contains(test));
+
+                Assert.IsTrue(await Test.ActivateItem(test));
+
+                Assert.IsTrue(Test.Items.Contains(test));
+
+                Assert.IsTrue(await Test.DeactivateItem(test, true));
+
+                Assert.IsFalse(Test.Items.Contains(test));
+            }
+
+            [TestMethod]
+            public async Task DeactivateItemFailedTest()
+            {
+                ArgumentNullException.ThrowIfNull(Test);
+
+                var test = new TestActiveFailViewModel();
+
+                Assert.IsFalse(await Test.DeactivateItem(test));
+            }
         }
     }
 }

@@ -48,6 +48,7 @@ namespace Caliban.Nano.UI
         /// </summary>
         /// <param name="view">The view to bind.</param>
         /// <param name="viewModel">The view model to bind.</param>
+        [ExcludeFromCodeCoverage]
         public static void Bind([NotNull] object view, [NotNull] object viewModel)
         {
             if (view is FrameworkElement element)
@@ -63,6 +64,7 @@ namespace Caliban.Nano.UI
             }
         }
 
+        [ExcludeFromCodeCoverage]
         private static void Resolve(FrameworkElement target, object source)
         {
             if (string.IsNullOrWhiteSpace(target.Name))
@@ -83,12 +85,12 @@ namespace Caliban.Nano.UI
             }
         }
 
-        private static class Bindings
+        internal static class Bindings
         {
             public static void Default()
             {
                 AddResolver<Control>(BindGuard("IsEnabled"));
-                AddResolver<Button>(BindEvent("Click"));
+                AddResolver<Button>(BindButton());
                 AddResolver<Image>(BindProperty("Source"));
                 AddResolver<Label>(BindProperty("Content"));
                 AddResolver<TextBox>(BindProperty("Text"));
@@ -104,6 +106,25 @@ namespace Caliban.Nano.UI
                 AddResolver<ContentControl>(BindView("Content"));
             }
 
+            [ExcludeFromCodeCoverage]
+            private static Resolver BindButton()
+            {
+                return (t, s) =>
+                {
+                    var method = s.GetType().GetMethod(t.Name);
+
+                    if (method is not null && t is ButtonBase button)
+                    {
+                        button.Command = new Command<object>(
+                            (_) => method.Invoke(s, null)
+                        );
+                    }
+
+                    return false; // Prevent content control binding
+                };
+            }
+
+            [ExcludeFromCodeCoverage]
             private static Resolver BindEvent(string name)
             {
                 return (t, s) =>
@@ -115,41 +136,46 @@ namespace Caliban.Nano.UI
                         var @event = t.GetType().GetEvent(name);
 
                         @event?.AddEventHandler(t, new RoutedEventHandler(
-                            (_, _) => method.Invoke(s, null)
+                            (sender, e) => method.Invoke(s, new[] { sender, e })
                         ));
                     }
 
-                    return false;
+                    return true;
                 };
             }
 
+            [ExcludeFromCodeCoverage]
             private static Resolver BindGuard(string name)
             {
                 return (t, s) => Bind(t, s, name, BindingUtils.GetPathWithGuard(t.Name));
             }
 
+            [ExcludeFromCodeCoverage]
             private static Resolver BindItem(string name)
             {
                 return (t, s) => Bind(t, s, name, BindingUtils.GetPathWithItem(t.Name));
             }
 
+            [ExcludeFromCodeCoverage]
             private static Resolver BindView(string name)
             {
                 return (t, s) => Bind(t, s, name, BindingUtils.GetPathWithView(t.Name));
             }
 
+            [ExcludeFromCodeCoverage]
             private static Resolver BindProperty(string name)
             {
                 return (t, s) => Bind(t, s, name, t.Name);
             }
 
+            [ExcludeFromCodeCoverage]
             private static bool Bind(FrameworkElement target, object source, string property, string path)
             {
                 var op = source.GetType().GetProperty(path);
 
                 if (op is null && BindingUtils.IsGuard(path))
                 {
-                    return true; // Ignore missing guards
+                    return true; // Pass on not existing guard properties
                 }
 
                 var dp = BindingUtils.GetDependencyProperty(property, target.GetType());
@@ -179,7 +205,7 @@ namespace Caliban.Nano.UI
             }
         }
 
-        private static class BindingUtils
+        internal static class BindingUtils
         {
             public static bool IsGuard(string path) => path.StartsWith("Can");
             public static string GetPathWithGuard(string name) => $"Can{name}";

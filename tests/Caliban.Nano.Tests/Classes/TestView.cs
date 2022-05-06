@@ -3,5 +3,5 @@
     internal sealed class TestView { }
     internal sealed class TestActiveAllView { }
     internal sealed class TestActiveOneView { }
-    internal sealed class TestFailingView { }
+    internal sealed class TestActiveFailView { }
 }

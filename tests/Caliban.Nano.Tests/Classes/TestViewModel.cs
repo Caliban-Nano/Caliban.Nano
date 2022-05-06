@@ -6,12 +6,12 @@ namespace Caliban.Nano.Tests.Classes
     internal sealed class TestViewModel : ViewModel { }
     internal sealed class TestActiveAllViewModel : ViewModel.ActiveAll { }
     internal sealed class TestActiveOneViewModel : ViewModel.ActiveOne { }
-    internal sealed class TestFailingViewModel : ViewModel
+    internal sealed class TestActiveFailViewModel : ViewModel
     {
         private bool Activate { get; init; }
         private bool Deactivate { get; init; }
 
-        public TestFailingViewModel(bool activate = false, bool deactivate = false)
+        public TestActiveFailViewModel(bool activate = false, bool deactivate = false)
         {
             Activate = activate;
             Deactivate = deactivate;
