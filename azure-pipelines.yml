@@ -36,3 +36,8 @@ steps:
     projects: '**/*tests.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code Coverage" -- Exclude="Caliban.Nano\..*"'
     testRunTitle: 'Unit Tests'
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation:  $(System.DefaultWorkingDirectory)/**/coverage.xml
