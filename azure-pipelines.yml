@@ -34,5 +34,5 @@ steps:
   inputs:
     command: 'test'
     projects: '**/*tests.csproj'
-    arguments: '--configuration $(buildConfiguration) --collect "Code coverage" /p:Exclude="[Caliban.Nano.*]*"'
+    arguments: '--configuration $(buildConfiguration) --settings ".runsettings" --collect "Code coverage"
     testRunTitle: 'Unit Tests'
