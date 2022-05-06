@@ -63,6 +63,7 @@ namespace Caliban.Nano.UI
             }                        
         }
 
+        [ExcludeFromCodeCoverage]
         private static void OnWindowClosing(object? sender, CancelEventArgs e)
         {
             if ((sender as Window)?.DataContext is IViewModel viewModel)

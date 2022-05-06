@@ -60,6 +60,7 @@ namespace Caliban.Nano
         /// <typeparam name="T">The view model type.</typeparam>
         /// <param name="settings">The window settings.</param>
         [ExcludeFromCodeCoverage]
+        [SuppressMessage("Performance", "CA1822", Justification = "Intended Behavior")]
         public async void Show<T>(Dictionary<string, object>? settings = null) where T : IViewModel
         {
             await WindowManager.ShowWindowAsync<T>(settings);
