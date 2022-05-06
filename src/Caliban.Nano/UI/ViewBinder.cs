@@ -48,6 +48,7 @@ namespace Caliban.Nano.UI
         /// </summary>
         /// <param name="view">The view to bind.</param>
         /// <param name="viewModel">The view model to bind.</param>
+        [ExcludeFromCodeCoverage]
         public static void Bind([NotNull] object view, [NotNull] object viewModel)
         {
             if (view is FrameworkElement element)
@@ -63,6 +64,7 @@ namespace Caliban.Nano.UI
             }
         }
 
+        [ExcludeFromCodeCoverage]
         private static void Resolve(FrameworkElement target, object source)
         {
             if (string.IsNullOrWhiteSpace(target.Name))
@@ -83,7 +85,7 @@ namespace Caliban.Nano.UI
             }
         }
 
-        private static class Bindings
+        internal static class Bindings
         {
             public static void Default()
             {
@@ -143,13 +145,14 @@ namespace Caliban.Nano.UI
                 return (t, s) => Bind(t, s, name, t.Name);
             }
 
+            [ExcludeFromCodeCoverage]
             private static bool Bind(FrameworkElement target, object source, string property, string path)
             {
                 var op = source.GetType().GetProperty(path);
 
                 if (op is null && BindingUtils.IsGuard(path))
                 {
-                    return true; // Ignore missing guards
+                    return true; // Pass on not existing guard properties
                 }
 
                 var dp = BindingUtils.GetDependencyProperty(property, target.GetType());
@@ -179,7 +182,7 @@ namespace Caliban.Nano.UI
             }
         }
 
-        private static class BindingUtils
+        internal static class BindingUtils
         {
             public static bool IsGuard(string path) => path.StartsWith("Can");
             public static string GetPathWithGuard(string name) => $"Can{name}";
