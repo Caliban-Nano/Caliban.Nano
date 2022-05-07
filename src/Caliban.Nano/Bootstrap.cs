@@ -7,9 +7,9 @@ using Caliban.Nano.UI;
 namespace Caliban.Nano
 {
     /// <summary>
-    /// A framework bootstrapper with fluent interface.
+    /// A framework bootstrapper and livecycle manager with fluent interface.
     /// </summary>
-    public sealed class Bootstrap
+    public sealed class Bootstrap : IDisposable
     {
         /// <summary>
         /// Used dependency injection container.
@@ -55,7 +55,7 @@ namespace Caliban.Nano
         }
 
         /// <summary>
-        /// Shows the view model via the window manager.
+        /// Shows the view model as main window via the window manager.
         /// </summary>
         /// <typeparam name="T">The view model type.</typeparam>
         /// <param name="settings">The window settings.</param>
@@ -64,6 +64,16 @@ namespace Caliban.Nano
         public async void Show<T>(Dictionary<string, object>? settings = null) where T : IViewModel
         {
             await WindowManager.ShowWindowAsync<T>(settings);
+        }
+
+        /// <summary>
+        /// Closes the main window via the window manager. 
+        /// </summary>
+        [ExcludeFromCodeCoverage]
+        [SuppressMessage("Performance", "CA1822", Justification = "Intended Behavior")]
+        public async void Dispose()
+        {
+            await WindowManager.CloseWindowAsync();
         }
     }
 }
