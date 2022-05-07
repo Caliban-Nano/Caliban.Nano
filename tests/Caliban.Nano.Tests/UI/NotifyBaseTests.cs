@@ -9,10 +9,15 @@ namespace Caliban.Nano.Tests.UI
         [TestMethod]
         public void NotifyPropertyChangedTest()
         {
+            var count = 0;
+
             var test = new TestClass();
 
-            test.PropertyChanged += (_, e) => Assert.AreEqual(e.PropertyName, "Test");
-            test.Test();
+            test.PropertyChanged += (_, e) => count++;
+
+            test.TestProperty = true;
+
+            Assert.AreEqual(count, 2);
         }
     }
 }
