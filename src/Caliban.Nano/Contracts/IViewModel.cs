@@ -21,15 +21,15 @@
         bool CanClose { get; }
 
         /// <summary>
-        /// Executed on activation (async).
+        /// (Awaitable) Executed on activation.
         /// </summary>
-        /// <returns>True if activation was successful.</returns>
+        /// <returns>True if activation was successful; otherwise false.</returns>
         Task<bool> OnActivate();
 
         /// <summary>
-        /// Executed on deactivation (async).
+        /// (Awaitable) Executed on deactivation.
         /// </summary>
-        /// <returns>True if deactivation was successful.</returns>
+        /// <returns>True if deactivation was successful; otherwise false.</returns>
         Task<bool> OnDeactivate();
     }
 }

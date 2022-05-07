@@ -36,10 +36,10 @@ namespace Caliban.Nano.Contracts
         void Register<T>([NotNull] object instance);
 
         /// <summary>
-        /// Returns true if the type is registered.
+        /// Returns if the type is registered.
         /// </summary>
         /// <typeparam name="T">The type.</typeparam>
-        /// <returns>True if the type is registered.</returns>
+        /// <returns>True if the type is registered; otherwise false.</returns>
         bool IsRegistered<T>();
 
         /// <summary>

@@ -34,10 +34,10 @@ namespace Caliban.Nano.UI
             }
 
             /// <summary>
-            /// Activates the given view model item (async).
+            /// (Awaitable) Activates the given view model item.
             /// </summary>
             /// <param name="item">The view model item.</param>
-            /// <returns>True if the activation was successful.</returns>
+            /// <returns>True if the activation was successful; otherwise false.</returns>
             public virtual async Task<bool> ActivateItem(IViewModel item)
             {
                 if (!Items.Contains(item))
@@ -56,11 +56,11 @@ namespace Caliban.Nano.UI
             }
 
             /// <summary>
-            /// Deactivates the given view model item (async).
+            /// (Awaitable) Deactivates the given view model item.
             /// </summary>
             /// <param name="item">The view model item.</param>
             /// <param name="close">If the item should be removed.</param>
-            /// <returns>True if the deactivation was successful.</returns>
+            /// <returns>True if the deactivation was successful; otherwise false.</returns>
             public virtual async Task<bool> DeactivateItem(IViewModel item, bool close = false)
             {
                 if (!await item.OnDeactivate())

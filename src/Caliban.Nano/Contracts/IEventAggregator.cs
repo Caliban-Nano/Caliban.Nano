@@ -8,10 +8,10 @@ namespace Caliban.Nano.Contracts
     public interface IEventAggregator : IDisposable
     {
         /// <summary>
-        /// Returns true if a handler is subscribed to the type.
+        /// Returns if a handler is subscribed to the type.
         /// </summary>
         /// <typeparam name="T">The message type.</typeparam>
-        /// <returns>True if the type has a handler.</returns>
+        /// <returns>True if the type has a handler; otherwise false.</returns>
         bool HasHandler<T>();
 
         /// <summary>

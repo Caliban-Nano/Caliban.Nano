@@ -17,7 +17,7 @@ namespace Caliban.Nano.UI
         /// </summary>
         /// <param name="target">The target element.</param>
         /// <param name="source">The source object.</param>
-        /// <returns>True if resolving should continue.</returns>
+        /// <returns>True if resolving should continue; otherwise false.</returns>
         public delegate bool Resolver(FrameworkElement target, object source);
 
         /// <summary>
