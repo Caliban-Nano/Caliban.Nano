@@ -72,17 +72,19 @@ namespace Caliban.Nano.UI
                 return;
             }
 
-            var resolvers = Scope
-                .Where(x => target.GetType().IsAssignableTo(x.Item1))
-                .Select(x => x.Item2);
-
-            foreach (var resolver in resolvers)
+            foreach (var resolver in GetResolvers(target.GetType()))
             {
                 if (!resolver(target, source))
                 {
                     break;
                 }
             }
+        }
+
+        [ExcludeFromCodeCoverage]
+        private static IEnumerable<Resolver> GetResolvers(Type type)
+        {
+            return Scope.Where(x => type.IsAssignableTo(x.Item1)).Select(x => x.Item2);
         }
 
         internal static class Bindings
