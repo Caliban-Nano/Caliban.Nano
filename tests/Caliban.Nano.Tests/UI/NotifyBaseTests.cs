@@ -13,7 +13,7 @@ namespace Caliban.Nano.Tests.UI
 
             var test = new TestClass();
 
-            test.PropertyChanged += (_, e) => count++;
+            test.PropertyChanged += (_, _) => count++;
 
             test.TestProperty = true;
 
