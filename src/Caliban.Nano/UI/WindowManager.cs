@@ -11,7 +11,7 @@ namespace Caliban.Nano.UI
     public static class WindowManager
     {
         /// <summary>
-        /// Creates and shows the specified view model as the main window.
+        /// (Awaitable) Creates and shows the specified view model as the main window.
         /// </summary>
         /// <typeparam name="T">The view model type.</typeparam>
         /// <param name="settings">The window settings.</param>
@@ -23,6 +23,8 @@ namespace Caliban.Nano.UI
             var view = (Window)viewModel.View;
 
             Application.Current.MainWindow = view;
+
+            view.Closing += ClosingGuard;
 
             if (settings is not null)
             {
@@ -37,8 +39,6 @@ namespace Caliban.Nano.UI
                 view.Title = window.DisplayName;
             }
 
-            view.Closing += OnWindowClosing;
-
             if (await viewModel.OnActivate())
             {
                 view.Show();
@@ -46,29 +46,31 @@ namespace Caliban.Nano.UI
         }
 
         /// <summary>
-        /// Tries to close the main window.
+        /// (Awaitable) Tries to close the main window.
         /// </summary>
+        /// <param name="force">Forces the window to close.</param>
         /// <returns>An asynchronous task.</returns>
         [ExcludeFromCodeCoverage]
-        public static async Task CloseWindowAsync()
+        public static async Task CloseWindowAsync(bool force = true)
         {
             var view = Application.Current.MainWindow;
 
             if (view.DataContext is IViewModel viewModel)
             {
-                if (await viewModel.OnDeactivate())
+                if (await viewModel.OnDeactivate() || force)
                 {
+                    view.Closing -= ClosingGuard;
                     view.Close();
                 }
             }                        
         }
 
         [ExcludeFromCodeCoverage]
-        private static void OnWindowClosing(object? sender, CancelEventArgs e)
+        private static async void ClosingGuard(object? sender, CancelEventArgs e)
         {
             if ((sender as Window)?.DataContext is IViewModel viewModel)
             {
-                e.Cancel = !viewModel.CanClose;
+                e.Cancel = !await viewModel.OnDeactivate();
             };
         }
     }

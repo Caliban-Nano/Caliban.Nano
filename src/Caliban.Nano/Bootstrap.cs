@@ -73,7 +73,7 @@ namespace Caliban.Nano
         [SuppressMessage("Performance", "CA1822", Justification = "Intended Behavior")]
         public async void Dispose()
         {
-            await WindowManager.CloseWindowAsync();
+            await WindowManager.CloseWindowAsync(true);
         }
     }
 }
