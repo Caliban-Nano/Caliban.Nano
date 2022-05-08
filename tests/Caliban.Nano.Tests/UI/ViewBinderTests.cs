@@ -69,9 +69,9 @@ namespace Caliban.Nano.Tests.UI
         public sealed class BindingUtilsTests
         {
             [TestMethod]
-            public void IsGuardTest()
+            public void IsSubPropertyTest()
             {
-                Assert.IsTrue(ViewBinder.BindingUtils.IsGuard("CanTest"));
+                Assert.IsTrue(ViewBinder.BindingUtils.IsSubProperty("Test.Test"));
             }
 
             [TestMethod]

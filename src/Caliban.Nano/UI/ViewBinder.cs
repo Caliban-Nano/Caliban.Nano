@@ -175,9 +175,9 @@ namespace Caliban.Nano.UI
             {
                 var op = source.GetType().GetProperty(path);
 
-                if (op is null && BindingUtils.IsGuard(path))
+                if (op is null && !BindingUtils.IsSubProperty(path))
                 {
-                    return true; // Pass on not existing guard properties
+                    return true; // Pass on non existing first level properties
                 }
 
                 var dp = BindingUtils.GetDependencyProperty(property, target.GetType());
@@ -209,7 +209,7 @@ namespace Caliban.Nano.UI
 
         internal static class BindingUtils
         {
-            public static bool IsGuard(string path) => path.StartsWith("Can");
+            public static bool IsSubProperty(string path) => path.Contains('.');
             public static string GetPathWithGuard(string name) => $"Can{name}";
             public static string GetPathWithItem(string name) => $"{name}Selected";
             public static string GetPathWithView(string name) => $"{name}.View";            
