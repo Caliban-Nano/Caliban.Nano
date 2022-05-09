@@ -30,5 +30,33 @@ namespace Caliban.Nano.UI
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property.Name));
         }
+
+        /// <summary>
+        /// Sets the value of a property and notifies.
+        /// </summary>
+        /// <typeparam name="T">The property type.</typeparam>
+        /// <param name="field">The inner field.</param>
+        /// <param name="value">The property value.</param>
+        /// <param name="name">The property name.</param>
+        /// <param name="others">Other names to notify about.</param>
+        /// <returns>True if the value could be set; otherwise false.</returns>
+        protected virtual bool SetValue<T>(ref T field, T value, [CallerMemberName] string? name = null, params string[] others)
+        {
+            if (!EqualityComparer<T>.Default.Equals(field, value))
+            {
+                field = value;
+
+                NotifyPropertyChanged(name);
+
+                foreach (var other in others)
+                {
+                    NotifyPropertyChanged(other);
+                }
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }

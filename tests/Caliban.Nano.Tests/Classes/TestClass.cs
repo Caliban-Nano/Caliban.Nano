@@ -9,19 +9,33 @@ namespace Caliban.Nano.Tests.Classes
         public IDependency? B { get; set; } = null;
         public IDependency? C { get; init; } = null;
         public IDependency? D { get; private set; } = null;
-        public bool TestProperty
+
+        public bool TestNotify
         {
-            get => _testProperty;
+            get => _testNotify;
             set
             {
-                _testProperty = value;
+                _testNotify = value;
 
                 NotifyPropertyChanged();
-                NotifyPropertyChanged(() => TestProperty);
+                NotifyPropertyChanged(() => TestNotify);
             }
         }
 
-        private bool _testProperty;
+        public bool TestValue1
+        {
+            get => _testValue;
+            set => SetValue(ref _testValue, value);
+        }
+
+        public bool TestValue2
+        {
+            get => _testValue;
+            set => SetValue(ref _testValue, value, "TestValue1", "TestValue2");
+        }
+
+        private bool _testNotify;
+        private bool _testValue;
         private readonly IDependency? _a = null;
 
         public TestClass(IDependency _)

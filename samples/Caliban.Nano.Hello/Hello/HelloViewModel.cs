@@ -10,13 +10,7 @@ namespace Caliban.Nano.Hello.Hello
         public string Input
         {
             get => _input;
-            set
-            {
-                _input = value;
-
-                NotifyPropertyChanged();
-                NotifyPropertyChanged(() => CanSayHello);
-            }
+            set => SetValue(ref _input, value, "Input", "CanSayHello");
         }
 
         private string _input = "";
