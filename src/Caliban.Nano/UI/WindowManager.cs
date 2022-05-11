@@ -66,11 +66,13 @@ namespace Caliban.Nano.UI
         }
 
         [ExcludeFromCodeCoverage]
-        private static async void ClosingGuard(object? sender, CancelEventArgs e)
+        private static void ClosingGuard(object? sender, CancelEventArgs e)
         {
             if ((sender as Window)?.DataContext is IViewModel viewModel)
             {
-                e.Cancel = !await viewModel.OnDeactivate();
+                viewModel.OnDeactivate().Wait();
+
+                e.Cancel = !viewModel.CanClose;
             };
         }
     }
