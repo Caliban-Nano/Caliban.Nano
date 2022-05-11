@@ -11,7 +11,7 @@ namespace Caliban.Nano.Tests
     public sealed class LogTests
     {
         [TestMethod]
-        public void ThisTest()
+        public void ThisMessageTest()
         {
             using var test = new StringWriter();
 
@@ -22,6 +22,20 @@ namespace Caliban.Nano.Tests
             Log.This("test");
 
             Assert.IsTrue(test.ToString().Contains("[info] [caliban.nano] test"));
+        }
+
+        [TestMethod]
+        public void ThisExceptionTest()
+        {
+            using var test = new StringWriter();
+
+            IoC.Resolve = new NanoContainer().Resolve;
+
+            Trace.Listeners.Add(new TextWriterTraceListener(test));
+
+            Log.This(new Exception("test"));
+
+            Assert.IsTrue(test.ToString().Contains("[error] [caliban.nano] test"));
         }
     }
 

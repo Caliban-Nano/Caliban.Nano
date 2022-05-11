@@ -33,6 +33,15 @@ namespace Caliban.Nano
         {
             Logger.Info($"[caliban.nano] {message}");
         }
+
+        /// <summary>
+        /// Logs a framework exception.
+        /// </summary>
+        /// <param name="exception">The exception.</param>
+        public static void This(Exception exception)
+        {
+            Logger.Error($"[caliban.nano] {exception.Message}");
+        }
     }
 
     /// <summary>
