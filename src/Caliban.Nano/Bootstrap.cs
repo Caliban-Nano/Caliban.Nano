@@ -63,7 +63,14 @@ namespace Caliban.Nano
         [SuppressMessage("Performance", "CA1822", Justification = "Intended Behavior")]
         public async void Show<T>(Dictionary<string, object>? settings = null) where T : IViewModel
         {
-            await WindowManager.ShowWindowAsync<T>(settings);
+            try
+            {
+                await WindowManager.ShowWindowAsync<T>(settings);
+            }
+            catch (Exception ex)
+            {
+                Log.This(ex);
+            }
         }
 
         /// <summary>
@@ -73,7 +80,14 @@ namespace Caliban.Nano
         [SuppressMessage("Performance", "CA1822", Justification = "Intended Behavior")]
         public async void Dispose()
         {
-            await WindowManager.CloseWindowAsync(true);
+            try
+            {
+                await WindowManager.CloseWindowAsync(true);
+            }
+            catch (Exception ex)
+            {
+                Log.This(ex);
+            }
         }
     }
 }
