@@ -5,8 +5,17 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Caliban.Nano.Hello.Hello"
       mc:Ignorable="d">
-    <DockPanel Height="auto" FocusManager.FocusedElement="{Binding ElementName=Input}">
-        <TextBox DockPanel.Dock="Top" x:Name="Input"/>
-        <Button DockPanel.Dock="Top" x:Name="SayHello" Content="Hello"/>
+    <DockPanel Height="auto" FocusManager.FocusedElement="{Binding ElementName=Input}" Style="{StaticResource Panel}">
+        <TextBox
+            x:Name="Input"
+            DockPanel.Dock="Top"
+            Style="{StaticResource Input}"
+        />
+        <Button
+            Content="Hello"
+            x:Name="SayHello"
+            DockPanel.Dock="Top"
+            Style="{StaticResource Hello}"
+        />
     </DockPanel>
 </UserControl>
