@@ -103,11 +103,11 @@ public class CarViewModel : ViewModel.ActiveOne
     {
         SwitchDriverAsync();
     }
-}
 
-public async void SwitchDriverAsync()
-{
-    await ActivateItem(new PersonViewModel());
+    public async void SwitchDriverAsync()
+    {
+        await ActivateItem(new PersonViewModel());
+    }
 }
 ```
 
