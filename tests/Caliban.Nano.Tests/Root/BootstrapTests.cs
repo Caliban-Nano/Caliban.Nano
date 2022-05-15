@@ -9,6 +9,12 @@ namespace Caliban.Nano.Tests.Root
     [TestClass]
     public class BootstrapTests
     {
+        [TestInitialize]
+        public void Initialize()
+        {
+            TypeFinder.Sources.Clear();
+        }
+
         [TestMethod]
         public void BootstrapTest()
         {
@@ -17,11 +23,11 @@ namespace Caliban.Nano.Tests.Root
             Assert.IsNotNull(bootstrap.Container);
             Assert.IsInstanceOfType(bootstrap.Container, typeof(NanoContainer));
 
-            Assert.AreEqual(TypeFinder.Sources.Count, 1);
+            Assert.AreEqual(1, TypeFinder.Sources.Count);
 
             bootstrap.AddSource(GetType().Assembly);
 
-            Assert.AreEqual(TypeFinder.Sources.Count, 2);
+            Assert.AreEqual(2, TypeFinder.Sources.Count);
 
             Assert.ThrowsException<TypeLoadException>(() => IoC.Get<IMock>());
 
