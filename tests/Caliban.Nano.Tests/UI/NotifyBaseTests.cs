@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Caliban.Nano.Tests.Classes;
+using Caliban.Nano.Tests.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Caliban.Nano.Tests.UI
@@ -11,12 +11,10 @@ namespace Caliban.Nano.Tests.UI
         public void NotifyPropertyChangedTest()
         {
             var count = 0;
+            var mock = new MockClass();
 
-            var test = new TestClass();
-
-            test.PropertyChanged += (_, _) => count++;
-
-            test.TestNotify = true;
+            mock.PropertyChanged += (_, _) => count++;
+            mock.Notify = true;
 
             Assert.AreEqual(count, 2);
         }
@@ -25,30 +23,25 @@ namespace Caliban.Nano.Tests.UI
         public void SetValueTest()
         {
             var names = new List<string?>();
+            var mock = new MockClass();
 
-            var test = new TestClass();
-
-            test.PropertyChanged += (s, e) =>
-            {
-                names.Add(e.PropertyName);
-            };
-
-            test.TestValue1 = true;
+            mock.PropertyChanged += (_, e) => names.Add(e.PropertyName);
+            mock.Value1 = true;
 
             Assert.AreEqual(names.Count, 1);
-            Assert.AreEqual(names[0], nameof(test.TestValue1));
+            Assert.AreEqual(names[0], nameof(mock.Value1));
 
             names.Clear();
 
-            test.TestValue2 = false;
+            mock.Value2 = false;
 
             Assert.AreEqual(names.Count, 2);
-            Assert.AreEqual(names[0], nameof(test.TestValue1));
-            Assert.AreEqual(names[1], nameof(test.TestValue2));
+            Assert.AreEqual(names[0], nameof(mock.Value1));
+            Assert.AreEqual(names[1], nameof(mock.Value2));
 
             names.Clear();
 
-            test.TestValue2 = false;
+            mock.Value2 = false;
 
             Assert.AreEqual(names.Count, 0);
         }

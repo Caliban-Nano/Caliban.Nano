@@ -4,7 +4,7 @@ using System.IO;
 using Caliban.Nano.Container;
 using Caliban.Nano.Contracts;
 using Caliban.Nano.Events;
-using Caliban.Nano.Tests.Classes;
+using Caliban.Nano.Tests.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Caliban.Nano.Tests.Events
@@ -13,7 +13,6 @@ namespace Caliban.Nano.Tests.Events
     public sealed class EventAggregatorTests
     {
         private IEventAggregator? Events { get; set; }
-
         private readonly Action<object> Handler = (_) => { };
 
         [TestInitialize]
@@ -27,14 +26,14 @@ namespace Caliban.Nano.Tests.Events
         {
             ArgumentNullException.ThrowIfNull(Events);
 
-            Events.Subscribe<TestEvent>(Handler);
+            Events.Subscribe<MockEvent>(Handler);
 
             using (Events)
             {
-                Assert.IsTrue(Events.HasHandler<TestEvent>());                
+                Assert.IsTrue(Events.HasHandler<MockEvent>());
             }
 
-            Assert.IsFalse(Events.HasHandler<TestEvent>());
+            Assert.IsFalse(Events.HasHandler<MockEvent>());
         }
 
         [TestMethod]
@@ -42,11 +41,11 @@ namespace Caliban.Nano.Tests.Events
         {
             ArgumentNullException.ThrowIfNull(Events);
 
-            Assert.IsFalse(Events.HasHandler<TestEvent>());
+            Assert.IsFalse(Events.HasHandler<MockEvent>());
 
-            Events.Subscribe<TestEvent>(Handler);
+            Events.Subscribe<MockEvent>(Handler);
 
-            Assert.IsTrue(Events.HasHandler<TestEvent>());
+            Assert.IsTrue(Events.HasHandler<MockEvent>());
         }
 
         [TestMethod]
@@ -54,9 +53,9 @@ namespace Caliban.Nano.Tests.Events
         {
             ArgumentNullException.ThrowIfNull(Events);
 
-            Events.Subscribe<TestEvent>(Handler);
+            Events.Subscribe<MockEvent>(Handler);
 
-            Assert.IsTrue(Events.HasHandler<TestEvent>());
+            Assert.IsTrue(Events.HasHandler<MockEvent>());
         }
 
         [TestMethod]
@@ -64,27 +63,25 @@ namespace Caliban.Nano.Tests.Events
         {
             ArgumentNullException.ThrowIfNull(Events);
 
-            Events.Subscribe<TestEvent>(Handler);
+            Events.Subscribe<MockEvent>(Handler);
 
-            Assert.IsTrue(Events.HasHandler<TestEvent>());
+            Assert.IsTrue(Events.HasHandler<MockEvent>());
 
-            Events.Unsubscribe<TestEvent>(Handler);
+            Events.Unsubscribe<MockEvent>(Handler);
 
-            Assert.IsFalse(Events.HasHandler<TestEvent>());
+            Assert.IsFalse(Events.HasHandler<MockEvent>());
         }
 
         [TestMethod]
-        public void PublishTest()
+        public void PublishPassedTest()
         {
-            Action<TestEvent> handler = (e) => Assert.AreEqual(e.EventArg, "Test");
-
             ArgumentNullException.ThrowIfNull(Events);
 
-            Events.Subscribe<TestEvent>(handler);
+            Events.Subscribe<MockEvent>((MockEvent _) => Assert.IsTrue(true));
 
-            Assert.IsTrue(Events.HasHandler<TestEvent>());
+            Assert.IsTrue(Events.HasHandler<MockEvent>());
 
-            Events.Publish(new TestEvent("Test"));
+            Events.Publish(new MockEvent());
         }
 
         [TestMethod]
@@ -92,19 +89,19 @@ namespace Caliban.Nano.Tests.Events
         {
             ArgumentNullException.ThrowIfNull(Events);
 
-            using var test = new StringWriter();
-
-            Trace.Listeners.Add(new TextWriterTraceListener(test));
-
             IoC.Resolve = new NanoContainer().Resolve;
 
-            Events.Subscribe<TestEvent>(new object());
+            using var writer = new StringWriter();
 
-            Assert.IsTrue(Events.HasHandler<TestEvent>());
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
-            Events.Publish(new TestEvent("Test"));
+            Events.Subscribe<MockEvent>(new object());
 
-            Assert.IsTrue(test.ToString().Contains("Handler System.Object is not supported"));
+            Assert.IsTrue(Events.HasHandler<MockEvent>());
+
+            Events.Publish(new MockEvent());
+
+            Assert.IsTrue(writer.ToString().Contains("Handler System.Object is not supported"));
         }
     }
 }

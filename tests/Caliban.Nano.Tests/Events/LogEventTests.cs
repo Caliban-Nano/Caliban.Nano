@@ -9,11 +9,10 @@ namespace Caliban.Nano.Tests.Events
         [TestMethod]
         public void LogEventTest()
         {
-            var log = new LogEvent("test");
+            var logEvent = new LogEvent("Message");
 
-            Assert.AreEqual($"{log}", "test");
-
-            Assert.AreEqual(log.Message, "test");
+            Assert.AreEqual(logEvent.Message, "Message");
+            Assert.AreEqual(logEvent.ToString(), "Message");
         }
     }
 }

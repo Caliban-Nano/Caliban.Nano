@@ -22,22 +22,15 @@ namespace Caliban.Nano.Tests.Events
 
             var count = 0;
 
-            void handler(object? sender, int value)
-            {
-                count += value;
-            }
+            void handler(object? _, int value) => count += value;
 
             EventRaiser.Raise(1);
-
             EventRaiser += handler;
-
-            EventRaiser.Raise(1);
-
+            EventRaiser.Raise(2);
             EventRaiser -= handler;
+            EventRaiser.Raise(3);
 
-            EventRaiser.Raise(1);
-
-            Assert.AreEqual(count, 1);
+            Assert.AreEqual(count, 2);
         }
     }
 }

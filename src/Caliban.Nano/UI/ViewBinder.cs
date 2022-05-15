@@ -188,7 +188,7 @@ namespace Caliban.Nano.UI
                     {
                         Source = source,
                         Path = new PropertyPath(path),
-                        Mode = op?.CanWrite ?? false
+                        Mode = op?.GetSetMethod()?.IsPublic ?? false
                             ? BindingMode.TwoWay
                             : BindingMode.OneWay,
 

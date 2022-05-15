@@ -1,10 +1,10 @@
 ﻿using System;
 using Caliban.Nano.Container;
 using Caliban.Nano.Contracts;
-using Caliban.Nano.Tests.Classes;
+using Caliban.Nano.Tests.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Caliban.Nano.Tests
+namespace Caliban.Nano.Tests.Root
 {
     [TestClass]
     public sealed class IoCTests
@@ -24,11 +24,11 @@ namespace Caliban.Nano.Tests
         {
             ArgumentNullException.ThrowIfNull(Container);
 
-            var test = new TestClass();
+            var mock = new MockClass();
 
-            Container.Register<TestClass>(test);
+            Container.Register<IMock>(mock);
 
-            Assert.AreEqual(IoC.Resolve(typeof(TestClass)), test);
+            Assert.AreEqual(IoC.Resolve(typeof(IMock)), mock);
         }
 
         [TestMethod]
@@ -36,11 +36,11 @@ namespace Caliban.Nano.Tests
         {
             ArgumentNullException.ThrowIfNull(Container);
 
-            var test = new TestClass();
+            var mock = new MockClass();
 
-            Container.Register<TestClass>(test);
+            Container.Register<IMock>(mock);
 
-            Assert.AreEqual(IoC.Get<TestClass>(), test);
+            Assert.AreEqual(IoC.Get<IMock>(), mock);
         }
     }
 }

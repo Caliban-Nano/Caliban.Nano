@@ -1,6 +1,6 @@
 ﻿using System;
 using Caliban.Nano.Container;
-using Caliban.Nano.Tests.Classes;
+using Caliban.Nano.Tests.Mocks;
 using Caliban.Nano.UI;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -20,34 +20,34 @@ namespace Caliban.Nano.Tests.UI
         [TestMethod]
         public void FindViewModelTest()
         {
-            var test = TypeFinder.FindViewModel(typeof(TestViewModel));
+            var viewModel = TypeFinder.FindViewModel(typeof(MockViewModel));
 
-            Assert.IsNotNull(test);
-            Assert.IsInstanceOfType(test, typeof(TestViewModel));
+            Assert.IsNotNull(viewModel);
+            Assert.IsInstanceOfType(viewModel, typeof(MockViewModel));
         }
 
         [TestMethod]
         public void FindViewTest()
         {
-            var test = TypeFinder.FindView(typeof(TestView));
+            var view = TypeFinder.FindView(typeof(MockView));
 
-            Assert.IsNotNull(test);
-            Assert.IsInstanceOfType(test, typeof(TestView));
+            Assert.IsNotNull(view);
+            Assert.IsInstanceOfType(view, typeof(MockView));
         }
 
         [TestMethod]
         public void FindTypeTest()
         {
-            var test = TypeFinder.FindType(typeof(TestClass).Name);
+            var type = TypeFinder.FindType(typeof(MockClass).Name);
 
-            Assert.IsNotNull(test);
-            Assert.IsInstanceOfType(test, typeof(TestClass));
+            Assert.IsNotNull(type);
+            Assert.IsInstanceOfType(type, typeof(MockClass));
         }
 
         [TestMethod]
         public void FindTypeExceptionTest()
         {
-            Assert.ThrowsException<TypeLoadException>(() => TypeFinder.FindType("unknown"));
+            Assert.ThrowsException<TypeLoadException>(() => TypeFinder.FindType("Unknown"));
         }
     }
 }

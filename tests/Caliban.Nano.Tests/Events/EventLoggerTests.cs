@@ -5,7 +5,7 @@ using Caliban.Nano.Container;
 using Caliban.Nano.Contracts;
 using Caliban.Nano.Events;
 using Caliban.Nano.Events.EventLogger;
-using Caliban.Nano.Tests.Classes;
+using Caliban.Nano.Tests.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Caliban.Nano.Tests.Events
@@ -24,20 +24,18 @@ namespace Caliban.Nano.Tests.Events
         }
 
         [TestMethod]
-        public void RaiseTest()
+        public void RaisePassedTest()
         {
             ArgumentNullException.ThrowIfNull(Container);
 
             var events = new EventAggregator();
-            var logger = new TestLogger();
+            var logger = new MockLogger();
 
             Container.Register<IEventAggregator>(events);
             
-            events.Subscribe<LogEvent>((LogEvent e) => {
-                Assert.AreEqual(e.Message, "test");
-            });
+            events.Subscribe<LogEvent>((LogEvent e) => Assert.AreEqual(e.Message, "Message"));
 
-            logger.Raise("test");
+            logger.Raise("Message");
         }
 
         [TestMethod]
@@ -45,17 +43,14 @@ namespace Caliban.Nano.Tests.Events
         {
             ArgumentNullException.ThrowIfNull(Container);
 
-            using var test = new StringWriter();
+            using var writer = new StringWriter();
+            var logger = new MockLogger();
 
-            Trace.Listeners.Add(new TextWriterTraceListener(test));
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
-            var logger = new TestLogger();
+            logger.Raise("Message");
 
-            logger.Raise("test");
-
-            Log.This("test");
-
-            Assert.IsTrue(test.ToString().Contains("IEventAggregator could not be resolved"));
+            Assert.IsTrue(writer.ToString().Contains("IEventAggregator could not be resolved"));
         }
     }
 }
