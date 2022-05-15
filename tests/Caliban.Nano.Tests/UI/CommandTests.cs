@@ -11,32 +11,32 @@ namespace Caliban.Nano.Tests.UI
         [TestMethod]
         public void ExecuteTest()
         {
-            var test = new Command<object>(
+            var command = new Command<object>(
                 (_) => Assert.IsTrue(true)
             );
 
-            test.Execute(new object());
+            command.Execute(new object());
         }
 
         [TestMethod]
         public void CanExecuteTest()
         {
-            var test = new Command<object>(
+            var command = new Command<object>(
                 (_) => Assert.IsTrue(true),
                 (_) => true
             );
 
-            Assert.IsTrue(test.CanExecute(new object()));
+            Assert.IsTrue(command.CanExecute(new object()));
         }
 
         [TestMethod]
         public void CanExecuteDefaultTest()
         {
-            var test = new Command<object>(
+            var command = new Command<object>(
                 (_) => Assert.IsTrue(true)
             );
 
-            Assert.IsTrue(test.CanExecute(new object()));
+            Assert.IsTrue(command.CanExecute(new object()));
         }
 
         [TestMethod]
@@ -48,33 +48,31 @@ namespace Caliban.Nano.Tests.UI
                 Assert.IsNotNull(e);
             };
 
-            var test = new Command<object>(
-                (_) => Assert.IsTrue(true),
-                (_) => true
+            var command = new Command<object>(
+                (_) => Assert.IsTrue(true)
             );
 
-            test.CanExecuteChanged += handler;
+            command.CanExecuteChanged += handler;
 
             CommandManager.InvalidateRequerySuggested();
 
-            test.CanExecuteChanged -= handler;
+            command.CanExecuteChanged -= handler;
         }
 
         [TestMethod]
         public void RaiseCanExecuteChangedTest()
         {
-            var test = new Command<object>(
-                (_) => Assert.IsTrue(true),
-                (_) => true
+            var command = new Command<object>(
+                (_) => Assert.IsTrue(true)
             );
 
-            test.CanExecuteChanged += (sender, e) =>
+            command.CanExecuteChanged += (sender, e) =>
             {
                 Assert.IsNotNull(sender);
                 Assert.IsNotNull(e);
             };
 
-            test.RaiseCanExecuteChanged();
+            command.RaiseCanExecuteChanged();
         }
     }
 }

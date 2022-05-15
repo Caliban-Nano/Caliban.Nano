@@ -20,34 +20,34 @@ namespace Caliban.Nano.Tests.UI
         [TestMethod]
         public void FindViewModelTest()
         {
-            var test = TypeFinder.FindViewModel(typeof(MockViewModel));
+            var viewModel = TypeFinder.FindViewModel(typeof(MockViewModel));
 
-            Assert.IsNotNull(test);
-            Assert.IsInstanceOfType(test, typeof(MockViewModel));
+            Assert.IsNotNull(viewModel);
+            Assert.IsInstanceOfType(viewModel, typeof(MockViewModel));
         }
 
         [TestMethod]
         public void FindViewTest()
         {
-            var test = TypeFinder.FindView(typeof(MockView));
+            var view = TypeFinder.FindView(typeof(MockView));
 
-            Assert.IsNotNull(test);
-            Assert.IsInstanceOfType(test, typeof(MockView));
+            Assert.IsNotNull(view);
+            Assert.IsInstanceOfType(view, typeof(MockView));
         }
 
         [TestMethod]
         public void FindTypeTest()
         {
-            var test = TypeFinder.FindType(typeof(MockClass).Name);
+            var type = TypeFinder.FindType(typeof(MockClass).Name);
 
-            Assert.IsNotNull(test);
-            Assert.IsInstanceOfType(test, typeof(MockClass));
+            Assert.IsNotNull(type);
+            Assert.IsInstanceOfType(type, typeof(MockClass));
         }
 
         [TestMethod]
         public void FindTypeExceptionTest()
         {
-            Assert.ThrowsException<TypeLoadException>(() => TypeFinder.FindType("unknown"));
+            Assert.ThrowsException<TypeLoadException>(() => TypeFinder.FindType("Unknown"));
         }
     }
 }

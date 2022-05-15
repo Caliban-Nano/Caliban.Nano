@@ -24,7 +24,7 @@ namespace Caliban.Nano.Tests.Events
         }
 
         [TestMethod]
-        public void RaiseTest()
+        public void RaisePassedTest()
         {
             ArgumentNullException.ThrowIfNull(Container);
 
@@ -33,11 +33,9 @@ namespace Caliban.Nano.Tests.Events
 
             Container.Register<IEventAggregator>(events);
             
-            events.Subscribe<LogEvent>((LogEvent e) => {
-                Assert.AreEqual(e.Message, "test");
-            });
+            events.Subscribe<LogEvent>((LogEvent e) => Assert.AreEqual(e.Message, "Message"));
 
-            logger.Raise("test");
+            logger.Raise("Message");
         }
 
         [TestMethod]
@@ -45,17 +43,14 @@ namespace Caliban.Nano.Tests.Events
         {
             ArgumentNullException.ThrowIfNull(Container);
 
-            using var test = new StringWriter();
-
-            Trace.Listeners.Add(new TextWriterTraceListener(test));
-
+            using var writer = new StringWriter();
             var logger = new MockLogger();
 
-            logger.Raise("test");
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
-            Log.This("test");
+            logger.Raise("Message");
 
-            Assert.IsTrue(test.ToString().Contains("IEventAggregator could not be resolved"));
+            Assert.IsTrue(writer.ToString().Contains("IEventAggregator could not be resolved"));
         }
     }
 }

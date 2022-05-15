@@ -11,7 +11,7 @@ namespace Caliban.Nano.Tests.UI
     [TestClass]
     public sealed class ViewModelTests
     {
-        private ViewModel? Test;
+        private ViewModel? Mock;
 
         [TestInitialize]
         public void Initialize()
@@ -20,53 +20,45 @@ namespace Caliban.Nano.Tests.UI
 
             IoC.Resolve = new NanoContainer().Resolve;
 
-            Test = new MockViewModel();
+            Mock = new MockViewModel();
         }
 
         [TestMethod]
         public void ConstructorTest()
         {
-            ArgumentNullException.ThrowIfNull(Test);
+            ArgumentNullException.ThrowIfNull(Mock);
 
-            Assert.IsNotNull(Test.View);
-
-            Assert.IsFalse(Test.IsActive);
-
-            Assert.IsTrue(Test.CanClose);
+            Assert.IsNotNull(Mock.View);
+            Assert.IsFalse(Mock.IsActive);
+            Assert.IsTrue(Mock.CanClose);
         }
 
         [TestMethod]
         public async Task OnActivateTest()
         {
-            ArgumentNullException.ThrowIfNull(Test);
+            ArgumentNullException.ThrowIfNull(Mock);
 
-            Assert.IsFalse(Test.IsActive);
-
-            Assert.IsTrue(await Test.OnActivate());
-
-            Assert.IsTrue(Test.IsActive);
+            Assert.IsFalse(Mock.IsActive);
+            Assert.IsTrue(await Mock.OnActivate());
+            Assert.IsTrue(Mock.IsActive);
         }
 
         [TestMethod]
         public async Task OnDeactivateTest()
         {
-            ArgumentNullException.ThrowIfNull(Test);
+            ArgumentNullException.ThrowIfNull(Mock);
 
-            Assert.IsFalse(Test.IsActive);
-
-            Assert.IsTrue(await Test.OnActivate());
-
-            Assert.IsTrue(Test.IsActive);
-
-            Assert.IsTrue(await Test.OnDeactivate());
-
-            Assert.IsFalse(Test.IsActive);
+            Assert.IsFalse(Mock.IsActive);
+            Assert.IsTrue(await Mock.OnActivate());
+            Assert.IsTrue(Mock.IsActive);
+            Assert.IsTrue(await Mock.OnDeactivate());
+            Assert.IsFalse(Mock.IsActive);
         }
 
         [TestClass]
         public sealed class ActiveAllTests
         {
-            private ViewModel.ActiveAll? Test { get; set; }
+            private ViewModel.ActiveAll? Mock { get; set; }
 
             [TestInitialize]
             public void Initialize()
@@ -75,157 +67,150 @@ namespace Caliban.Nano.Tests.UI
 
                 IoC.Resolve = new NanoContainer().Resolve;
 
-                Test = new MockAllViewModel();
+                Mock = new MockAllViewModel();
             }
 
             [TestMethod]
             public async Task ActiveChangedTest()
             {
-                ArgumentNullException.ThrowIfNull(Test);
+                ArgumentNullException.ThrowIfNull(Mock);
 
-                var test = new MockViewModel();
+                var mock = new MockViewModel();
 
-                Test.ActiveChanged += (item) =>
+                Mock.ActiveChanged += (item) =>
                 {
                     Assert.IsNotNull(item);
-                    Assert.AreEqual(item, test);
+                    Assert.AreEqual(item, mock);
                     Assert.IsInstanceOfType(item, typeof(MockViewModel));
                 };
 
-                Assert.IsTrue(await Test.ActivateItem(test));
-
-                Assert.IsTrue(await Test.DeactivateItem(test));
+                Assert.IsTrue(await Mock.ActivateItem(mock));
+                Assert.IsTrue(await Mock.DeactivateItem(mock));
             }
 
             [TestMethod]
             public async Task ActiveItemsTest()
             {
-                ArgumentNullException.ThrowIfNull(Test);
+                ArgumentNullException.ThrowIfNull(Mock);
 
-                var test1 = new MockViewModel();
-                var test2 = new MockViewModel();
+                var mock1 = new MockViewModel();
+                var mock2 = new MockViewModel();
 
-                Assert.IsFalse(Test.ActiveItems.Contains(test1));
-                Assert.IsFalse(Test.ActiveItems.Contains(test2));
+                Assert.IsFalse(Mock.ActiveItems.Contains(mock1));
+                Assert.IsFalse(Mock.ActiveItems.Contains(mock2));
 
-                Assert.IsTrue(await Test.ActivateItem(test1));
-                Assert.IsTrue(await Test.ActivateItem(test2));
+                Assert.IsTrue(await Mock.ActivateItem(mock1));
+                Assert.IsTrue(await Mock.ActivateItem(mock2));
 
-                Assert.IsTrue(Test.ActiveItems.Contains(test1));
-                Assert.IsTrue(Test.ActiveItems.Contains(test2));
+                Assert.IsTrue(Mock.ActiveItems.Contains(mock1));
+                Assert.IsTrue(Mock.ActiveItems.Contains(mock2));
             }
 
             [TestMethod]
             public async Task ItemsTest()
             {
-                ArgumentNullException.ThrowIfNull(Test);
+                ArgumentNullException.ThrowIfNull(Mock);
 
-                var test = new MockViewModel();
+                var mock = new MockViewModel();
 
-                Assert.IsFalse(Test.Items.Contains(test));
-
-                Assert.IsTrue(await Test.ActivateItem(test));
-
-                Assert.IsTrue(Test.Items.Contains(test));
+                Assert.IsFalse(Mock.Items.Contains(mock));
+                Assert.IsTrue(await Mock.ActivateItem(mock));
+                Assert.IsTrue(Mock.Items.Contains(mock));
             }
 
             [TestMethod]
-            public async Task ActivateItemTest()
+            public async Task ActivateItemPassedTest()
             {
-                ArgumentNullException.ThrowIfNull(Test);
+                ArgumentNullException.ThrowIfNull(Mock);
 
-                var test1 = new MockViewModel();
-                var test2 = new MockViewModel();
+                var mock1 = new MockViewModel();
+                var mock2 = new MockViewModel();
 
-                Assert.IsFalse(test1.IsActive);
-                Assert.IsFalse(test2.IsActive);
+                Assert.IsFalse(mock1.IsActive);
+                Assert.IsFalse(mock2.IsActive);
 
-                Assert.IsTrue(await Test.ActivateItem(test1));
+                Assert.IsTrue(await Mock.ActivateItem(mock1));
 
-                Assert.IsTrue(test1.IsActive);
-                Assert.IsFalse(test2.IsActive);
+                Assert.IsTrue(mock1.IsActive);
+                Assert.IsFalse(mock2.IsActive);
 
-                Assert.IsTrue(await Test.ActivateItem(test2));
+                Assert.IsTrue(await Mock.ActivateItem(mock2));
 
-                Assert.IsTrue(test1.IsActive);
-                Assert.IsTrue(test2.IsActive);
+                Assert.IsTrue(mock1.IsActive);
+                Assert.IsTrue(mock2.IsActive);
             }
 
             [TestMethod]
             public async Task ActivateItemFailedTest()
             {
-                ArgumentNullException.ThrowIfNull(Test);
+                ArgumentNullException.ThrowIfNull(Mock);
 
-                var test = new MockFailViewModel();
+                var fail = new MockFailViewModel();
 
-                Assert.IsFalse(await Test.ActivateItem(test));
+                Assert.IsFalse(await Mock.ActivateItem(fail));
             }
 
             [TestMethod]
-            public async Task DeactivateItemTest()
+            public async Task DeactivateItemPassedTest()
             {
-                ArgumentNullException.ThrowIfNull(Test);
+                ArgumentNullException.ThrowIfNull(Mock);
 
-                var test1 = new MockViewModel();
-                var test2 = new MockViewModel();
+                var mock1 = new MockViewModel();
+                var mock2 = new MockViewModel();
 
-                Assert.IsFalse(test1.IsActive);
-                Assert.IsFalse(test2.IsActive);
+                Assert.IsFalse(mock1.IsActive);
+                Assert.IsFalse(mock2.IsActive);
 
-                Assert.IsTrue(await Test.ActivateItem(test1));
+                Assert.IsTrue(await Mock.ActivateItem(mock1));
 
-                Assert.IsTrue(test1.IsActive);
-                Assert.IsFalse(test2.IsActive);
+                Assert.IsTrue(mock1.IsActive);
+                Assert.IsFalse(mock2.IsActive);
 
-                Assert.IsTrue(await Test.ActivateItem(test2));
+                Assert.IsTrue(await Mock.ActivateItem(mock2));
 
-                Assert.IsTrue(test1.IsActive);
-                Assert.IsTrue(test2.IsActive);
+                Assert.IsTrue(mock1.IsActive);
+                Assert.IsTrue(mock2.IsActive);
 
-                Assert.IsTrue(await Test.DeactivateItem(test1));
+                Assert.IsTrue(await Mock.DeactivateItem(mock1));
 
-                Assert.IsFalse(test1.IsActive);
-                Assert.IsTrue(test2.IsActive);
+                Assert.IsFalse(mock1.IsActive);
+                Assert.IsTrue(mock2.IsActive);
 
-                Assert.IsTrue(await Test.DeactivateItem(test2));
+                Assert.IsTrue(await Mock.DeactivateItem(mock2));
 
-                Assert.IsFalse(test1.IsActive);
-                Assert.IsFalse(test2.IsActive);
-            }
-
-            [TestMethod]
-            public async Task DeactivateItemCloseTest()
-            {
-                ArgumentNullException.ThrowIfNull(Test);
-
-                var test = new MockViewModel();
-
-                Assert.IsFalse(Test.Items.Contains(test));
-
-                Assert.IsTrue(await Test.ActivateItem(test));
-
-                Assert.IsTrue(Test.Items.Contains(test));
-
-                Assert.IsTrue(await Test.DeactivateItem(test, true));
-
-                Assert.IsFalse(Test.Items.Contains(test));
+                Assert.IsFalse(mock1.IsActive);
+                Assert.IsFalse(mock2.IsActive);
             }
 
             [TestMethod]
             public async Task DeactivateItemFailedTest()
             {
-                ArgumentNullException.ThrowIfNull(Test);
+                ArgumentNullException.ThrowIfNull(Mock);
 
-                var test = new MockFailViewModel();
+                var fail = new MockFailViewModel();
 
-                Assert.IsFalse(await Test.DeactivateItem(test));
+                Assert.IsFalse(await Mock.DeactivateItem(fail));
+            }
+
+            [TestMethod]
+            public async Task DeactivateItemCloseTest()
+            {
+                ArgumentNullException.ThrowIfNull(Mock);
+
+                var mock = new MockViewModel();
+
+                Assert.IsFalse(Mock.Items.Contains(mock));
+                Assert.IsTrue(await Mock.ActivateItem(mock));
+                Assert.IsTrue(Mock.Items.Contains(mock));
+                Assert.IsTrue(await Mock.DeactivateItem(mock, true));
+                Assert.IsFalse(Mock.Items.Contains(mock));
             }
         }
 
         [TestClass]
         public sealed class ActiveOneTests
         {
-            private ViewModel.ActiveOne? Test { get; set; }
+            private ViewModel.ActiveOne? Mock { get; set; }
 
             [TestInitialize]
             public void Initialize()
@@ -234,149 +219,140 @@ namespace Caliban.Nano.Tests.UI
 
                 IoC.Resolve = new NanoContainer().Resolve;
 
-                Test = new MockOneViewModel();
+                Mock = new MockOneViewModel();
             }
 
             [TestMethod]
             public async Task ActiveChangedTest()
             {
-                ArgumentNullException.ThrowIfNull(Test);
+                ArgumentNullException.ThrowIfNull(Mock);
 
-                var test = new MockViewModel();
+                var mock = new MockViewModel();
 
-                Test!.ActiveChanged += (item) =>
+                Mock!.ActiveChanged += (item) =>
                 {
                     Assert.IsNotNull(item);
-                    Assert.AreEqual(item, test);
+                    Assert.AreEqual(item, mock);
                     Assert.IsInstanceOfType(item, typeof(MockViewModel));
                 };
 
-                Assert.IsTrue(await Test.ActivateItem(test));
-
-                Assert.IsTrue(await Test.DeactivateItem(test));
+                Assert.IsTrue(await Mock.ActivateItem(mock));
+                Assert.IsTrue(await Mock.DeactivateItem(mock));
             }
 
             [TestMethod]
             public async Task ActiveItemTest()
             {
-                ArgumentNullException.ThrowIfNull(Test);
+                ArgumentNullException.ThrowIfNull(Mock);
 
-                var test = new MockViewModel();
+                var mock = new MockViewModel();
 
-                Assert.IsNull(Test.ActiveItem);
-
-                Assert.IsTrue(await Test.ActivateItem(test));
-
-                Assert.AreEqual(Test.ActiveItem, test);
+                Assert.IsNull(Mock.ActiveItem);
+                Assert.IsTrue(await Mock.ActivateItem(mock));
+                Assert.AreEqual(Mock.ActiveItem, mock);
             }
 
             [TestMethod]
             public async Task ItemsTest()
             {
-                ArgumentNullException.ThrowIfNull(Test);
+                ArgumentNullException.ThrowIfNull(Mock);
 
-                var test = new MockViewModel();
+                var mock = new MockViewModel();
 
-                Assert.IsFalse(Test.Items.Contains(test));
-
-                Assert.IsTrue(await Test.ActivateItem(test));
-
-                Assert.IsTrue(Test.Items.Contains(test));
+                Assert.IsFalse(Mock.Items.Contains(mock));
+                Assert.IsTrue(await Mock.ActivateItem(mock));
+                Assert.IsTrue(Mock.Items.Contains(mock));
             }
 
             [TestMethod]
-            public async Task ActivateItemTest()
+            public async Task ActivateItemPassedTest()
             {
-                ArgumentNullException.ThrowIfNull(Test);
+                ArgumentNullException.ThrowIfNull(Mock);
 
-                var test1 = new MockViewModel();
-                var test2 = new MockViewModel();
+                var mock1 = new MockViewModel();
+                var mock2 = new MockViewModel();
 
-                Assert.IsFalse(test1.IsActive);
-                Assert.IsFalse(test2.IsActive);
+                Assert.IsFalse(mock1.IsActive);
+                Assert.IsFalse(mock2.IsActive);
 
-                Assert.IsTrue(await Test.ActivateItem(test1));
+                Assert.IsTrue(await Mock.ActivateItem(mock1));
 
-                Assert.IsTrue(test1.IsActive);
-                Assert.IsFalse(test2.IsActive);
+                Assert.IsTrue(mock1.IsActive);
+                Assert.IsFalse(mock2.IsActive);
 
-                Assert.IsTrue(await Test.ActivateItem(test2));
+                Assert.IsTrue(await Mock.ActivateItem(mock2));
 
-                Assert.IsFalse(test1.IsActive);
-                Assert.IsTrue(test2.IsActive);
+                Assert.IsFalse(mock1.IsActive);
+                Assert.IsTrue(mock2.IsActive);
             }
 
             [TestMethod]
             public async Task ActivateItemFailedTest()
             {
-                ArgumentNullException.ThrowIfNull(Test);
+                ArgumentNullException.ThrowIfNull(Mock);
 
-                var test1 = new MockFailViewModel(true, false);
-                var test2 = new MockFailViewModel(false, true);
+                var fail1 = new MockFailViewModel(true, false);
+                var fail2 = new MockFailViewModel(false, true);
 
-                Assert.IsTrue(await Test.ActivateItem(test1));
-                Assert.IsFalse(await Test.ActivateItem(test1));
-                Assert.IsFalse(await Test.ActivateItem(test2));
+                Assert.IsTrue(await Mock.ActivateItem(fail1));
+                Assert.IsFalse(await Mock.ActivateItem(fail1));
+                Assert.IsFalse(await Mock.ActivateItem(fail2));
             }
 
             [TestMethod]
-            public async Task DeactivateItemTest()
+            public async Task DeactivateItemPassedTest()
             {
-                ArgumentNullException.ThrowIfNull(Test);
+                ArgumentNullException.ThrowIfNull(Mock);
 
-                var test1 = new MockViewModel();
-                var test2 = new MockViewModel();
+                var mock1 = new MockViewModel();
+                var mock2 = new MockViewModel();
 
-                Assert.IsFalse(test1.IsActive);
-                Assert.IsFalse(test2.IsActive);
+                Assert.IsFalse(mock1.IsActive);
+                Assert.IsFalse(mock2.IsActive);
 
-                Assert.IsTrue(await Test.ActivateItem(test1));
+                Assert.IsTrue(await Mock.ActivateItem(mock1));
 
-                Assert.IsTrue(test1.IsActive);
-                Assert.IsFalse(test2.IsActive);
+                Assert.IsTrue(mock1.IsActive);
+                Assert.IsFalse(mock2.IsActive);
 
-                Assert.IsTrue(await Test.ActivateItem(test2));
+                Assert.IsTrue(await Mock.ActivateItem(mock2));
 
-                Assert.IsFalse(test1.IsActive);
-                Assert.IsTrue(test2.IsActive);
+                Assert.IsFalse(mock1.IsActive);
+                Assert.IsTrue(mock2.IsActive);
 
-                Assert.IsTrue(await Test.DeactivateItem(test1));
+                Assert.IsTrue(await Mock.DeactivateItem(mock1));
 
-                Assert.IsFalse(test1.IsActive);
-                Assert.IsTrue(test2.IsActive);
+                Assert.IsFalse(mock1.IsActive);
+                Assert.IsTrue(mock2.IsActive);
 
-                Assert.IsTrue(await Test.DeactivateItem(test2));
+                Assert.IsTrue(await Mock.DeactivateItem(mock2));
 
-                Assert.IsFalse(test1.IsActive);
-                Assert.IsFalse(test2.IsActive);
-            }
-
-            [TestMethod]
-            public async Task DeactivateItemCloseTest()
-            {
-                ArgumentNullException.ThrowIfNull(Test);
-
-                var test = new MockViewModel();
-
-                Assert.IsFalse(Test.Items.Contains(test));
-
-                Assert.IsTrue(await Test.ActivateItem(test));
-
-                Assert.IsTrue(Test.Items.Contains(test));
-
-                Assert.IsTrue(await Test.DeactivateItem(test, true));
-
-                Assert.IsFalse(Test.Items.Contains(test));
+                Assert.IsFalse(mock1.IsActive);
+                Assert.IsFalse(mock2.IsActive);
             }
 
             [TestMethod]
             public async Task DeactivateItemFailedTest()
             {
-                ArgumentNullException.ThrowIfNull(Test);
+                ArgumentNullException.ThrowIfNull(Mock);
 
-                var test = new MockFailViewModel();
+                var fail = new MockFailViewModel();
 
-                Assert.IsFalse(await Test.DeactivateItem(test));
+                Assert.IsFalse(await Mock.DeactivateItem(fail));
+            }
+
+            [TestMethod]
+            public async Task DeactivateItemCloseTest()
+            {
+                ArgumentNullException.ThrowIfNull(Mock);
+
+                var mock = new MockViewModel();
+
+                Assert.IsFalse(Mock.Items.Contains(mock));
+                Assert.IsTrue(await Mock.ActivateItem(mock));
+                Assert.IsTrue(Mock.Items.Contains(mock));
+                Assert.IsTrue(await Mock.DeactivateItem(mock, true));
+                Assert.IsFalse(Mock.Items.Contains(mock));
             }
         }
     }

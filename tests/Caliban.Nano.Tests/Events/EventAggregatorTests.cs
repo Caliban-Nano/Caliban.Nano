@@ -13,7 +13,6 @@ namespace Caliban.Nano.Tests.Events
     public sealed class EventAggregatorTests
     {
         private IEventAggregator? Events { get; set; }
-
         private readonly Action<object> Handler = (_) => { };
 
         [TestInitialize]
@@ -31,7 +30,7 @@ namespace Caliban.Nano.Tests.Events
 
             using (Events)
             {
-                Assert.IsTrue(Events.HasHandler<MockEvent>());                
+                Assert.IsTrue(Events.HasHandler<MockEvent>());
             }
 
             Assert.IsFalse(Events.HasHandler<MockEvent>());
@@ -74,13 +73,11 @@ namespace Caliban.Nano.Tests.Events
         }
 
         [TestMethod]
-        public void PublishTest()
+        public void PublishPassedTest()
         {
-            Action<MockEvent> handler = (e) => Assert.IsTrue(true);
-
             ArgumentNullException.ThrowIfNull(Events);
 
-            Events.Subscribe<MockEvent>(handler);
+            Events.Subscribe<MockEvent>((MockEvent _) => Assert.IsTrue(true));
 
             Assert.IsTrue(Events.HasHandler<MockEvent>());
 
@@ -92,11 +89,11 @@ namespace Caliban.Nano.Tests.Events
         {
             ArgumentNullException.ThrowIfNull(Events);
 
-            using var test = new StringWriter();
-
-            Trace.Listeners.Add(new TextWriterTraceListener(test));
-
             IoC.Resolve = new NanoContainer().Resolve;
+
+            using var writer = new StringWriter();
+
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
             Events.Subscribe<MockEvent>(new object());
 
@@ -104,7 +101,7 @@ namespace Caliban.Nano.Tests.Events
 
             Events.Publish(new MockEvent());
 
-            Assert.IsTrue(test.ToString().Contains("Handler System.Object is not supported"));
+            Assert.IsTrue(writer.ToString().Contains("Handler System.Object is not supported"));
         }
     }
 }

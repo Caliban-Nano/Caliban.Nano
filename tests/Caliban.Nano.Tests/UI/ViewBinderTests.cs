@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using Caliban.Nano.Tests.Mocks;
 using Caliban.Nano.UI;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -71,48 +70,48 @@ namespace Caliban.Nano.Tests.UI
             [TestMethod]
             public void IsSubPropertyTest()
             {
-                Assert.IsTrue(ViewBinder.BindingUtils.IsSubProperty("Test.Test"));
+                Assert.IsTrue(ViewBinder.BindingUtils.IsSubProperty("Property.Sub"));
             }
 
             [TestMethod]
             public void GetPathWithGuardTest()
             {
-                var test = ViewBinder.BindingUtils.GetPathWithGuard("Test");
+                var path = ViewBinder.BindingUtils.GetPathWithGuard("Action");
 
-                Assert.AreEqual(test, "CanTest");
+                Assert.AreEqual(path, "CanAction");
             }
 
             [TestMethod]
             public void GetPathWithItemTest()
             {
-                var test = ViewBinder.BindingUtils.GetPathWithItem("Test");
+                var path = ViewBinder.BindingUtils.GetPathWithItem("Items");
 
-                Assert.AreEqual(test, "TestSelected");
+                Assert.AreEqual(path, "ItemsSelected");
             }
 
             [TestMethod]
             public void GetPathWithViewTest()
             {
-                var test = ViewBinder.BindingUtils.GetPathWithView("Test");
+                var path = ViewBinder.BindingUtils.GetPathWithView("Content");
 
-                Assert.AreEqual(test, "Test.View");
+                Assert.AreEqual(path, "Content.View");
             }
 
             [TestMethod]
-            public void GetDependencyPropertyTest()
+            public void GetDependencyPropertyPassedTest()
             {
-                var test = ViewBinder.BindingUtils.GetDependencyProperty("Text", typeof(TextBox));
+                var dp = ViewBinder.BindingUtils.GetDependencyProperty("Text", typeof(TextBox));
 
-                Assert.IsNotNull(test);
-                Assert.AreEqual(test, TextBox.TextProperty);
+                Assert.IsNotNull(dp);
+                Assert.AreEqual(dp, TextBox.TextProperty);
             }
 
             [TestMethod]
-            public void GetDependencyPropertyNullTest()
+            public void GetDependencyPropertyFailedTest()
             {
-                var test = ViewBinder.BindingUtils.GetDependencyProperty("Test", typeof(TextBox));
+                var dp = ViewBinder.BindingUtils.GetDependencyProperty("Unknown", typeof(TextBox));
 
-                Assert.IsNull(test);
+                Assert.IsNull(dp);
             }
         }
     }

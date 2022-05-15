@@ -24,11 +24,11 @@ namespace Caliban.Nano.Tests
         {
             ArgumentNullException.ThrowIfNull(Container);
 
-            var test = new MockClass();
+            var mock = new MockClass();
 
-            Container.Register<MockClass>(test);
+            Container.Register<IMock>(mock);
 
-            Assert.AreEqual(IoC.Resolve(typeof(MockClass)), test);
+            Assert.AreEqual(IoC.Resolve(typeof(IMock)), mock);
         }
 
         [TestMethod]
@@ -36,11 +36,11 @@ namespace Caliban.Nano.Tests
         {
             ArgumentNullException.ThrowIfNull(Container);
 
-            var test = new MockClass();
+            var mock = new MockClass();
 
-            Container.Register<MockClass>(test);
+            Container.Register<IMock>(mock);
 
-            Assert.AreEqual(IoC.Get<MockClass>(), test);
+            Assert.AreEqual(IoC.Get<IMock>(), mock);
         }
     }
 }

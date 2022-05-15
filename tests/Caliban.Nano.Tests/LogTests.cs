@@ -13,29 +13,29 @@ namespace Caliban.Nano.Tests
         [TestMethod]
         public void ThisMessageTest()
         {
-            using var test = new StringWriter();
-
             IoC.Resolve = new NanoContainer().Resolve;
 
-            Trace.Listeners.Add(new TextWriterTraceListener(test));
+            using var writer = new StringWriter();
 
-            Log.This("test");
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
-            Assert.IsTrue(test.ToString().Contains("[info] [caliban.nano] test"));
+            Log.This("Message");
+
+            Assert.IsTrue(writer.ToString().Contains("[info] [caliban.nano] Message"));
         }
 
         [TestMethod]
         public void ThisExceptionTest()
         {
-            using var test = new StringWriter();
-
             IoC.Resolve = new NanoContainer().Resolve;
 
-            Trace.Listeners.Add(new TextWriterTraceListener(test));
+            using var writer = new StringWriter();
 
-            Log.This(new Exception("test"));
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
-            Assert.IsTrue(test.ToString().Contains("[error] [caliban.nano] test"));
+            Log.This(new Exception("Exception"));
+
+            Assert.IsTrue(writer.ToString().Contains("[error] [caliban.nano] Exception"));
         }
     }
 
@@ -51,34 +51,33 @@ namespace Caliban.Nano.Tests
         }
 
         [TestMethod]
-        public void HandleEventTest()
+        public void HandleExternTest()
         {
             ArgumentNullException.ThrowIfNull(Logger);
 
-            using var test = new StringWriter();
-
-            Trace.Listeners.Add(new TextWriterTraceListener(test));
-
+            using var writer = new StringWriter();
             var events = new EventAggregator();
 
-            events.Subscribe<LogEvent>(Logger);
-            events.Publish(new LogEvent("test"));
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
-            Assert.IsTrue(test.ToString().Contains("[event] test"));
+            events.Subscribe<LogEvent>(Logger);
+            events.Publish(new LogEvent("Event"));
+
+            Assert.IsTrue(writer.ToString().Contains("[event] Event"));
         }
 
         [TestMethod]
-        public void HandleTest()
+        public void HandleInternTest()
         {
             ArgumentNullException.ThrowIfNull(Logger);
 
-            using var test = new StringWriter();
+            using var writer = new StringWriter();
             
-            Trace.Listeners.Add(new TextWriterTraceListener(test));
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
-            Logger.Handle(new LogEvent("test"));
+            Logger.Handle(new LogEvent("Event"));
 
-            Assert.IsTrue(test.ToString().Contains("[event] test"));
+            Assert.IsTrue(writer.ToString().Contains("[event] Event"));
         }
 
         [TestMethod]
@@ -86,13 +85,13 @@ namespace Caliban.Nano.Tests
         {
             ArgumentNullException.ThrowIfNull(Logger);
 
-            using var test = new StringWriter();
+            using var writer = new StringWriter();
             
-            Trace.Listeners.Add(new TextWriterTraceListener(test));
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
-            Logger.Info("test");
+            Logger.Info("Info");
 
-            Assert.IsTrue(test.ToString().Contains("[info] test"));
+            Assert.IsTrue(writer.ToString().Contains("[info] Info"));
         }
 
         [TestMethod]
@@ -100,13 +99,13 @@ namespace Caliban.Nano.Tests
         {
             ArgumentNullException.ThrowIfNull(Logger);
             
-            using var test = new StringWriter();
+            using var writer = new StringWriter();
             
-            Trace.Listeners.Add(new TextWriterTraceListener(test));
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
-            Logger.Warn("test");
+            Logger.Warn("Warning");
 
-            Assert.IsTrue(test.ToString().Contains("[warn] test"));
+            Assert.IsTrue(writer.ToString().Contains("[warn] Warning"));
         }
 
         [TestMethod]
@@ -114,13 +113,13 @@ namespace Caliban.Nano.Tests
         {
             ArgumentNullException.ThrowIfNull(Logger);
 
-            using var test = new StringWriter();
+            using var writer = new StringWriter();
             
-            Trace.Listeners.Add(new TextWriterTraceListener(test));
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
-            Logger.Error("test");
+            Logger.Error("Error");
 
-            Assert.IsTrue(test.ToString().Contains("[error] test"));
+            Assert.IsTrue(writer.ToString().Contains("[error] Error"));
         }
 
         [TestMethod]
@@ -128,13 +127,13 @@ namespace Caliban.Nano.Tests
         {
             ArgumentNullException.ThrowIfNull(Logger);
 
-            using var test = new StringWriter();
+            using var writer = new StringWriter();
             
-            Trace.Listeners.Add(new TextWriterTraceListener(test));
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
-            Logger.Error("{0}", new[] { "test" });
+            Logger.Error("{0}", new[] { "Error" });
 
-            Assert.IsTrue(test.ToString().Contains("[error] test"));
+            Assert.IsTrue(writer.ToString().Contains("[error] Error"));
         }
 
         [TestMethod]
@@ -142,13 +141,13 @@ namespace Caliban.Nano.Tests
         {
             ArgumentNullException.ThrowIfNull(Logger);
 
-            using var test = new StringWriter();
+            using var writer = new StringWriter();
             
-            Trace.Listeners.Add(new TextWriterTraceListener(test));
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
-            Logger.Error(new Exception("test"));
+            Logger.Error(new Exception("Error"));
 
-            Assert.IsTrue(test.ToString().Contains("[error] test"));
+            Assert.IsTrue(writer.ToString().Contains("[error] Error"));
         }
 
         [TestMethod]
@@ -156,13 +155,13 @@ namespace Caliban.Nano.Tests
         {
             ArgumentNullException.ThrowIfNull(Logger);
             
-            using var test = new StringWriter();
+            using var writer = new StringWriter();
             
-            Trace.Listeners.Add(new TextWriterTraceListener(test));
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
-            Logger.Error(new Exception("test1"), "{0}", new[] { "test2" });
+            Logger.Error(new Exception("Exception"), "{0}", new[] { "Message" });
 
-            Assert.IsTrue(test.ToString().Contains("[error] test1: test2"));
+            Assert.IsTrue(writer.ToString().Contains("[error] Exception: Message"));
         }
     }
 }
