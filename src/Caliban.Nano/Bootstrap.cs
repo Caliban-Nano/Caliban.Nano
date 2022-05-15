@@ -77,7 +77,6 @@ namespace Caliban.Nano
         /// Closes the main window via the window manager. 
         /// </summary>
         [ExcludeFromCodeCoverage]
-        [SuppressMessage("Performance", "CA1822", Justification = "Intended Behavior")]
         public async void Dispose()
         {
             try
