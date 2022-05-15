@@ -1,7 +1,7 @@
 ﻿using System;
 using Caliban.Nano.Container;
 using Caliban.Nano.Contracts;
-using Caliban.Nano.Tests.Classes;
+using Caliban.Nano.Tests.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Caliban.Nano.Tests
@@ -24,11 +24,11 @@ namespace Caliban.Nano.Tests
         {
             ArgumentNullException.ThrowIfNull(Container);
 
-            var test = new TestClass();
+            var test = new MockClass();
 
-            Container.Register<TestClass>(test);
+            Container.Register<MockClass>(test);
 
-            Assert.AreEqual(IoC.Resolve(typeof(TestClass)), test);
+            Assert.AreEqual(IoC.Resolve(typeof(MockClass)), test);
         }
 
         [TestMethod]
@@ -36,11 +36,11 @@ namespace Caliban.Nano.Tests
         {
             ArgumentNullException.ThrowIfNull(Container);
 
-            var test = new TestClass();
+            var test = new MockClass();
 
-            Container.Register<TestClass>(test);
+            Container.Register<MockClass>(test);
 
-            Assert.AreEqual(IoC.Get<TestClass>(), test);
+            Assert.AreEqual(IoC.Get<MockClass>(), test);
         }
     }
 }

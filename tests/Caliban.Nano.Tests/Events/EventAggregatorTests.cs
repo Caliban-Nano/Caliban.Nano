@@ -4,7 +4,7 @@ using System.IO;
 using Caliban.Nano.Container;
 using Caliban.Nano.Contracts;
 using Caliban.Nano.Events;
-using Caliban.Nano.Tests.Classes;
+using Caliban.Nano.Tests.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Caliban.Nano.Tests.Events
@@ -27,14 +27,14 @@ namespace Caliban.Nano.Tests.Events
         {
             ArgumentNullException.ThrowIfNull(Events);
 
-            Events.Subscribe<TestEvent>(Handler);
+            Events.Subscribe<MockEvent>(Handler);
 
             using (Events)
             {
-                Assert.IsTrue(Events.HasHandler<TestEvent>());                
+                Assert.IsTrue(Events.HasHandler<MockEvent>());                
             }
 
-            Assert.IsFalse(Events.HasHandler<TestEvent>());
+            Assert.IsFalse(Events.HasHandler<MockEvent>());
         }
 
         [TestMethod]
@@ -42,11 +42,11 @@ namespace Caliban.Nano.Tests.Events
         {
             ArgumentNullException.ThrowIfNull(Events);
 
-            Assert.IsFalse(Events.HasHandler<TestEvent>());
+            Assert.IsFalse(Events.HasHandler<MockEvent>());
 
-            Events.Subscribe<TestEvent>(Handler);
+            Events.Subscribe<MockEvent>(Handler);
 
-            Assert.IsTrue(Events.HasHandler<TestEvent>());
+            Assert.IsTrue(Events.HasHandler<MockEvent>());
         }
 
         [TestMethod]
@@ -54,9 +54,9 @@ namespace Caliban.Nano.Tests.Events
         {
             ArgumentNullException.ThrowIfNull(Events);
 
-            Events.Subscribe<TestEvent>(Handler);
+            Events.Subscribe<MockEvent>(Handler);
 
-            Assert.IsTrue(Events.HasHandler<TestEvent>());
+            Assert.IsTrue(Events.HasHandler<MockEvent>());
         }
 
         [TestMethod]
@@ -64,27 +64,27 @@ namespace Caliban.Nano.Tests.Events
         {
             ArgumentNullException.ThrowIfNull(Events);
 
-            Events.Subscribe<TestEvent>(Handler);
+            Events.Subscribe<MockEvent>(Handler);
 
-            Assert.IsTrue(Events.HasHandler<TestEvent>());
+            Assert.IsTrue(Events.HasHandler<MockEvent>());
 
-            Events.Unsubscribe<TestEvent>(Handler);
+            Events.Unsubscribe<MockEvent>(Handler);
 
-            Assert.IsFalse(Events.HasHandler<TestEvent>());
+            Assert.IsFalse(Events.HasHandler<MockEvent>());
         }
 
         [TestMethod]
         public void PublishTest()
         {
-            Action<TestEvent> handler = (e) => Assert.AreEqual(e.EventArg, "Test");
+            Action<MockEvent> handler = (e) => Assert.IsTrue(true);
 
             ArgumentNullException.ThrowIfNull(Events);
 
-            Events.Subscribe<TestEvent>(handler);
+            Events.Subscribe<MockEvent>(handler);
 
-            Assert.IsTrue(Events.HasHandler<TestEvent>());
+            Assert.IsTrue(Events.HasHandler<MockEvent>());
 
-            Events.Publish(new TestEvent("Test"));
+            Events.Publish(new MockEvent());
         }
 
         [TestMethod]
@@ -98,11 +98,11 @@ namespace Caliban.Nano.Tests.Events
 
             IoC.Resolve = new NanoContainer().Resolve;
 
-            Events.Subscribe<TestEvent>(new object());
+            Events.Subscribe<MockEvent>(new object());
 
-            Assert.IsTrue(Events.HasHandler<TestEvent>());
+            Assert.IsTrue(Events.HasHandler<MockEvent>());
 
-            Events.Publish(new TestEvent("Test"));
+            Events.Publish(new MockEvent());
 
             Assert.IsTrue(test.ToString().Contains("Handler System.Object is not supported"));
         }

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Caliban.Nano.Container;
-using Caliban.Nano.Tests.Classes;
+using Caliban.Nano.Tests.Mocks;
 using Caliban.Nano.UI;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -20,7 +20,7 @@ namespace Caliban.Nano.Tests.UI
 
             IoC.Resolve = new NanoContainer().Resolve;
 
-            Test = new TestViewModel();
+            Test = new MockViewModel();
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace Caliban.Nano.Tests.UI
 
                 IoC.Resolve = new NanoContainer().Resolve;
 
-                Test = new TestActiveAllViewModel();
+                Test = new MockAllViewModel();
             }
 
             [TestMethod]
@@ -83,13 +83,13 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test = new TestViewModel();
+                var test = new MockViewModel();
 
                 Test.ActiveChanged += (item) =>
                 {
                     Assert.IsNotNull(item);
                     Assert.AreEqual(item, test);
-                    Assert.IsInstanceOfType(item, typeof(TestViewModel));
+                    Assert.IsInstanceOfType(item, typeof(MockViewModel));
                 };
 
                 Assert.IsTrue(await Test.ActivateItem(test));
@@ -102,8 +102,8 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test1 = new TestViewModel();
-                var test2 = new TestViewModel();
+                var test1 = new MockViewModel();
+                var test2 = new MockViewModel();
 
                 Assert.IsFalse(Test.ActiveItems.Contains(test1));
                 Assert.IsFalse(Test.ActiveItems.Contains(test2));
@@ -120,7 +120,7 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test = new TestViewModel();
+                var test = new MockViewModel();
 
                 Assert.IsFalse(Test.Items.Contains(test));
 
@@ -134,8 +134,8 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test1 = new TestViewModel();
-                var test2 = new TestViewModel();
+                var test1 = new MockViewModel();
+                var test2 = new MockViewModel();
 
                 Assert.IsFalse(test1.IsActive);
                 Assert.IsFalse(test2.IsActive);
@@ -156,7 +156,7 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test = new TestActiveFailViewModel();
+                var test = new MockFailViewModel();
 
                 Assert.IsFalse(await Test.ActivateItem(test));
             }
@@ -166,8 +166,8 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test1 = new TestViewModel();
-                var test2 = new TestViewModel();
+                var test1 = new MockViewModel();
+                var test2 = new MockViewModel();
 
                 Assert.IsFalse(test1.IsActive);
                 Assert.IsFalse(test2.IsActive);
@@ -198,7 +198,7 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test = new TestViewModel();
+                var test = new MockViewModel();
 
                 Assert.IsFalse(Test.Items.Contains(test));
 
@@ -216,7 +216,7 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test = new TestActiveFailViewModel();
+                var test = new MockFailViewModel();
 
                 Assert.IsFalse(await Test.DeactivateItem(test));
             }
@@ -234,7 +234,7 @@ namespace Caliban.Nano.Tests.UI
 
                 IoC.Resolve = new NanoContainer().Resolve;
 
-                Test = new TestActiveOneViewModel();
+                Test = new MockOneViewModel();
             }
 
             [TestMethod]
@@ -242,13 +242,13 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test = new TestViewModel();
+                var test = new MockViewModel();
 
                 Test!.ActiveChanged += (item) =>
                 {
                     Assert.IsNotNull(item);
                     Assert.AreEqual(item, test);
-                    Assert.IsInstanceOfType(item, typeof(TestViewModel));
+                    Assert.IsInstanceOfType(item, typeof(MockViewModel));
                 };
 
                 Assert.IsTrue(await Test.ActivateItem(test));
@@ -261,7 +261,7 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test = new TestViewModel();
+                var test = new MockViewModel();
 
                 Assert.IsNull(Test.ActiveItem);
 
@@ -275,7 +275,7 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test = new TestViewModel();
+                var test = new MockViewModel();
 
                 Assert.IsFalse(Test.Items.Contains(test));
 
@@ -289,8 +289,8 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test1 = new TestViewModel();
-                var test2 = new TestViewModel();
+                var test1 = new MockViewModel();
+                var test2 = new MockViewModel();
 
                 Assert.IsFalse(test1.IsActive);
                 Assert.IsFalse(test2.IsActive);
@@ -311,8 +311,8 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test1 = new TestActiveFailViewModel(true, false);
-                var test2 = new TestActiveFailViewModel(false, true);
+                var test1 = new MockFailViewModel(true, false);
+                var test2 = new MockFailViewModel(false, true);
 
                 Assert.IsTrue(await Test.ActivateItem(test1));
                 Assert.IsFalse(await Test.ActivateItem(test1));
@@ -324,8 +324,8 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test1 = new TestViewModel();
-                var test2 = new TestViewModel();
+                var test1 = new MockViewModel();
+                var test2 = new MockViewModel();
 
                 Assert.IsFalse(test1.IsActive);
                 Assert.IsFalse(test2.IsActive);
@@ -356,7 +356,7 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test = new TestViewModel();
+                var test = new MockViewModel();
 
                 Assert.IsFalse(Test.Items.Contains(test));
 
@@ -374,7 +374,7 @@ namespace Caliban.Nano.Tests.UI
             {
                 ArgumentNullException.ThrowIfNull(Test);
 
-                var test = new TestActiveFailViewModel();
+                var test = new MockFailViewModel();
 
                 Assert.IsFalse(await Test.DeactivateItem(test));
             }

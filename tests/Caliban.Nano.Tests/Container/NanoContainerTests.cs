@@ -1,7 +1,7 @@
 ﻿using System;
 using Caliban.Nano.Container;
 using Caliban.Nano.Contracts;
-using Caliban.Nano.Tests.Classes;
+using Caliban.Nano.Tests.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Caliban.Nano.Tests.Container
@@ -22,16 +22,16 @@ namespace Caliban.Nano.Tests.Container
         {
             ArgumentNullException.ThrowIfNull(Container);
 
-            Assert.IsFalse(Container.IsRegistered<TestClass>());
+            Assert.IsFalse(Container.IsRegistered<MockClass>());
 
-            Container.Register<TestClass>(new TestClass());
+            Container.Register<MockClass>(new MockClass());
 
             using (Container)
             {
-                Assert.IsTrue(Container.IsRegistered<TestClass>());
+                Assert.IsTrue(Container.IsRegistered<MockClass>());
             }
 
-            Assert.IsFalse(Container.IsRegistered<TestClass>());
+            Assert.IsFalse(Container.IsRegistered<MockClass>());
         }
 
         [TestMethod]
@@ -39,14 +39,14 @@ namespace Caliban.Nano.Tests.Container
         {
             ArgumentNullException.ThrowIfNull(Container);
 
-            Container.Register<TestClass>(new TestClass());
+            Container.Register<MockClass>(new MockClass());
             Container.Resolved += (test) =>
             {
                 Assert.IsNotNull(test);
-                Assert.IsInstanceOfType(test, typeof(TestClass));
+                Assert.IsInstanceOfType(test, typeof(MockClass));
             };
 
-            Container.Resolve(typeof(TestClass));
+            Container.Resolve(typeof(MockClass));
         }
 
         [TestMethod]
@@ -54,45 +54,45 @@ namespace Caliban.Nano.Tests.Container
         {
             ArgumentNullException.ThrowIfNull(Container);
 
-            Container.Register<IDependency>(new TestClass());
+            Container.Register<IMock>(new MockClass());
 
-            Assert.IsTrue(Container.IsRegistered<IDependency>());
+            Assert.IsTrue(Container.IsRegistered<IMock>());
 
-            var instance = Container.Resolve(typeof(TestClass));
+            var instance = Container.Resolve(typeof(MockClass));
 
             Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, typeof(TestClass));
+            Assert.IsInstanceOfType(instance, typeof(MockClass));
 
-            var test = (TestClass)instance;
+            var test = (MockClass)instance;
 
-            Assert.IsNotNull(test.A);
-            Assert.IsInstanceOfType(test.A, typeof(TestClass));
+            Assert.IsNotNull(test.DependencyA);
+            Assert.IsInstanceOfType(test.DependencyA, typeof(MockClass));
 
-            Assert.IsNotNull(test.B);
-            Assert.IsInstanceOfType(test.B, typeof(TestClass));
+            Assert.IsNotNull(test.DependencyB);
+            Assert.IsInstanceOfType(test.DependencyB, typeof(MockClass));
 
-            Assert.IsNotNull(test.C);
-            Assert.IsInstanceOfType(test.C, typeof(TestClass));
+            Assert.IsNotNull(test.DependencyC);
+            Assert.IsInstanceOfType(test.DependencyC, typeof(MockClass));
 
-            Assert.IsNotNull(test.D);
-            Assert.IsInstanceOfType(test.D, typeof(TestClass));
+            Assert.IsNotNull(test.DependencyD);
+            Assert.IsInstanceOfType(test.DependencyD, typeof(MockClass));
 
-            Container.Register<TestClass>(test);
+            Container.Register<MockClass>(test);
 
-            Assert.AreEqual(Container.Resolve(typeof(TestClass)), test);
+            Assert.AreEqual(Container.Resolve(typeof(MockClass)), test);
 
-            test = (TestClass)Container.Resolve(new TestClass());
+            test = (MockClass)Container.Resolve(new MockClass());
 
-            Assert.IsNull(test.A);
+            Assert.IsNull(test.DependencyA);
 
-            Assert.IsNotNull(test.B);
-            Assert.IsInstanceOfType(test.B, typeof(TestClass));
+            Assert.IsNotNull(test.DependencyB);
+            Assert.IsInstanceOfType(test.DependencyB, typeof(MockClass));
 
-            Assert.IsNotNull(test.C);
-            Assert.IsInstanceOfType(test.C, typeof(TestClass));
+            Assert.IsNotNull(test.DependencyC);
+            Assert.IsInstanceOfType(test.DependencyC, typeof(MockClass));
 
-            Assert.IsNotNull(test.D);
-            Assert.IsInstanceOfType(test.D, typeof(TestClass));
+            Assert.IsNotNull(test.DependencyD);
+            Assert.IsInstanceOfType(test.DependencyD, typeof(MockClass));
         }
 
         [TestMethod]
@@ -100,14 +100,14 @@ namespace Caliban.Nano.Tests.Container
         {
             ArgumentNullException.ThrowIfNull(Container);
 
-            Container.Register<IDependency>(new TestClass());
+            Container.Register<IMock>(new MockClass());
 
-            Assert.IsTrue(Container.IsRegistered<IDependency>());
+            Assert.IsTrue(Container.IsRegistered<IMock>());
 
-            var instance = Container.Resolve<TestClass>();
+            var instance = Container.Resolve<MockClass>();
 
             Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, typeof(TestClass));
+            Assert.IsInstanceOfType(instance, typeof(MockClass));
         }
 
         [TestMethod]
@@ -115,7 +115,7 @@ namespace Caliban.Nano.Tests.Container
         {
             ArgumentNullException.ThrowIfNull(Container);
 
-            Assert.ThrowsException<TypeLoadException>(() => Container.Resolve<IDependency>());
+            Assert.ThrowsException<TypeLoadException>(() => Container.Resolve<IMock>());
         }
 
         [TestMethod]
@@ -123,9 +123,9 @@ namespace Caliban.Nano.Tests.Container
         {
             ArgumentNullException.ThrowIfNull(Container);
 
-            Container.Register<TestClass>(new TestClass());
+            Container.Register<MockClass>(new MockClass());
 
-            Assert.IsNotNull(Container.Resolve(typeof(TestClass)));
+            Assert.IsNotNull(Container.Resolve(typeof(MockClass)));
         }
 
         [TestMethod]
@@ -133,15 +133,15 @@ namespace Caliban.Nano.Tests.Container
         {
             ArgumentNullException.ThrowIfNull(Container);
 
-            Assert.IsFalse(Container.IsRegistered<TestClass>());
+            Assert.IsFalse(Container.IsRegistered<MockClass>());
 
-            Container.Register<TestClass>(new TestClass());
+            Container.Register<MockClass>(new MockClass());
 
-            Assert.IsTrue(Container.IsRegistered<TestClass>());
+            Assert.IsTrue(Container.IsRegistered<MockClass>());
 
-            Container.Unregister<TestClass>();
+            Container.Unregister<MockClass>();
 
-            Assert.IsFalse(Container.IsRegistered<TestClass>());
+            Assert.IsFalse(Container.IsRegistered<MockClass>());
         }
 
         [TestMethod]
@@ -149,15 +149,15 @@ namespace Caliban.Nano.Tests.Container
         {
             ArgumentNullException.ThrowIfNull(Container);
 
-            var test = new TestClass();
+            var test = new MockClass();
 
-            Container.Register<TestClass>(test);
+            Container.Register<MockClass>(test);
 
-            Assert.AreEqual(Container.Resolve(typeof(TestClass)), test);
+            Assert.AreEqual(Container.Resolve(typeof(MockClass)), test);
 
-            Container.Unregister<TestClass>();
+            Container.Unregister<MockClass>();
 
-            Assert.AreNotEqual(Container.Resolve(typeof(TestClass)), test);
+            Assert.AreNotEqual(Container.Resolve(typeof(MockClass)), test);
         }
     }
 }

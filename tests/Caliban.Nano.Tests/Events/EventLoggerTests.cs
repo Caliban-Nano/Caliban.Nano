@@ -5,7 +5,7 @@ using Caliban.Nano.Container;
 using Caliban.Nano.Contracts;
 using Caliban.Nano.Events;
 using Caliban.Nano.Events.EventLogger;
-using Caliban.Nano.Tests.Classes;
+using Caliban.Nano.Tests.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Caliban.Nano.Tests.Events
@@ -29,7 +29,7 @@ namespace Caliban.Nano.Tests.Events
             ArgumentNullException.ThrowIfNull(Container);
 
             var events = new EventAggregator();
-            var logger = new TestLogger();
+            var logger = new MockLogger();
 
             Container.Register<IEventAggregator>(events);
             
@@ -49,7 +49,7 @@ namespace Caliban.Nano.Tests.Events
 
             Trace.Listeners.Add(new TextWriterTraceListener(test));
 
-            var logger = new TestLogger();
+            var logger = new MockLogger();
 
             logger.Raise("test");
 
