@@ -4,7 +4,7 @@ using Caliban.Nano.Tests.Mocks;
 using Caliban.Nano.UI;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Caliban.Nano.Tests
+namespace Caliban.Nano.Tests.Root
 {
     [TestClass]
     public class BootstrapTests

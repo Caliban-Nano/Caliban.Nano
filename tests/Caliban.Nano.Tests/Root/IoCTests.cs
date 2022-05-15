@@ -4,7 +4,7 @@ using Caliban.Nano.Contracts;
 using Caliban.Nano.Tests.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Caliban.Nano.Tests
+namespace Caliban.Nano.Tests.Root
 {
     [TestClass]
     public sealed class IoCTests

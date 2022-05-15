@@ -5,7 +5,7 @@ using Caliban.Nano.Container;
 using Caliban.Nano.Events;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Caliban.Nano.Tests
+namespace Caliban.Nano.Tests.Root
 {
     [TestClass]
     public sealed class LogTests
@@ -72,7 +72,7 @@ namespace Caliban.Nano.Tests
             ArgumentNullException.ThrowIfNull(Logger);
 
             using var writer = new StringWriter();
-            
+
             Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
             Logger.Handle(new LogEvent("Event"));
@@ -86,7 +86,7 @@ namespace Caliban.Nano.Tests
             ArgumentNullException.ThrowIfNull(Logger);
 
             using var writer = new StringWriter();
-            
+
             Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
             Logger.Info("Info");
@@ -98,9 +98,9 @@ namespace Caliban.Nano.Tests
         public void WarnTest()
         {
             ArgumentNullException.ThrowIfNull(Logger);
-            
+
             using var writer = new StringWriter();
-            
+
             Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
             Logger.Warn("Warning");
@@ -114,7 +114,7 @@ namespace Caliban.Nano.Tests
             ArgumentNullException.ThrowIfNull(Logger);
 
             using var writer = new StringWriter();
-            
+
             Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
             Logger.Error("Error");
@@ -128,7 +128,7 @@ namespace Caliban.Nano.Tests
             ArgumentNullException.ThrowIfNull(Logger);
 
             using var writer = new StringWriter();
-            
+
             Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
             Logger.Error("{0}", new[] { "Error" });
@@ -142,7 +142,7 @@ namespace Caliban.Nano.Tests
             ArgumentNullException.ThrowIfNull(Logger);
 
             using var writer = new StringWriter();
-            
+
             Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
             Logger.Error(new Exception("Error"));
@@ -154,9 +154,9 @@ namespace Caliban.Nano.Tests
         public void ErrorExceptionFormatTest()
         {
             ArgumentNullException.ThrowIfNull(Logger);
-            
+
             using var writer = new StringWriter();
-            
+
             Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
             Logger.Error(new Exception("Exception"), "{0}", new[] { "Message" });
