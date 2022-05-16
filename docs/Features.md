@@ -1,10 +1,12 @@
 # Intro
-
 This work is heavily inspired by the [Caliburn.Micro](https://caliburnmicro.com) framework. Which is one of the nicest frameworks, I had ever the pleasure to use. It is also named the after the character *Caliban* in Shakespeare's play *The Tempest* (hence the projects symbol). As the writer Russell Hoban put it:
 
 > Caliban is one of the hungry ideas, he's always looking for someone to word him into being ... Caliban is a necessary idea.
 
 Which seems very fitting.
+
+# Documentation
+Before we come to the features, let me remind you, that there is also the full [API](api/index.md) documentation available.
 
 # Features
 
