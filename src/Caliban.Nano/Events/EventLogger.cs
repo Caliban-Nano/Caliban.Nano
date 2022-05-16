@@ -11,7 +11,7 @@ namespace Caliban.Nano.Events.EventLogger
         /// <summary>
         /// Raises a log event for a specified log message.
         /// </summary>
-        /// <param name="logger">The logger instance.</param>
+        /// <param name="_"></param>
         /// <param name="message">The log message.</param>
         public static void Raise(this ILogger _, [NotNull] string message)
         {

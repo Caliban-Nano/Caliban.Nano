@@ -1,0 +1,1 @@
+defaultdocumentation -j ..\docs\api.json ..\docs\api.xml

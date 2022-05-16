@@ -1,0 +1,16 @@
+{
+  "FileNameFactory": "FullName",
+  "AssemblyFilePath": "..\\artifacts\\Release\\net6.0-windows\\Caliban.Nano.dll",
+  "DocumentationFilePath": "api.xml",
+  "OutputDirectoryPath": "api",
+  "GeneratedPages": "Namespaces,Interfaces,Classes",
+  "GeneratedAccessModifiers": "Public,Protected",
+  "UrlFactories": [
+    "DocItem",
+    "DotnetApi"
+  ],
+  "Sections": [
+    "Header",
+    "Default"
+  ]
+}

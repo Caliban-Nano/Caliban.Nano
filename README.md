@@ -16,4 +16,4 @@ PM> Install-Package Caliban.Nano
 
 # How to start
 
-The fastest way to get started, is to take a look at the [Hello Project](samples/Caliban.Nano.Hello/) included, showing most of the [Features](docs/README.md).
+The fastest way to get started, is to take a look at the [Hello Project](samples/Caliban.Nano.Hello/) included, showing most of the [Features](docs/Features.md). There is also a full [API](docs/api/index.md) documentation available.
