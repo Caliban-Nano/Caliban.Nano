@@ -9,15 +9,13 @@
         /// <summary>
         /// Enclosed event handler.
         /// </summary>
-        /// <typeparam name="T">The event arguments type.</typeparam>
         public event EventHandler<T>? Event;
 
         /// <summary>
         /// Attaches an event handler to the enclosed event.
         /// </summary>
-        /// <param name="@this">The event raiser.</param>
+        /// <param name="this">The event raiser.</param>
         /// <param name="handler">The event handler.</param>
-        /// <typeparam name="T">The event arguments type.</typeparam>
         /// <returns>Returns the given event raiser.</returns>
         public static EventRaiser<T> operator +(EventRaiser<T> @this, EventHandler<T> handler)
         {
@@ -29,9 +27,8 @@
         /// <summary>
         /// Detaches an event handler to the enclosed event.
         /// </summary>
-        /// <param name="@this">The event raiser.</param>
+        /// <param name="this">The event raiser.</param>
         /// <param name="handler">The event handler.</param>
-        /// <typeparam name="T">The event arguments type.</typeparam>
         /// <returns>Returns the given event raiser.</returns>
         public static EventRaiser<T> operator -(EventRaiser<T> @this, EventHandler<T> handler)
         {

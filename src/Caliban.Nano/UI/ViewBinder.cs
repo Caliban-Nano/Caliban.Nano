@@ -127,26 +127,6 @@ namespace Caliban.Nano.UI
             }
 
             [ExcludeFromCodeCoverage]
-            private static Resolver BindEvent(string name)
-            {
-                return (t, s) =>
-                {
-                    var method = s.GetType().GetMethod(t.Name);
-
-                    if (method is not null)
-                    {
-                        var @event = t.GetType().GetEvent(name);
-
-                        @event?.AddEventHandler(t, new RoutedEventHandler(
-                            (sender, e) => method.Invoke(s, new[] { sender, e })
-                        ));
-                    }
-
-                    return true;
-                };
-            }
-
-            [ExcludeFromCodeCoverage]
             private static Resolver BindGuard(string name)
             {
                 return (t, s) => Bind(t, s, name, BindingUtils.GetPathWithGuard(t.Name));

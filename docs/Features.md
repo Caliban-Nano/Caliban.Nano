@@ -43,9 +43,9 @@ public class Remote
 ```
 
 ```cs
-public class Display : IHandle<BatteryLowEvent>
+public class Television : IHandle<BatteryLowEvent>
 {
-    public Display(IEventAggregator events)
+    public Television(IEventAggregator events)
     {
         events.Subscribe<BatteryLowEvent>(this);
     }
@@ -85,12 +85,7 @@ private string _someInput = "";
 public string SomeInput
 {
     get => _someInput;
-    set
-    {
-        _someInput = value;
-
-        NotifyPropertyChanged();
-    }
+    set => SetValue(ref _someInput, value);
 }
 ```
 
@@ -102,14 +97,17 @@ Decouple view models with the built in composition pattern.
 ```
 
 ```cs
-public CarViewModel() : ViewModel.ActiveOne
+public class CarViewModel : ViewModel.ActiveOne
 {
-    SwitchDriverAsync();
-}
+    public CarViewModel()
+    {
+        SwitchDriverAsync();
+    }
 
-public async void SwitchDriverAsync()
-{
-    await ActivateItem(new PersonViewModel());
+    public async void SwitchDriverAsync()
+    {
+        await ActivateItem(new PersonViewModel());
+    }
 }
 ```
 
