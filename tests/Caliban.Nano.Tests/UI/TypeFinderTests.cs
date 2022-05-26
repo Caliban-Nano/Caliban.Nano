@@ -13,8 +13,6 @@ namespace Caliban.Nano.Tests.UI
         public void Initialize()
         {
             TypeFinder.Sources.Add(GetType().Assembly);
-
-            IoC.Resolve = new NanoContainer().Resolve;
         }
 
         [TestMethod]

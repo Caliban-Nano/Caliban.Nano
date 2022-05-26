@@ -13,8 +13,6 @@ namespace Caliban.Nano.Tests
         [TestMethod]
         public void ThisMessageTest()
         {
-            IoC.Resolve = new NanoContainer().Resolve;
-
             using var writer = new StringWriter();
 
             Trace.Listeners.Add(new TextWriterTraceListener(writer));
@@ -27,8 +25,6 @@ namespace Caliban.Nano.Tests
         [TestMethod]
         public void ThisExceptionTest()
         {
-            IoC.Resolve = new NanoContainer().Resolve;
-
             using var writer = new StringWriter();
 
             Trace.Listeners.Add(new TextWriterTraceListener(writer));

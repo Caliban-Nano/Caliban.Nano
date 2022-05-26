@@ -31,13 +31,13 @@ namespace Caliban.Nano.Tests
 
             Assert.ThrowsException<TypeLoadException>(() => IoC.Get<IMock>());
 
-            bootstrap.Register<IMock>(() => typeof(MockClass));
-
-            Assert.IsInstanceOfType(IoC.Get<IMock>(), typeof(MockClass));
-
-            bootstrap.Register<MockClass>(() => new MockClass());
+            bootstrap.Register<MockClass>(typeof(MockClass));
 
             Assert.IsInstanceOfType(IoC.Get<MockClass>(), typeof(MockClass));
+
+            bootstrap.Register<IMock>(new MockClass());
+
+            Assert.IsInstanceOfType(IoC.Get<IMock>(), typeof(MockClass));
         }
     }
 }

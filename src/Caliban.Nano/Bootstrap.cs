@@ -24,9 +24,7 @@ namespace Caliban.Nano
         {
             TypeFinder.Sources.Add(Assembly.GetCallingAssembly());
 
-            Container = container ?? new NanoContainer();
-
-            IoC.Resolve = Container.Resolve;
+            IoC.Container = Container = container ?? new NanoContainer();
         }
 
         /// <summary>
@@ -39,17 +37,17 @@ namespace Caliban.Nano
             TypeFinder.Sources.Add(assembly);
 
             return this;
-        }   
+        }
 
         /// <summary>
-        /// Registers an instance for a type at the used container.
+        /// Registers a type or an instance at the used container.
         /// </summary>
         /// <typeparam name="T">The type.</typeparam>
-        /// <param name="instance">The instance.</param>
+        /// <param name="object">The type or instance.</param>
         /// <returns>The bootstrap instance.</returns>
-        public Bootstrap Register<T>([NotNull] object instance)
+        public Bootstrap Register<T>([NotNull] object @object)
         {
-            Container.Register<T>(instance);
+            Container.Bind<T>(@object);
 
             return this;
         }

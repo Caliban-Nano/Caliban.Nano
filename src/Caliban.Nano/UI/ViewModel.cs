@@ -22,13 +22,13 @@ namespace Caliban.Nano.UI
         /// <inheritdoc />
         public T ViewAs<T>() where T : class
         {
-            return View as T ?? throw new InvalidCastException($"View is not of type {typeof(T).Name}");
+            return View as T ?? throw new InvalidCastException($"View is not {typeof(T).Name}");
         }
 
         /// <inheritdoc />
         public T ModelAs<T>() where T : class
         {
-            return Model as T ?? throw new InvalidCastException($"Model is not of type {typeof(T).Name}");
+            return Model as T ?? throw new InvalidCastException($"Model is not {typeof(T).Name}");
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Caliban.Nano.UI
         /// </summary>
         public ViewModel()
         {
-            //IoC.Build(this);
+            IoC.Container.Build(this);
 
             BindToModel();
             BindToView();

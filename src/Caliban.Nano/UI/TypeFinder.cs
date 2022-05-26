@@ -62,7 +62,7 @@ namespace Caliban.Nano.UI
                 throw new TypeLoadException($"Type {name} could not be found");
             }
 
-            return IoC.Resolve(type);
+            return IoC.Container.Create(type);
         }
     }
 }
