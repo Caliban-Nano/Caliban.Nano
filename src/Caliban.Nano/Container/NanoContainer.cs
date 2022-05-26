@@ -138,8 +138,11 @@ namespace Caliban.Nano.Container
         {
             lock (_bindings)
             {
+                var selector = (ConstructorInfo c) => c.GetParameters()
+                    .Count(p => _bindings.ContainsKey(p.ParameterType));
+
                 return type.GetConstructors()
-                    .OrderBy(c => c.GetParameters().Count(p => _bindings.ContainsKey(p.ParameterType)))
+                    .OrderBy(selector)
                     .LastOrDefault();
             }
         }
@@ -148,8 +151,12 @@ namespace Caliban.Nano.Container
         {
             lock (_bindings)
             {
+                var selector = (ParameterInfo p) => _bindings.ContainsKey(p.ParameterType)
+                    ? Resolve(p.ParameterType)
+                    : null;
+
                 return info.GetParameters()
-                    .Select(p => _bindings.ContainsKey(p.ParameterType) ? Resolve(p.ParameterType) : null)
+                    .Select(selector)
                     .ToArray();
             }
         }
