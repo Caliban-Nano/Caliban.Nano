@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using Caliban.Nano.Contracts;
 
 namespace Caliban.Nano.UI
 {
@@ -18,7 +20,7 @@ namespace Caliban.Nano.UI
         /// <param name="target">The target element.</param>
         /// <param name="source">The source object.</param>
         /// <returns>True if resolving should continue; otherwise false.</returns>
-        public delegate bool Resolver(FrameworkElement target, object source);
+        public delegate bool Resolver(FrameworkElement target, IViewModel source);
 
         /// <summary>
         /// Scope of all used resolvers.
@@ -49,7 +51,7 @@ namespace Caliban.Nano.UI
         /// <param name="view">The view to bind.</param>
         /// <param name="viewModel">The view model to bind.</param>
         [ExcludeFromCodeCoverage]
-        public static void Bind([NotNull] object view, [NotNull] object viewModel)
+        public static void Bind([NotNull] object view, [NotNull] IViewModel viewModel)
         {
             if (view is FrameworkElement element)
             {
@@ -65,7 +67,7 @@ namespace Caliban.Nano.UI
         }
 
         [ExcludeFromCodeCoverage]
-        private static void Resolve(FrameworkElement target, object source)
+        private static void Resolve(FrameworkElement target, IViewModel source)
         {
             if (string.IsNullOrWhiteSpace(target.Name))
             {
@@ -151,11 +153,17 @@ namespace Caliban.Nano.UI
             }
 
             [ExcludeFromCodeCoverage]
-            private static bool Bind(FrameworkElement target, object source, string property, string path)
+            private static bool Bind(FrameworkElement target, IViewModel source, string property, string path)
             {
-                var op = source.GetType().GetProperty(path);
+                var ip = BindingUtils.GetInstanceProperty(path, source);
+                var mp = BindingUtils.GetInstanceProperty(path, source.Model);
 
-                if (op is null && !BindingUtils.IsSubProperty(path))
+                if (ip is null && mp is not null) // Route binding to model
+                {
+                    (ip, path) = (mp, BindingUtils.GetPathWithModel(path));
+                }
+
+                if (ip is null && !BindingUtils.IsSubProperty(path))
                 {
                     return true; // Pass on non existing first level properties
                 }
@@ -168,7 +176,7 @@ namespace Caliban.Nano.UI
                     {
                         Source = source,
                         Path = new PropertyPath(path),
-                        Mode = op?.GetSetMethod()?.IsPublic ?? false
+                        Mode = ip?.GetSetMethod()?.IsPublic ?? false
                             ? BindingMode.TwoWay
                             : BindingMode.OneWay,
 
@@ -191,10 +199,13 @@ namespace Caliban.Nano.UI
         {
             public static bool IsSubProperty(string path) => path.Contains('.');
             public static string GetPathWithGuard(string name) => $"Can{name}";
+            public static string GetPathWithModel(string name) => $"Model.{name}";
             public static string GetPathWithItem(string name) => $"{name}Selected";
-            public static string GetPathWithView(string name) => $"{name}.View";            
-            public static DependencyProperty? GetDependencyProperty(string property, Type type)
-                => DependencyPropertyDescriptor.FromName(property, type, type)?.DependencyProperty;
+            public static string GetPathWithView(string name) => $"{name}.View";
+            public static PropertyInfo? GetInstanceProperty(string name, object? source)
+                => source?.GetType().GetProperty(name);
+            public static DependencyProperty? GetDependencyProperty(string name, Type type)
+                => DependencyPropertyDescriptor.FromName(name, type, type)?.DependencyProperty;
         }
     }
 }

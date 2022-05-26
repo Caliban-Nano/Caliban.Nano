@@ -36,6 +36,15 @@ namespace Caliban.Nano.Tests.UI
         }
 
         [TestMethod]
+        public void FindModelTest()
+        {
+            var model = TypeFinder.FindModel(typeof(MockModel));
+
+            Assert.IsNotNull(model);
+            Assert.IsInstanceOfType(model, typeof(MockModel));
+        }
+
+        [TestMethod]
         public void FindTypeTest()
         {
             var type = TypeFinder.FindType(typeof(MockClass).Name);

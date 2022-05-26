@@ -29,6 +29,7 @@ namespace Caliban.Nano.Tests.UI
             ArgumentNullException.ThrowIfNull(Mock);
 
             Assert.IsNotNull(Mock.View);
+            Assert.IsNotNull(Mock.Model);
             Assert.IsFalse(Mock.IsActive);
             Assert.IsTrue(Mock.CanClose);
         }
