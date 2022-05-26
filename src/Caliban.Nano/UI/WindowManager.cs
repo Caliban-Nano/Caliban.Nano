@@ -19,7 +19,7 @@ namespace Caliban.Nano.UI
         [ExcludeFromCodeCoverage]
         public static async Task ShowWindowAsync<T>(Dictionary<string, object>? settings = null) where T : IViewModel
         {
-            var viewModel = IoC.Get<T>();
+            var viewModel = (T)IoC.Container.Create(typeof(T));
             var view = viewModel.ViewAs<Window>();
 
             Application.Current.MainWindow = view;

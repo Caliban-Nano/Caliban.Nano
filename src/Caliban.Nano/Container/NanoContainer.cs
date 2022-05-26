@@ -98,6 +98,11 @@ namespace Caliban.Nano.Container
             {
                 if (LockGetValue(property.PropertyType, out var value))
                 {
+                    if (value is Type type)
+                    {
+                        value = Create(type);
+                    }
+
                     property.SetValue(instance, value);
                 }
             }
