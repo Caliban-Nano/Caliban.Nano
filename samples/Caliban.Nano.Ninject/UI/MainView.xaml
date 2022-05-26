@@ -17,7 +17,7 @@
     mc:Ignorable="d">
     <Grid>
         <TextBlock
-            x:Name="Text"
+            x:Name="DisplayText"
             Grid.Row="0"
             Grid.Column="0"
             HorizontalAlignment="Center"

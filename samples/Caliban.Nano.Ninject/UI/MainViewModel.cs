@@ -8,9 +8,9 @@ namespace Caliban.Nano.Ninject.UI
     public sealed class MainViewModel : ViewModel, IWindow
     {
         [Inject]
-        public IMessage? Message { get; init; }
+        public IMessage? Text { get; init; }
 
         public string DisplayName => "Ninject Demo";
-        public string Text => Message?.Message ?? "Error";
+        public string DisplayText => Text?.Message ?? "Error";
     }
 }
