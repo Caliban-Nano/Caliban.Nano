@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using Caliban.Nano.Contracts;
-using Caliban.Nano.Hello.Hello;
+using Caliban.Nano.Hello.UI.Hello;
 using Caliban.Nano.UI;
 
-namespace Caliban.Nano.Hello.Shell
+namespace Caliban.Nano.Hello.UI.Shell
 {
     public sealed class ShellViewModel : ViewModel.ActiveOne, IWindow, IHandle<string>
     {

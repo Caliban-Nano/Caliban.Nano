@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Caliban.Nano.Hello.Hello
+namespace Caliban.Nano.Hello.UI.Hello
 {
     /// <summary>
     /// Interaktionslogik für HelloView.xaml
