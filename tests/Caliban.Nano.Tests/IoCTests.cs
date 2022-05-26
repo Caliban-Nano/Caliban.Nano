@@ -4,7 +4,7 @@ using Caliban.Nano.Contracts;
 using Caliban.Nano.Tests.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Caliban.Nano.Tests.Root
+namespace Caliban.Nano.Tests
 {
     [TestClass]
     public sealed class IoCTests
@@ -26,7 +26,7 @@ namespace Caliban.Nano.Tests.Root
 
             var mock = new MockClass();
 
-            Container.Register<IMock>(mock);
+            Container.Bind<IMock>(() => mock);
 
             Assert.AreEqual(IoC.Resolve(typeof(IMock)), mock);
         }
@@ -38,7 +38,7 @@ namespace Caliban.Nano.Tests.Root
 
             var mock = new MockClass();
 
-            Container.Register<IMock>(mock);
+            Container.Bind<IMock>(() => mock);
 
             Assert.AreEqual(IoC.Get<IMock>(), mock);
         }

@@ -5,7 +5,7 @@ using Caliban.Nano.Container;
 using Caliban.Nano.Events;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Caliban.Nano.Tests.Root
+namespace Caliban.Nano.Tests
 {
     [TestClass]
     public sealed class LogTests
