@@ -28,6 +28,18 @@ namespace Caliban.Nano.Data
             PropertyChanged += (_, _) => HasChanged = true;
         }
 
+        /// <inheritdoc />
+        public virtual void Load()
+        {
+            HasChanged = false;
+        }
+
+        /// <inheritdoc />
+        public virtual void Save()
+        {
+            HasChanged = false;
+        }
+
         /// <summary>
         /// Gets a model value.
         /// </summary>

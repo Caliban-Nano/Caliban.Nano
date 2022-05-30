@@ -11,5 +11,15 @@ namespace Caliban.Nano.Contracts
         /// If the model has changed.
         /// </summary>
         bool HasChanged { get; }
+
+        /// <summary>
+        /// Loads the model and resets changed state.
+        /// </summary>
+        void Load();
+
+        /// <summary>
+        /// Saves the model and resets changed state.
+        /// </summary>
+        void Save();
     }
 }
