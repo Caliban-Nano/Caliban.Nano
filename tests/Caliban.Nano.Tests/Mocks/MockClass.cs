@@ -67,6 +67,8 @@ namespace Caliban.Nano.Tests.Mocks
         #endregion
     }
 
+    internal sealed class MockClassEmpty : IMock { }
+
     internal sealed class MockClassPrivate
     {
         private MockClassPrivate() { }

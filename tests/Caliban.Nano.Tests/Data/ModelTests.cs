@@ -7,11 +7,27 @@ namespace Caliban.Nano.Tests.Data
     public sealed class ModelTests
     {
         [TestMethod]
+        public void PropertyChangedTest()
+        {
+            var count = 0;
+
+            var mock = new MockModel();
+
+            mock.PropertyChanged += (_, _) => count++;
+
+            Assert.AreEqual(0, count);
+
+            mock.Value1 = !mock.Value1;
+
+            Assert.AreEqual(1, count);
+        }
+
+        [TestMethod]
         public void HasChangedTest()
         {
             var mock = new MockModel();
-
-            mock.ClearHasChanged();
+            
+            mock.SetHasChanged(false);
 
             Assert.IsFalse(mock.HasChanged);
 
@@ -19,13 +35,41 @@ namespace Caliban.Nano.Tests.Data
 
             Assert.IsTrue(mock.HasChanged);
 
-            mock.ClearHasChanged();
+            mock.SetHasChanged(false);
 
             Assert.IsFalse(mock.HasChanged);
 
             mock.Value2 = true;
 
             Assert.IsTrue(mock.HasChanged);
+        }
+
+        [TestMethod]
+        public void LoadTest()
+        {
+            var mock = new MockModel();
+
+            mock.SetHasChanged(true);
+
+            Assert.IsTrue(mock.HasChanged);
+
+            mock.Load();
+
+            Assert.IsFalse(mock.HasChanged);
+        }
+
+        [TestMethod]
+        public void SaveTest()
+        {
+            var mock = new MockModel();
+
+            mock.SetHasChanged(true);
+
+            Assert.IsTrue(mock.HasChanged);
+
+            mock.Save();
+
+            Assert.IsFalse(mock.HasChanged);
         }
 
         [TestMethod]

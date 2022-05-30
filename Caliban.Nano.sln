@@ -14,6 +14,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Caliban.Nano.Tests", "tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Caliban.Nano.Ninject", "samples\Caliban.Nano.Ninject\Caliban.Nano.Ninject.csproj", "{15C9A60B-3075-414E-8FC6-243F4D367B17}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{35B633BE-784C-42F9-BD4C-EB53A9C5C732}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Caliban.Nano.NLog", "samples\Caliban.Nano.NLog\Caliban.Nano.NLog.csproj", "{3D75F045-5F8B-41AD-BA03-F756730AAC38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,9 +40,18 @@ Global
 		{15C9A60B-3075-414E-8FC6-243F4D367B17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15C9A60B-3075-414E-8FC6-243F4D367B17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15C9A60B-3075-414E-8FC6-243F4D367B17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D75F045-5F8B-41AD-BA03-F756730AAC38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D75F045-5F8B-41AD-BA03-F756730AAC38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D75F045-5F8B-41AD-BA03-F756730AAC38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D75F045-5F8B-41AD-BA03-F756730AAC38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4493FE82-0551-49D1-ABC7-A872B1C0AD9D} = {35B633BE-784C-42F9-BD4C-EB53A9C5C732}
+		{15C9A60B-3075-414E-8FC6-243F4D367B17} = {35B633BE-784C-42F9-BD4C-EB53A9C5C732}
+		{3D75F045-5F8B-41AD-BA03-F756730AAC38} = {35B633BE-784C-42F9-BD4C-EB53A9C5C732}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BD60DF71-5807-473A-A32A-ACA118CF80F6}

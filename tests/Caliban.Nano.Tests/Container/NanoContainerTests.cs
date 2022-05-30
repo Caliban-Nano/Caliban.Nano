@@ -182,6 +182,29 @@ namespace Caliban.Nano.Tests.Container
         }
 
         [TestMethod]
+        public void BuildRecursiveTest()
+        {
+            ArgumentNullException.ThrowIfNull(Container);
+
+            var mock = new MockClass();
+
+            Container.Bind<IMock>(typeof(MockClassEmpty));
+
+            Container.Build(mock);
+
+            Assert.IsNull(mock.DependencyA);
+
+            Assert.IsNotNull(mock.DependencyB);
+            Assert.IsInstanceOfType(mock.DependencyB, typeof(MockClassEmpty));
+
+            Assert.IsNotNull(mock.DependencyC);
+            Assert.IsInstanceOfType(mock.DependencyC, typeof(MockClassEmpty));
+
+            Assert.IsNotNull(mock.DependencyD);
+            Assert.IsInstanceOfType(mock.DependencyD, typeof(MockClassEmpty));
+        }
+
+        [TestMethod]
         public void BindInstanceTest()
         {
             ArgumentNullException.ThrowIfNull(Container);
@@ -212,9 +235,9 @@ namespace Caliban.Nano.Tests.Container
 
             var count = 0;
 
-            Container.Bind<int>(() => ++count);
+            Container.Bind<MockClass>(() => ++count);
 
-            var lambda = (Func<int>)Container.Resolve<int>();
+            var lambda = (Func<int>)Container.Resolve<MockClass>();
 
             Assert.AreEqual(lambda(), 1);
         }

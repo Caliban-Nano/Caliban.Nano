@@ -16,6 +16,6 @@ namespace Caliban.Nano.Tests.Mocks
             set => Set(value, "Value2", "Value1");
         }
 
-        public void ClearHasChanged() => HasChanged = false;
+        public void SetHasChanged(bool value) => HasChanged = value;
     }
 }
