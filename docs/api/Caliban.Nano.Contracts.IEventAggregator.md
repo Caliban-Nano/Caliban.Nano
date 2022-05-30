@@ -23,7 +23,8 @@ Implements [System.IDisposable](https://docs.microsoft.com/en-us/dotnet/api/Syst
 Returns if a handler is subscribed to the type.
 
 ```csharp
-bool HasHandler<T>();
+bool HasHandler<T>()
+    where T : notnull;
 ```
 #### Type parameters
 
@@ -69,7 +70,8 @@ The message.
 Subscribes a handler to a type.
 
 ```csharp
-void Subscribe<T>(object handler);
+void Subscribe<T>(object handler)
+    where T : notnull;
 ```
 #### Type parameters
 
@@ -93,7 +95,8 @@ The event handler.
 Unsubscribes a handler from a type.
 
 ```csharp
-void Unsubscribe<T>(object handler);
+void Unsubscribe<T>(object handler)
+    where T : notnull;
 ```
 #### Type parameters
 

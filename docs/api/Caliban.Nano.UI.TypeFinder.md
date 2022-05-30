@@ -40,6 +40,27 @@ public static System.Func<string,string> Rule { get; set; }
 [System.Func&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Func-2 'System.Func`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[,](https://docs.microsoft.com/en-us/dotnet/api/System.Func-2 'System.Func`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Func-2 'System.Func`2')
 ### Methods
 
+<a name='Caliban.Nano.UI.TypeFinder.FindModel(System.Type)'></a>
+
+## TypeFinder.FindModel(Type) Method
+
+Returns a model instance for the requested type.
+
+```csharp
+public static object FindModel(System.Type type);
+```
+#### Parameters
+
+<a name='Caliban.Nano.UI.TypeFinder.FindModel(System.Type).type'></a>
+
+`type` [System.Type](https://docs.microsoft.com/en-us/dotnet/api/System.Type 'System.Type')
+
+The model type.
+
+#### Returns
+[System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')  
+A model instance.
+
 <a name='Caliban.Nano.UI.TypeFinder.FindType(string)'></a>
 
 ## TypeFinder.FindType(string) Method

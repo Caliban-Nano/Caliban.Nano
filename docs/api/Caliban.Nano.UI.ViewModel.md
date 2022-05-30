@@ -3,7 +3,7 @@
 
 ## ViewModel Class
 
-A base base view model.
+A base view model.
 
 ```csharp
 public abstract class ViewModel : Caliban.Nano.UI.NotifyBase,
@@ -60,6 +60,21 @@ Implements [IsActive](Caliban.Nano.Contracts.IViewModel.md#Caliban.Nano.Contract
 #### Property Value
 [System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')
 
+<a name='Caliban.Nano.UI.ViewModel.Model'></a>
+
+## ViewModel.Model Property
+
+The associated model.
+
+```csharp
+public object? Model { get; set; }
+```
+
+Implements [Model](Caliban.Nano.Contracts.IViewModel.md#Caliban.Nano.Contracts.IViewModel.Model 'Caliban.Nano.Contracts.IViewModel.Model')
+
+#### Property Value
+[System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')
+
 <a name='Caliban.Nano.UI.ViewModel.View'></a>
 
 ## ViewModel.View Property
@@ -67,7 +82,7 @@ Implements [IsActive](Caliban.Nano.Contracts.IViewModel.md#Caliban.Nano.Contract
 The associated view.
 
 ```csharp
-public object View { get; set; }
+public object? View { get; set; }
 ```
 
 Implements [View](Caliban.Nano.Contracts.IViewModel.md#Caliban.Nano.Contracts.IViewModel.View 'Caliban.Nano.Contracts.IViewModel.View')
@@ -75,6 +90,55 @@ Implements [View](Caliban.Nano.Contracts.IViewModel.md#Caliban.Nano.Contracts.IV
 #### Property Value
 [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')
 ### Methods
+
+<a name='Caliban.Nano.UI.ViewModel.BindToModel()'></a>
+
+## ViewModel.BindToModel() Method
+
+Binds the view model to the model.
+
+```csharp
+protected virtual void BindToModel();
+```
+
+<a name='Caliban.Nano.UI.ViewModel.BindToView()'></a>
+
+## ViewModel.BindToView() Method
+
+Binds the view model to the view.
+
+```csharp
+protected virtual void BindToView();
+```
+
+<a name='Caliban.Nano.UI.ViewModel.ModelAs_T_()'></a>
+
+## ViewModel.ModelAs<T>() Method
+
+Returns the model as type.
+
+```csharp
+public T ModelAs<T>()
+    where T : class;
+```
+#### Type parameters
+
+<a name='Caliban.Nano.UI.ViewModel.ModelAs_T_().T'></a>
+
+`T`
+
+The type.
+
+Implements [ModelAs&lt;T&gt;()](Caliban.Nano.Contracts.IViewModel.md#Caliban.Nano.Contracts.IViewModel.ModelAs_T_() 'Caliban.Nano.Contracts.IViewModel.ModelAs<T>()')
+
+#### Returns
+[T](Caliban.Nano.UI.ViewModel.md#Caliban.Nano.UI.ViewModel.ModelAs_T_().T 'Caliban.Nano.UI.ViewModel.ModelAs<T>().T')  
+The typed model.
+
+#### Exceptions
+
+[System.InvalidCastException](https://docs.microsoft.com/en-us/dotnet/api/System.InvalidCastException 'System.InvalidCastException')  
+Thrown if the model could not be cast.
 
 <a name='Caliban.Nano.UI.ViewModel.OnActivate()'></a>
 
@@ -107,3 +171,32 @@ Implements [OnDeactivate()](Caliban.Nano.Contracts.IViewModel.md#Caliban.Nano.Co
 #### Returns
 [System.Threading.Tasks.Task&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')[System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')  
 True if deactivation was successful; otherwise false.
+
+<a name='Caliban.Nano.UI.ViewModel.ViewAs_T_()'></a>
+
+## ViewModel.ViewAs<T>() Method
+
+Returns the views as type.
+
+```csharp
+public T ViewAs<T>()
+    where T : class;
+```
+#### Type parameters
+
+<a name='Caliban.Nano.UI.ViewModel.ViewAs_T_().T'></a>
+
+`T`
+
+The type.
+
+Implements [ViewAs&lt;T&gt;()](Caliban.Nano.Contracts.IViewModel.md#Caliban.Nano.Contracts.IViewModel.ViewAs_T_() 'Caliban.Nano.Contracts.IViewModel.ViewAs<T>()')
+
+#### Returns
+[T](Caliban.Nano.UI.ViewModel.md#Caliban.Nano.UI.ViewModel.ViewAs_T_().T 'Caliban.Nano.UI.ViewModel.ViewAs<T>().T')  
+The typed view.
+
+#### Exceptions
+
+[System.InvalidCastException](https://docs.microsoft.com/en-us/dotnet/api/System.InvalidCastException 'System.InvalidCastException')  
+Thrown if the view could not be cast.

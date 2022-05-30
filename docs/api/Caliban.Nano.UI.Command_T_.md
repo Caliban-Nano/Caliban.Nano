@@ -8,6 +8,7 @@ A functional relay command.
 ```csharp
 public class Command<T> :
 System.Windows.Input.ICommand
+    where T : notnull
 ```
 #### Type parameters
 

@@ -39,6 +39,19 @@ bool IsActive { get; }
 #### Property Value
 [System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')
 
+<a name='Caliban.Nano.Contracts.IViewModel.Model'></a>
+
+## IViewModel.Model Property
+
+The associated model.
+
+```csharp
+object? Model { get; }
+```
+
+#### Property Value
+[System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')
+
 <a name='Caliban.Nano.Contracts.IViewModel.View'></a>
 
 ## IViewModel.View Property
@@ -46,12 +59,39 @@ bool IsActive { get; }
 The associated view.
 
 ```csharp
-object View { get; }
+object? View { get; }
 ```
 
 #### Property Value
 [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')
 ### Methods
+
+<a name='Caliban.Nano.Contracts.IViewModel.ModelAs_T_()'></a>
+
+## IViewModel.ModelAs<T>() Method
+
+Returns the model as type.
+
+```csharp
+T ModelAs<T>()
+    where T : class;
+```
+#### Type parameters
+
+<a name='Caliban.Nano.Contracts.IViewModel.ModelAs_T_().T'></a>
+
+`T`
+
+The type.
+
+#### Returns
+[T](Caliban.Nano.Contracts.IViewModel.md#Caliban.Nano.Contracts.IViewModel.ModelAs_T_().T 'Caliban.Nano.Contracts.IViewModel.ModelAs<T>().T')  
+The typed model.
+
+#### Exceptions
+
+[System.InvalidCastException](https://docs.microsoft.com/en-us/dotnet/api/System.InvalidCastException 'System.InvalidCastException')  
+Thrown if the model could not be cast.
 
 <a name='Caliban.Nano.Contracts.IViewModel.OnActivate()'></a>
 
@@ -80,3 +120,30 @@ System.Threading.Tasks.Task<bool> OnDeactivate();
 #### Returns
 [System.Threading.Tasks.Task&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')[System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')  
 True if deactivation was successful; otherwise false.
+
+<a name='Caliban.Nano.Contracts.IViewModel.ViewAs_T_()'></a>
+
+## IViewModel.ViewAs<T>() Method
+
+Returns the views as type.
+
+```csharp
+T ViewAs<T>()
+    where T : class;
+```
+#### Type parameters
+
+<a name='Caliban.Nano.Contracts.IViewModel.ViewAs_T_().T'></a>
+
+`T`
+
+The type.
+
+#### Returns
+[T](Caliban.Nano.Contracts.IViewModel.md#Caliban.Nano.Contracts.IViewModel.ViewAs_T_().T 'Caliban.Nano.Contracts.IViewModel.ViewAs<T>().T')  
+The typed view.
+
+#### Exceptions
+
+[System.InvalidCastException](https://docs.microsoft.com/en-us/dotnet/api/System.InvalidCastException 'System.InvalidCastException')  
+Thrown if the view could not be cast.
