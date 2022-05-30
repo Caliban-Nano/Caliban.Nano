@@ -18,7 +18,7 @@ namespace Caliban.Nano.Contracts
         /// <typeparam name="T">The type.</typeparam>
         /// <returns>The bound or created instance.</returns>
         /// <exception cref="TypeLoadException">Thrown if the type could not be created.</exception>
-        object Resolve<T>();
+        object Resolve<T>() where T : class;
 
         /// <summary>
         /// Resolves a bound type by returning an existing instance or creating a new one.
@@ -33,7 +33,7 @@ namespace Caliban.Nano.Contracts
         /// </summary>
         /// <typeparam name="T">The type.</typeparam>
         /// <returns>True if the type can be resolved; otherwise false.</returns>
-        bool CanResolve<T>();
+        bool CanResolve<T>() where T : class;
 
         /// <summary>
         /// Returns a new type instance.
@@ -54,12 +54,12 @@ namespace Caliban.Nano.Contracts
         /// </summary>
         /// <typeparam name="T">The type.</typeparam>
         /// <param name="object">The type or instance.</param>
-        void Bind<T>([NotNull] object @object);
+        void Bind<T>([NotNull] object @object) where T : class;
 
         /// <summary>
         /// Unbinds the type.
         /// </summary>
         /// <typeparam name="T">The type.</typeparam>
-        void Unbind<T>();
+        void Unbind<T>() where T : class;
     }
 }

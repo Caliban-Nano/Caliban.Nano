@@ -45,7 +45,7 @@ namespace Caliban.Nano
         /// <typeparam name="T">The type.</typeparam>
         /// <param name="object">The type or instance.</param>
         /// <returns>The bootstrap instance.</returns>
-        public Bootstrap Register<T>([NotNull] object @object)
+        public Bootstrap Register<T>([NotNull] object @object) where T : class
         {
             Container.Bind<T>(@object);
 

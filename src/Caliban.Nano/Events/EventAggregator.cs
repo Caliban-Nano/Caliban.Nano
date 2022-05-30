@@ -22,7 +22,7 @@ namespace Caliban.Nano.Events
         }
 
         /// <inheritdoc />
-        public virtual bool HasHandler<T>()
+        public virtual bool HasHandler<T>() where T : notnull
         {
             lock (_subscriptions)
             {
@@ -31,7 +31,7 @@ namespace Caliban.Nano.Events
         }
 
         /// <inheritdoc />
-        public virtual void Subscribe<T>([NotNull] object handler)
+        public virtual void Subscribe<T>([NotNull] object handler) where T : notnull
         {
             lock (_subscriptions)
             {
@@ -40,7 +40,7 @@ namespace Caliban.Nano.Events
         }
 
         /// <inheritdoc />
-        public virtual void Unsubscribe<T>([NotNull] object handler)
+        public virtual void Unsubscribe<T>([NotNull] object handler) where T : notnull
         {
             lock (_subscriptions)
             {

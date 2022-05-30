@@ -42,4 +42,8 @@
     </None>
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="powershell.exe -ExecutionPolicy Unrestricted $(SolutionDir)\scripts\create-docs.ps1 $(SolutionDir) $(ConfigurationName)" />
+  </Target>
+
 </Project>

@@ -19,7 +19,7 @@ namespace Caliban.Nano
         /// </summary>
         /// <typeparam name="T">The type.</typeparam>
         /// <returns>The located service.</returns>
-        public static T Get<T>()
+        public static T Get<T>() where T : class
         {
             return (T)Container.Resolve(typeof(T));
         }

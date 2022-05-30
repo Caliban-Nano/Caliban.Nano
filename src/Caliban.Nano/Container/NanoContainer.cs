@@ -34,7 +34,7 @@ namespace Caliban.Nano.Container
         }
 
         /// <inheritdoc />
-        public object Resolve<T>()
+        public object Resolve<T>() where T : class
         {
             return Resolve(typeof(T));
         }
@@ -64,7 +64,7 @@ namespace Caliban.Nano.Container
         }
 
         /// <inheritdoc />
-        public bool CanResolve<T>()
+        public bool CanResolve<T>() where T : class
         {
             lock (_bindings)
             {
@@ -109,7 +109,7 @@ namespace Caliban.Nano.Container
         }
 
         /// <inheritdoc />
-        public void Bind<T>([NotNull] object @object)
+        public void Bind<T>([NotNull] object @object) where T : class
         {
             lock (_bindings)
             {
@@ -118,7 +118,7 @@ namespace Caliban.Nano.Container
         }
 
         /// <inheritdoc />
-        public void Unbind<T>()
+        public void Unbind<T>() where T : class
         {
             lock (_bindings)
             {

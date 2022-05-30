@@ -4,7 +4,7 @@
     /// A simple wrapper for raising an event externally.
     /// </summary>
     /// <typeparam name="T">The event arguments type.</typeparam>
-    public class EventRaiser<T>
+    public class EventRaiser<T> where T : notnull
     {
         /// <summary>
         /// Enclosed event handler.

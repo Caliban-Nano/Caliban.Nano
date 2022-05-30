@@ -5,7 +5,7 @@ namespace Caliban.Nano.UI
     /// <summary>
     /// A functional relay command.
     /// </summary>
-    public class Command<T> : ICommand
+    public class Command<T> : ICommand where T : notnull
     {
         private readonly Action<T?> _action;
         private readonly Func<T?, bool> _guard;

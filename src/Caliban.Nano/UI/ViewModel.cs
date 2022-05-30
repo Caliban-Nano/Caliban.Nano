@@ -87,7 +87,7 @@ namespace Caliban.Nano.UI
             }
             catch (TypeLoadException)
             {
-                // Ignore because not all view models have a model
+                // Not all view models have a model
             }
         }
     }
