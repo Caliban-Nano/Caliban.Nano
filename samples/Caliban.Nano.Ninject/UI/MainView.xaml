@@ -5,22 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Caliban.Nano.Ninject"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="320"
-    Height="200"
-    Background="#2E3238"
-    FontFamily="Segoe UI"
-    FontSize="20"
-    Foreground="#E6E6E6"
-    TextOptions.TextFormattingMode="Display"
-    TextOptions.TextRenderingMode="ClearType"
-    WindowStartupLocation="CenterScreen"
+    Width="0"
+    Height="0"
     mc:Ignorable="d">
-    <Grid>
-        <TextBlock
-            x:Name="DisplayText"
-            Grid.Row="0"
-            Grid.Column="0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center" />
-    </Grid>
+    <Grid />
 </Window>

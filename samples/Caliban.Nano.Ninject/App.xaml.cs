@@ -13,7 +13,7 @@ namespace Caliban.Nano.Ninject
         void OnStartup(object sender, StartupEventArgs e)
         {
             new Bootstrap(new NinjectAdapter())
-                .Register<IMessage>(typeof(HelloWorld))
+                .Register<IMessage>(typeof(Message))
                 .Show<MainViewModel>();
         }
     }

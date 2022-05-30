@@ -35,7 +35,7 @@ namespace Caliban.Nano.Ninject.Container
         }
 
         /// <inheritdoc />
-        public object Resolve<T>()
+        public object Resolve<T>() where T : class
         {
             return Resolve(typeof(T));
         }
@@ -56,7 +56,7 @@ namespace Caliban.Nano.Ninject.Container
         }
 
         /// <inheritdoc />
-        public bool CanResolve<T>()
+        public bool CanResolve<T>() where T : class
         {
             return _kernel.CanResolve<T>();
         }
@@ -83,7 +83,7 @@ namespace Caliban.Nano.Ninject.Container
         }
 
         /// <inheritdoc />
-        public void Bind<T>([NotNull] object @object)
+        public void Bind<T>([NotNull] object @object) where T : class
         {
             if (@object is Type type)
             {
@@ -96,7 +96,7 @@ namespace Caliban.Nano.Ninject.Container
         }
 
         /// <inheritdoc />
-        public void Unbind<T>()
+        public void Unbind<T>() where T : class
         {
             _kernel.Unbind<T>();
         }
