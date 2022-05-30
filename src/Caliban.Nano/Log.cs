@@ -58,6 +58,12 @@ namespace Caliban.Nano
         }
 
         /// <inheritdoc />
+        public void Dispose()
+        {
+            Trace.Close();
+        }
+
+        /// <inheritdoc />
         public void Handle(LogEvent message)
         {
             Trace.TraceInformation($"[event] {message}");

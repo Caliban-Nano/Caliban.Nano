@@ -3,7 +3,7 @@
     /// <summary>
     /// An all-purpose logger interface as the lowest common denominator.
     /// </summary>
-    public interface ILogger
+    public interface ILogger : IDisposable
     {
         /// <summary>
         /// Logs an informal message.
