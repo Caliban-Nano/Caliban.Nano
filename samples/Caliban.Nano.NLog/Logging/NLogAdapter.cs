@@ -1,7 +1,7 @@
 ﻿using System;
 using NLog;
 
-namespace Caliban.Nano.NLog
+namespace Caliban.Nano.NLog.Logging
 {
     /// <summary>
     /// A NLog logging adapter.

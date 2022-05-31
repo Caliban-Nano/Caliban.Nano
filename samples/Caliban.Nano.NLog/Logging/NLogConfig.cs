@@ -2,7 +2,7 @@
 using NLog.Config;
 using NLog.Targets;
 
-namespace Caliban.Nano.NLog
+namespace Caliban.Nano.NLog.Logging
 {
     /// <summary>
     /// A NLog logfile configuration.
