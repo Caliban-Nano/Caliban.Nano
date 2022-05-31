@@ -1,9 +1,13 @@
 ﻿using System.Threading.Tasks;
+using Caliban.Nano.Contracts;
 using Caliban.Nano.UI;
 
 namespace Caliban.Nano.Tests.Mocks
 {
-    internal sealed class MockViewModel : ViewModel { }
+    internal sealed class MockViewModel : ViewModel
+    {
+        public MockViewModel(IViewModel? parent = null) : base(parent) { }
+    }
     internal sealed class MockAllViewModel : ViewModel.ActiveAll { }
     internal sealed class MockOneViewModel : ViewModel.ActiveOne { }
     internal sealed class MockSoloViewModel : ViewModel { }

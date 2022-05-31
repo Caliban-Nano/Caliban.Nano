@@ -1,4 +1,5 @@
-﻿using Caliban.Nano.Contracts;
+﻿using System.Windows;
+using Caliban.Nano.Contracts;
 
 namespace Caliban.Nano.UI
 {
@@ -20,6 +21,9 @@ namespace Caliban.Nano.UI
         public bool CanClose { get; protected set; } = true;
 
         /// <inheritdoc />
+        public IViewModel? Parent { get; protected set; } = null;
+
+        /// <inheritdoc />
         public T ViewAs<T>() where T : class
         {
             return View as T ?? throw new InvalidCastException($"View is not {typeof(T).Name}");
@@ -34,12 +38,34 @@ namespace Caliban.Nano.UI
         /// <summary>
         /// Initializes a new instance of this class with dependency injection and binding.
         /// </summary>
-        public ViewModel()
+        /// <param name="parent">The optional parent view model.</param>
+        public ViewModel(IViewModel? parent = null)
         {
             IoC.Container.Build(this);
 
+            Parent = parent;
+
             BindToModel();
             BindToView();
+        }
+
+        /// <inheritdoc />
+        public virtual Task<bool> Close()
+        {
+            if (Parent is IParent parent)
+            {
+                return parent.DeactivateItem(this, true);
+            }
+
+            if (View is Window window)
+            {
+                if (CanClose)
+                {
+                    window.Close();
+                }
+            }
+
+            return OnDeactivate();
         }
 
         /// <inheritdoc />
