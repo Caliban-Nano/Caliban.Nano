@@ -40,14 +40,30 @@ namespace Caliban.Nano
         }
 
         /// <summary>
-        /// Registers a type or an instance at the used container.
+        /// Registers and binds a type at the used container.
         /// </summary>
-        /// <typeparam name="T">The type.</typeparam>
-        /// <param name="object">The type or instance.</param>
+        /// <typeparam name="T1">The registered type.</typeparam>
+        /// <typeparam name="T2">The bound type.</typeparam>
         /// <returns>The bootstrap instance.</returns>
-        public Bootstrap Register<T>([NotNull] object @object) where T : class
+        public Bootstrap Register<T1, T2>()
+            where T1 : class
+            where T2 : class
         {
-            Container.Bind<T>(@object);
+            Container.Bind<T1>(typeof(T2));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Registers and binds an instance at the used container.
+        /// </summary>
+        /// <typeparam name="T">The registered type.</typeparam>
+        /// <param name="instance">The bound instance.</param>
+        /// <returns>The bootstrap instance.</returns>
+        public Bootstrap Register<T>([NotNull] object instance)
+            where T : class
+        {
+            Container.Bind<T>(instance);
 
             return this;
         }
@@ -59,7 +75,8 @@ namespace Caliban.Nano
         /// <param name="settings">The window settings.</param>
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Performance", "CA1822", Justification = "Intended Behavior")]
-        public async void Show<T>(Dictionary<string, object>? settings = null) where T : IViewModel
+        public async void Show<T>(Dictionary<string, object>? settings = null)
+            where T : IViewModel
         {
             try
             {
