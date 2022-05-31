@@ -47,6 +47,24 @@ namespace Caliban.Nano.Tests
         }
 
         [TestMethod]
+        public void DisposeTest()
+        {
+            using var writer = new StringWriter();
+            var listener = new TextWriterTraceListener(writer);
+
+            Trace.Listeners.Add(listener);
+
+            listener.Write("Test 1");
+
+            new TraceLogger().Dispose();
+
+            listener.Write("Test 2");
+
+            Assert.IsTrue(writer.ToString().Contains("Test 1"));
+            Assert.IsFalse(writer.ToString().Contains("Test 2"));
+        }
+
+        [TestMethod]
         public void HandleExternTest()
         {
             ArgumentNullException.ThrowIfNull(Logger);
