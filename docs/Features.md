@@ -88,7 +88,7 @@ private string _someInput = "";
 public string SomeInput
 {
     get => _someInput;
-    set => SetValue(ref _someInput, value);
+    set => SetProperty(ref _someInput, value);
 }
 ```
 
@@ -100,16 +100,11 @@ Decouple view models with the built in composition pattern.
 ```
 
 ```cs
-public class CarViewModel : ViewModel.ActiveOne
+public class EditorViewModel : ViewModel.ActiveOne
 {
-    public CarViewModel()
+    public async Task NewTabAsync()
     {
-        SwitchDriverAsync();
-    }
-
-    public async void SwitchDriverAsync()
-    {
-        await ActivateItem(new PersonViewModel());
+        await ActivateItem(new TabViewModel());
     }
 }
 ```
@@ -138,8 +133,8 @@ public class MainModel
 }
 ```
 
-## ✔️ Implicit Model Properties
-Write concise code by using implicit model properties.
+## ✔️ Implicit Model Members
+Write concise code by using implicit model members.
 
 ```cs
 public class SheepModel : Model
