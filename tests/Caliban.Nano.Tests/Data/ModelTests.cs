@@ -1,4 +1,5 @@
-﻿using Caliban.Nano.Tests.Mocks;
+﻿using System.Threading.Tasks;
+using Caliban.Nano.Tests.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Caliban.Nano.Tests.Data
@@ -45,7 +46,7 @@ namespace Caliban.Nano.Tests.Data
         }
 
         [TestMethod]
-        public void LoadTest()
+        public async Task LoadTest()
         {
             var mock = new MockModel();
 
@@ -53,13 +54,13 @@ namespace Caliban.Nano.Tests.Data
 
             Assert.IsTrue(mock.HasChanged);
 
-            mock.Load();
+            await mock.Load();
 
             Assert.IsFalse(mock.HasChanged);
         }
 
         [TestMethod]
-        public void SaveTest()
+        public async Task SaveTest()
         {
             var mock = new MockModel();
 
@@ -67,7 +68,7 @@ namespace Caliban.Nano.Tests.Data
 
             Assert.IsTrue(mock.HasChanged);
 
-            mock.Save();
+            await mock.Save();
 
             Assert.IsFalse(mock.HasChanged);
         }

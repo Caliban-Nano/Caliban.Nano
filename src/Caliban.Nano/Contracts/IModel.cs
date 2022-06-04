@@ -13,13 +13,15 @@ namespace Caliban.Nano.Contracts
         bool HasChanged { get; }
 
         /// <summary>
-        /// Loads the model and resets changed state.
+        /// (Awaitable) Loads the model and resets changed state.
         /// </summary>
-        void Load();
+        /// <returns>An asynchronous task.</returns>
+        Task Load();
 
         /// <summary>
-        /// Saves the model and resets changed state.
+        /// (Awaitable) Saves the model and resets changed state.
         /// </summary>
-        void Save();
+        /// <returns>An asynchronous task.</returns>
+        Task Save();
     }
 }
