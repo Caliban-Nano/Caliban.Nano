@@ -15,13 +15,13 @@ namespace Caliban.Nano.Contracts
         /// <summary>
         /// (Awaitable) Loads the model and resets changed state.
         /// </summary>
-        /// <returns>An asynchronous task.</returns>
-        Task Load();
+        /// <returns>True if loading was successful; otherwise false.</returns>
+        Task<bool> Load();
 
         /// <summary>
         /// (Awaitable) Saves the model and resets changed state.
         /// </summary>
-        /// <returns>An asynchronous task.</returns>
-        Task Save();
+        /// <returns>True if saving was successful; otherwise false.</returns>
+        Task<bool> Save();
     }
 }

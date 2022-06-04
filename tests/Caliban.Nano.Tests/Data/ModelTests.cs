@@ -53,9 +53,7 @@ namespace Caliban.Nano.Tests.Data
             mock.SetHasChanged(true);
 
             Assert.IsTrue(mock.HasChanged);
-
-            await mock.Load();
-
+            Assert.IsTrue(await mock.Load());
             Assert.IsFalse(mock.HasChanged);
         }
 
@@ -67,9 +65,7 @@ namespace Caliban.Nano.Tests.Data
             mock.SetHasChanged(true);
 
             Assert.IsTrue(mock.HasChanged);
-
-            await mock.Save();
-
+            Assert.IsTrue(await mock.Save());
             Assert.IsFalse(mock.HasChanged);
         }
 
