@@ -92,14 +92,14 @@ The model value.
 (Awaitable) Loads the model and resets changed state.
 
 ```csharp
-public virtual System.Threading.Tasks.Task Load();
+public virtual System.Threading.Tasks.Task<bool> Load();
 ```
 
 Implements [Load()](Caliban.Nano.Contracts.IModel.md#Caliban.Nano.Contracts.IModel.Load() 'Caliban.Nano.Contracts.IModel.Load()')
 
 #### Returns
-[System.Threading.Tasks.Task](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task 'System.Threading.Tasks.Task')  
-An asynchronous task.
+[System.Threading.Tasks.Task&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')[System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')  
+True if loading was successful; otherwise false.
 
 <a name='Caliban.Nano.Data.Model.Save()'></a>
 
@@ -108,14 +108,14 @@ An asynchronous task.
 (Awaitable) Saves the model and resets changed state.
 
 ```csharp
-public virtual System.Threading.Tasks.Task Save();
+public virtual System.Threading.Tasks.Task<bool> Save();
 ```
 
 Implements [Save()](Caliban.Nano.Contracts.IModel.md#Caliban.Nano.Contracts.IModel.Save() 'Caliban.Nano.Contracts.IModel.Save()')
 
 #### Returns
-[System.Threading.Tasks.Task](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task 'System.Threading.Tasks.Task')  
-An asynchronous task.
+[System.Threading.Tasks.Task&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')[System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')  
+True if saving was successful; otherwise false.
 
 <a name='Caliban.Nano.Data.Model.Set_T_(T,string,string[])'></a>
 
