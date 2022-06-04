@@ -34,18 +34,26 @@ bool HasChanged { get; }
 
 ## IModel.Load() Method
 
-Loads the model and resets changed state.
+(Awaitable) Loads the model and resets changed state.
 
 ```csharp
-void Load();
+System.Threading.Tasks.Task Load();
 ```
+
+#### Returns
+[System.Threading.Tasks.Task](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task 'System.Threading.Tasks.Task')  
+An asynchronous task.
 
 <a name='Caliban.Nano.Contracts.IModel.Save()'></a>
 
 ## IModel.Save() Method
 
-Saves the model and resets changed state.
+(Awaitable) Saves the model and resets changed state.
 
 ```csharp
-void Save();
+System.Threading.Tasks.Task Save();
 ```
+
+#### Returns
+[System.Threading.Tasks.Task](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task 'System.Threading.Tasks.Task')  
+An asynchronous task.

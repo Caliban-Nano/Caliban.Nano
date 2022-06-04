@@ -89,25 +89,33 @@ The model value.
 
 ## Model.Load() Method
 
-Loads the model and resets changed state.
+(Awaitable) Loads the model and resets changed state.
 
 ```csharp
-public virtual void Load();
+public virtual System.Threading.Tasks.Task Load();
 ```
 
 Implements [Load()](Caliban.Nano.Contracts.IModel.md#Caliban.Nano.Contracts.IModel.Load() 'Caliban.Nano.Contracts.IModel.Load()')
+
+#### Returns
+[System.Threading.Tasks.Task](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task 'System.Threading.Tasks.Task')  
+An asynchronous task.
 
 <a name='Caliban.Nano.Data.Model.Save()'></a>
 
 ## Model.Save() Method
 
-Saves the model and resets changed state.
+(Awaitable) Saves the model and resets changed state.
 
 ```csharp
-public virtual void Save();
+public virtual System.Threading.Tasks.Task Save();
 ```
 
 Implements [Save()](Caliban.Nano.Contracts.IModel.md#Caliban.Nano.Contracts.IModel.Save() 'Caliban.Nano.Contracts.IModel.Save()')
+
+#### Returns
+[System.Threading.Tasks.Task](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task 'System.Threading.Tasks.Task')  
+An asynchronous task.
 
 <a name='Caliban.Nano.Data.Model.Set_T_(T,string,string[])'></a>
 
