@@ -6,11 +6,14 @@
 An all-purpose logger interface as the lowest common denominator.
 
 ```csharp
-public interface ILogger
+public interface ILogger :
+System.IDisposable
 ```
 
 Derived  
 &#8627; [TraceLogger](Caliban.Nano.TraceLogger.md 'Caliban.Nano.TraceLogger')
+
+Implements [System.IDisposable](https://docs.microsoft.com/en-us/dotnet/api/System.IDisposable 'System.IDisposable')
 ### Methods
 
 <a name='Caliban.Nano.Contracts.ILogger.Error(string,object[])'></a>

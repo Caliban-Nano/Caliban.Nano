@@ -19,15 +19,22 @@ Derived
 Implements [IViewModel](Caliban.Nano.Contracts.IViewModel.md 'Caliban.Nano.Contracts.IViewModel')
 ### Constructors
 
-<a name='Caliban.Nano.UI.ViewModel.ViewModel()'></a>
+<a name='Caliban.Nano.UI.ViewModel.ViewModel(Caliban.Nano.Contracts.IViewModel)'></a>
 
-## ViewModel() Constructor
+## ViewModel(IViewModel) Constructor
 
 Initializes a new instance of this class with dependency injection and binding.
 
 ```csharp
-public ViewModel();
+public ViewModel(Caliban.Nano.Contracts.IViewModel? parent=null);
 ```
+#### Parameters
+
+<a name='Caliban.Nano.UI.ViewModel.ViewModel(Caliban.Nano.Contracts.IViewModel).parent'></a>
+
+`parent` [IViewModel](Caliban.Nano.Contracts.IViewModel.md 'Caliban.Nano.Contracts.IViewModel')
+
+The optional parent view model.
 ### Properties
 
 <a name='Caliban.Nano.UI.ViewModel.CanClose'></a>
@@ -75,6 +82,21 @@ Implements [Model](Caliban.Nano.Contracts.IViewModel.md#Caliban.Nano.Contracts.I
 #### Property Value
 [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')
 
+<a name='Caliban.Nano.UI.ViewModel.Parent'></a>
+
+## ViewModel.Parent Property
+
+The optional parent view model.
+
+```csharp
+public Caliban.Nano.Contracts.IViewModel? Parent { get; set; }
+```
+
+Implements [Parent](Caliban.Nano.Contracts.IViewModel.md#Caliban.Nano.Contracts.IViewModel.Parent 'Caliban.Nano.Contracts.IViewModel.Parent')
+
+#### Property Value
+[IViewModel](Caliban.Nano.Contracts.IViewModel.md 'Caliban.Nano.Contracts.IViewModel')
+
 <a name='Caliban.Nano.UI.ViewModel.View'></a>
 
 ## ViewModel.View Property
@@ -110,6 +132,22 @@ Binds the view model to the view.
 ```csharp
 protected virtual void BindToView();
 ```
+
+<a name='Caliban.Nano.UI.ViewModel.Close()'></a>
+
+## ViewModel.Close() Method
+
+(Awaitable) Closes the view model if possible.
+
+```csharp
+public virtual System.Threading.Tasks.Task<bool> Close();
+```
+
+Implements [Close()](Caliban.Nano.Contracts.IViewModel.md#Caliban.Nano.Contracts.IViewModel.Close() 'Caliban.Nano.Contracts.IViewModel.Close()')
+
+#### Returns
+[System.Threading.Tasks.Task&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')[System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')  
+True if closing was successful; otherwise false.
 
 <a name='Caliban.Nano.UI.ViewModel.ModelAs_T_()'></a>
 

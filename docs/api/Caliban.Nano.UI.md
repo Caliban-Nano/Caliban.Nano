@@ -11,7 +11,7 @@
 | [ViewModel](Caliban.Nano.UI.ViewModel.md 'Caliban.Nano.UI.ViewModel') | A base view model. |
 | [ViewModel.ActiveAll](Caliban.Nano.UI.ViewModel.ActiveAll.md 'Caliban.Nano.UI.ViewModel.ActiveAll') | A composition conductor for multiple active view models. |
 | [ViewModel.ActiveOne](Caliban.Nano.UI.ViewModel.ActiveOne.md 'Caliban.Nano.UI.ViewModel.ActiveOne') | A composition conductor for single active view models. |
-| [WindowManager](Caliban.Nano.UI.WindowManager.md 'Caliban.Nano.UI.WindowManager') | A window manager for single window applications. |
+| [WindowManager](Caliban.Nano.UI.WindowManager.md 'Caliban.Nano.UI.WindowManager') | A primitive window manager for single window applications. |
 ### Delegates
 
 <a name='Caliban.Nano.UI.ViewBinder.Resolver(System.Windows.FrameworkElement,Caliban.Nano.Contracts.IViewModel)'></a>

@@ -52,6 +52,19 @@ object? Model { get; }
 #### Property Value
 [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')
 
+<a name='Caliban.Nano.Contracts.IViewModel.Parent'></a>
+
+## IViewModel.Parent Property
+
+The optional parent view model.
+
+```csharp
+Caliban.Nano.Contracts.IViewModel? Parent { get; }
+```
+
+#### Property Value
+[IViewModel](Caliban.Nano.Contracts.IViewModel.md 'Caliban.Nano.Contracts.IViewModel')
+
 <a name='Caliban.Nano.Contracts.IViewModel.View'></a>
 
 ## IViewModel.View Property
@@ -65,6 +78,20 @@ object? View { get; }
 #### Property Value
 [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')
 ### Methods
+
+<a name='Caliban.Nano.Contracts.IViewModel.Close()'></a>
+
+## IViewModel.Close() Method
+
+(Awaitable) Closes the view model if possible.
+
+```csharp
+System.Threading.Tasks.Task<bool> Close();
+```
+
+#### Returns
+[System.Threading.Tasks.Task&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')[System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')  
+True if closing was successful; otherwise false.
 
 <a name='Caliban.Nano.Contracts.IViewModel.ModelAs_T_()'></a>
 

@@ -8,12 +8,13 @@ A debug trace logger implementing ILogger.
 ```csharp
 public sealed class TraceLogger :
 Caliban.Nano.Contracts.ILogger,
+System.IDisposable,
 Caliban.Nano.Contracts.IHandle<Caliban.Nano.Events.LogEvent>
 ```
 
 Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; TraceLogger
 
-Implements [ILogger](Caliban.Nano.Contracts.ILogger.md 'Caliban.Nano.Contracts.ILogger'), [Caliban.Nano.Contracts.IHandle&lt;](Caliban.Nano.Contracts.IHandle_T_.md 'Caliban.Nano.Contracts.IHandle<T>')[LogEvent](Caliban.Nano.Events.LogEvent.md 'Caliban.Nano.Events.LogEvent')[&gt;](Caliban.Nano.Contracts.IHandle_T_.md 'Caliban.Nano.Contracts.IHandle<T>')
+Implements [ILogger](Caliban.Nano.Contracts.ILogger.md 'Caliban.Nano.Contracts.ILogger'), [System.IDisposable](https://docs.microsoft.com/en-us/dotnet/api/System.IDisposable 'System.IDisposable'), [Caliban.Nano.Contracts.IHandle&lt;](Caliban.Nano.Contracts.IHandle_T_.md 'Caliban.Nano.Contracts.IHandle<T>')[LogEvent](Caliban.Nano.Events.LogEvent.md 'Caliban.Nano.Events.LogEvent')[&gt;](Caliban.Nano.Contracts.IHandle_T_.md 'Caliban.Nano.Contracts.IHandle<T>')
 ### Constructors
 
 <a name='Caliban.Nano.TraceLogger.TraceLogger()'></a>
@@ -26,6 +27,18 @@ Initializes a new instance of this class.
 public TraceLogger();
 ```
 ### Methods
+
+<a name='Caliban.Nano.TraceLogger.Dispose()'></a>
+
+## TraceLogger.Dispose() Method
+
+Führt anwendungsspezifische Aufgaben durch, die mit der Freigabe, der Zurückgabe oder dem Zurücksetzen von nicht verwalteten Ressourcen zusammenhängen.
+
+```csharp
+public void Dispose();
+```
+
+Implements [Dispose()](https://docs.microsoft.com/en-us/dotnet/api/System.IDisposable.Dispose 'System.IDisposable.Dispose')
 
 <a name='Caliban.Nano.TraceLogger.Error(string,object[])'></a>
 
