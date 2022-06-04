@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using Caliban.Nano.Container;
 using Caliban.Nano.Contracts;
 using Caliban.Nano.Events;
 using Caliban.Nano.Tests.Mocks;
@@ -88,8 +87,6 @@ namespace Caliban.Nano.Tests.Events
         public void PublishFailedTest()
         {
             ArgumentNullException.ThrowIfNull(Events);
-
-            IoC.Resolve = new NanoContainer().Resolve;
 
             using var writer = new StringWriter();
 

@@ -5,7 +5,7 @@ using Caliban.Nano.Container;
 using Caliban.Nano.Events;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Caliban.Nano.Tests.Root
+namespace Caliban.Nano.Tests
 {
     [TestClass]
     public sealed class LogTests
@@ -13,8 +13,6 @@ namespace Caliban.Nano.Tests.Root
         [TestMethod]
         public void ThisMessageTest()
         {
-            IoC.Resolve = new NanoContainer().Resolve;
-
             using var writer = new StringWriter();
 
             Trace.Listeners.Add(new TextWriterTraceListener(writer));
@@ -27,8 +25,6 @@ namespace Caliban.Nano.Tests.Root
         [TestMethod]
         public void ThisExceptionTest()
         {
-            IoC.Resolve = new NanoContainer().Resolve;
-
             using var writer = new StringWriter();
 
             Trace.Listeners.Add(new TextWriterTraceListener(writer));
@@ -48,6 +44,24 @@ namespace Caliban.Nano.Tests.Root
         public void Initialize()
         {
             Logger = new TraceLogger();
+        }
+
+        [TestMethod]
+        public void DisposeTest()
+        {
+            using var writer = new StringWriter();
+            var listener = new TextWriterTraceListener(writer);
+
+            Trace.Listeners.Add(listener);
+
+            listener.Write("Test 1");
+
+            new TraceLogger().Dispose();
+
+            listener.Write("Test 2");
+
+            Assert.IsTrue(writer.ToString().Contains("Test 1"));
+            Assert.IsFalse(writer.ToString().Contains("Test 2"));
         }
 
         [TestMethod]

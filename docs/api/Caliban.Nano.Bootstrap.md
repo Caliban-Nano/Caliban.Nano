@@ -84,10 +84,11 @@ Implements [Dispose()](https://docs.microsoft.com/en-us/dotnet/api/System.IDispo
 
 ## Bootstrap.Register<T>(object) Method
 
-Registers an instance for a type at the used container.
+Registers a type or an instance at the used container.
 
 ```csharp
-public Caliban.Nano.Bootstrap Register<T>(object instance);
+public Caliban.Nano.Bootstrap Register<T>(object @object)
+    where T : class;
 ```
 #### Type parameters
 
@@ -98,11 +99,11 @@ public Caliban.Nano.Bootstrap Register<T>(object instance);
 The type.
 #### Parameters
 
-<a name='Caliban.Nano.Bootstrap.Register_T_(object).instance'></a>
+<a name='Caliban.Nano.Bootstrap.Register_T_(object).object'></a>
 
-`instance` [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')
+`object` [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')
 
-The instance.
+The type or instance.
 
 #### Returns
 [Bootstrap](Caliban.Nano.Bootstrap.md 'Caliban.Nano.Bootstrap')  

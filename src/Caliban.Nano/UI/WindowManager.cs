@@ -6,7 +6,7 @@ using Caliban.Nano.Contracts;
 namespace Caliban.Nano.UI
 {
     /// <summary>
-    /// A window manager for single window applications.
+    /// A primitive window manager for single window applications.
     /// </summary>
     public static class WindowManager
     {
@@ -17,52 +17,86 @@ namespace Caliban.Nano.UI
         /// <param name="settings">The window settings.</param>
         /// <returns>An asynchronous task.</returns>
         [ExcludeFromCodeCoverage]
-        public static async Task ShowWindowAsync<T>(Dictionary<string, object>? settings = null) where T : IViewModel
+        public static async Task ShowAsync<T>(Dictionary<string, object>? settings = null) where T : IViewModel
         {
-            var viewModel = IoC.Get<T>();
-            var view = (Window)viewModel.View;
-
-            Application.Current.MainWindow = view;
-
-            view.Closing += ClosingGuard;
+            var window = CreateWindow<T>();
 
             if (settings is not null)
             {
                 foreach (var (key, value) in settings)
                 {
-                    typeof(Window).GetProperty(key)?.SetValue(view, value);
+                    typeof(Window).GetProperty(key)?.SetValue(window, value);
                 }
             }
 
-            if (viewModel is IWindow window)
+            Application.Current.MainWindow = window;
+
+            await ShowWindowAsync(window);
+        }
+
+        /// <summary>
+        /// (Awaitable) Forces closing of the main window.
+        /// </summary>
+        /// <returns>An asynchronous task.</returns>
+        [ExcludeFromCodeCoverage]
+        public static async Task CloseAsync()
+        {
+            await CloseWindowAsync(Application.Current.MainWindow, true);
+        }
+
+        /// <summary>
+        /// Returns a new window.
+        /// </summary>
+        /// <typeparam name="T">The view model type.</typeparam>
+        /// <returns>The created window.</returns>
+        [ExcludeFromCodeCoverage]
+        public static Window CreateWindow<T>() where T : IViewModel
+        {
+            var viewModel = (T)IoC.Container.Create(typeof(T));
+
+            return viewModel.ViewAs<Window>();
+        }
+
+        /// <summary>
+        /// (Awaitable) Shows the specified window.
+        /// </summary>
+        /// <param name="window">The window.</param>
+        /// <returns>An asynchronous task.</returns>
+        [ExcludeFromCodeCoverage]
+        public static async Task ShowWindowAsync(Window window)
+        {
+            var viewModel = (IViewModel)window.DataContext;
+
+            window.Closing += ClosingGuard;
+
+            if (viewModel is IWindow wnd)
             {
-                view.Title = window.DisplayName;
+                window.Title = wnd.DisplayName;
             }
 
             if (await viewModel.OnActivate())
             {
-                view.Show();
+                window.Show();
             }
         }
 
         /// <summary>
-        /// (Awaitable) Tries to close the main window.
+        /// (Awaitable) Closes the given window.
         /// </summary>
+        /// <param name="window">The window.</param>
         /// <param name="force">Forces the window to close.</param>
         /// <returns>An asynchronous task.</returns>
         [ExcludeFromCodeCoverage]
-        public static async Task CloseWindowAsync(bool force = true)
+        public static async Task CloseWindowAsync(Window window, bool force = false)
         {
-            var view = Application.Current.MainWindow;
-
-            if (view.DataContext is IViewModel viewModel)
+            if (window.DataContext is IViewModel viewModel)
             {
                 if (await viewModel.OnDeactivate() || force)
                 {
-                    view.Closing -= ClosingGuard;
-                    view.Close();
+                    window.Closing -= ClosingGuard;
+                    window.Close();
                 }
-            }                        
+            }
         }
 
         [ExcludeFromCodeCoverage]

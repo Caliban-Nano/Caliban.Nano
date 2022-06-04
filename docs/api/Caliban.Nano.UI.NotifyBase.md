@@ -3,7 +3,7 @@
 
 ## NotifyBase Class
 
-Base implementation of the INotifyPropertyChanged interface.
+Chainable implementation of the INotifyPropertyChanged interface.
 
 ```csharp
 public abstract class NotifyBase :
@@ -17,6 +17,29 @@ Derived
 
 Implements [System.ComponentModel.INotifyPropertyChanged](https://docs.microsoft.com/en-us/dotnet/api/System.ComponentModel.INotifyPropertyChanged 'System.ComponentModel.INotifyPropertyChanged')
 ### Methods
+
+<a name='Caliban.Nano.UI.NotifyBase.NotifyPropertyChanged(object,System.ComponentModel.PropertyChangedEventArgs)'></a>
+
+## NotifyBase.NotifyPropertyChanged(object, PropertyChangedEventArgs) Method
+
+Notifies clients that a property value has changed.
+
+```csharp
+protected virtual void NotifyPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e);
+```
+#### Parameters
+
+<a name='Caliban.Nano.UI.NotifyBase.NotifyPropertyChanged(object,System.ComponentModel.PropertyChangedEventArgs).sender'></a>
+
+`sender` [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')
+
+The event sender.
+
+<a name='Caliban.Nano.UI.NotifyBase.NotifyPropertyChanged(object,System.ComponentModel.PropertyChangedEventArgs).e'></a>
+
+`e` [System.ComponentModel.PropertyChangedEventArgs](https://docs.microsoft.com/en-us/dotnet/api/System.ComponentModel.PropertyChangedEventArgs 'System.ComponentModel.PropertyChangedEventArgs')
+
+The event arguments.
 
 <a name='Caliban.Nano.UI.NotifyBase.NotifyPropertyChanged(string)'></a>
 
@@ -59,43 +82,43 @@ The property type.
 
 The property name.
 
-<a name='Caliban.Nano.UI.NotifyBase.SetValue_T_(T,T,string,string[])'></a>
+<a name='Caliban.Nano.UI.NotifyBase.SetProperty_T_(T,T,string,string[])'></a>
 
-## NotifyBase.SetValue<T>(T, T, string, string[]) Method
+## NotifyBase.SetProperty<T>(T, T, string, string[]) Method
 
 Sets the value of a property and notifies.
 
 ```csharp
-protected virtual bool SetValue<T>(ref T field, T value, string? name=null, params string[] others);
+protected virtual bool SetProperty<T>(ref T field, T value, string? name=null, params string[] others);
 ```
 #### Type parameters
 
-<a name='Caliban.Nano.UI.NotifyBase.SetValue_T_(T,T,string,string[]).T'></a>
+<a name='Caliban.Nano.UI.NotifyBase.SetProperty_T_(T,T,string,string[]).T'></a>
 
 `T`
 
 The property type.
 #### Parameters
 
-<a name='Caliban.Nano.UI.NotifyBase.SetValue_T_(T,T,string,string[]).field'></a>
+<a name='Caliban.Nano.UI.NotifyBase.SetProperty_T_(T,T,string,string[]).field'></a>
 
-`field` [T](Caliban.Nano.UI.NotifyBase.md#Caliban.Nano.UI.NotifyBase.SetValue_T_(T,T,string,string[]).T 'Caliban.Nano.UI.NotifyBase.SetValue<T>(T, T, string, string[]).T')
+`field` [T](Caliban.Nano.UI.NotifyBase.md#Caliban.Nano.UI.NotifyBase.SetProperty_T_(T,T,string,string[]).T 'Caliban.Nano.UI.NotifyBase.SetProperty<T>(T, T, string, string[]).T')
 
 The inner field.
 
-<a name='Caliban.Nano.UI.NotifyBase.SetValue_T_(T,T,string,string[]).value'></a>
+<a name='Caliban.Nano.UI.NotifyBase.SetProperty_T_(T,T,string,string[]).value'></a>
 
-`value` [T](Caliban.Nano.UI.NotifyBase.md#Caliban.Nano.UI.NotifyBase.SetValue_T_(T,T,string,string[]).T 'Caliban.Nano.UI.NotifyBase.SetValue<T>(T, T, string, string[]).T')
+`value` [T](Caliban.Nano.UI.NotifyBase.md#Caliban.Nano.UI.NotifyBase.SetProperty_T_(T,T,string,string[]).T 'Caliban.Nano.UI.NotifyBase.SetProperty<T>(T, T, string, string[]).T')
 
 The property value.
 
-<a name='Caliban.Nano.UI.NotifyBase.SetValue_T_(T,T,string,string[]).name'></a>
+<a name='Caliban.Nano.UI.NotifyBase.SetProperty_T_(T,T,string,string[]).name'></a>
 
 `name` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 
 The property name.
 
-<a name='Caliban.Nano.UI.NotifyBase.SetValue_T_(T,T,string,string[]).others'></a>
+<a name='Caliban.Nano.UI.NotifyBase.SetProperty_T_(T,T,string,string[]).others'></a>
 
 `others` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[[]](https://docs.microsoft.com/en-us/dotnet/api/System.Array 'System.Array')
 

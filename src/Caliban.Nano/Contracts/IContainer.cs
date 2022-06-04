@@ -8,44 +8,58 @@ namespace Caliban.Nano.Contracts
     public interface IContainer : IDisposable
     {
         /// <summary>
-        /// Occures when an instance is resolved.
+        /// Occures when an object is resolved.
         /// </summary>
         event Action<object>? Resolved;
 
         /// <summary>
-        /// Resolves a registered instance or creates a new if none is registered.
+        /// Resolves a bound type by returning an existing instance or creating a new one.
         /// </summary>
         /// <typeparam name="T">The type.</typeparam>
-        /// <returns>The resolved or created instance.</returns>
-        /// <exception cref="TypeLoadException">Thrown if the type could not be loaded.</exception>
-        object Resolve<T>();
+        /// <returns>The bound or created instance.</returns>
+        /// <exception cref="TypeLoadException">Thrown if the type could not be created.</exception>
+        object Resolve<T>() where T : class;
 
         /// <summary>
-        /// Resolves a registered instance or creates a new if none is registered.
+        /// Resolves a bound type by returning an existing instance or creating a new one.
         /// </summary>
-        /// <param name="request">The requested type.</param>
-        /// <returns>The resolved or created instance.</returns>
-        /// <exception cref="TypeLoadException">Thrown if the request could not be loaded.</exception>
-        object Resolve([NotNull] object request);
+        /// <param name="type">The type.</param>
+        /// <returns>The bound or created instance.</returns>
+        /// <exception cref="TypeLoadException">Thrown if the type could not be created.</exception>
+        object Resolve([NotNull] Type type);
 
         /// <summary>
-        /// Registers an instance for a type.
+        /// Returns if the type can be resolved.
         /// </summary>
         /// <typeparam name="T">The type.</typeparam>
+        /// <returns>True if the type can be resolved; otherwise false.</returns>
+        bool CanResolve<T>() where T : class;
+
+        /// <summary>
+        /// Returns a new type instance.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>The created instance.</returns>
+        /// <exception cref="TypeLoadException">Thrown if the type could not be created.</exception>
+        object Create([NotNull] Type type);
+
+        /// <summary>
+        /// Builds up an instance.
+        /// </summary>
         /// <param name="instance">The instance.</param>
-        void Register<T>([NotNull] object instance);
+        void Build([NotNull] object instance);
 
         /// <summary>
-        /// Returns if the type is registered.
+        /// Binds the type to the type or instance.
         /// </summary>
         /// <typeparam name="T">The type.</typeparam>
-        /// <returns>True if the type is registered; otherwise false.</returns>
-        bool IsRegistered<T>();
+        /// <param name="object">The type or instance.</param>
+        void Bind<T>([NotNull] object @object) where T : class;
 
         /// <summary>
-        /// Unregisters all instances from a type.
+        /// Unbinds the type.
         /// </summary>
         /// <typeparam name="T">The type.</typeparam>
-        void Unregister<T>();
+        void Unbind<T>() where T : class;
     }
 }

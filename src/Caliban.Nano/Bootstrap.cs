@@ -24,32 +24,46 @@ namespace Caliban.Nano
         {
             TypeFinder.Sources.Add(Assembly.GetCallingAssembly());
 
-            Container = container ?? new NanoContainer();
-
-            IoC.Resolve = Container.Resolve;
+            IoC.Container = Container = container ?? new NanoContainer();
         }
 
         /// <summary>
-        /// Adds an assembly to the type finder.
+        /// Imports the assembly for the type finder.
         /// </summary>
-        /// <param name="assembly">The new assembly.</param>
+        /// <param name="assembly">The assembly.</param>
         /// <returns>The bootstrap instance.</returns>
-        public Bootstrap AddSource([NotNull] Assembly assembly)
+        public Bootstrap Import([NotNull] Assembly assembly)
         {
             TypeFinder.Sources.Add(assembly);
 
             return this;
-        }   
+        }
 
         /// <summary>
-        /// Registers an instance for a type at the used container.
+        /// Registers and binds a type at the used container.
         /// </summary>
-        /// <typeparam name="T">The type.</typeparam>
-        /// <param name="instance">The instance.</param>
+        /// <typeparam name="T1">The registered type.</typeparam>
+        /// <typeparam name="T2">The bound type.</typeparam>
+        /// <returns>The bootstrap instance.</returns>
+        public Bootstrap Register<T1, T2>()
+            where T1 : class
+            where T2 : class
+        {
+            Container.Bind<T1>(typeof(T2));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Registers and binds an instance at the used container.
+        /// </summary>
+        /// <typeparam name="T">The registered type.</typeparam>
+        /// <param name="instance">The bound instance.</param>
         /// <returns>The bootstrap instance.</returns>
         public Bootstrap Register<T>([NotNull] object instance)
+            where T : class
         {
-            Container.Register<T>(instance);
+            Container.Bind<T>(instance);
 
             return this;
         }
@@ -61,11 +75,12 @@ namespace Caliban.Nano
         /// <param name="settings">The window settings.</param>
         [ExcludeFromCodeCoverage]
         [SuppressMessage("Performance", "CA1822", Justification = "Intended Behavior")]
-        public async void Show<T>(Dictionary<string, object>? settings = null) where T : IViewModel
+        public async void Show<T>(Dictionary<string, object>? settings = null)
+            where T : IViewModel
         {
             try
             {
-                await WindowManager.ShowWindowAsync<T>(settings);
+                await WindowManager.ShowAsync<T>(settings);
             }
             catch (Exception ex)
             {
@@ -81,7 +96,7 @@ namespace Caliban.Nano
         {
             try
             {
-                await WindowManager.CloseWindowAsync(true);
+                await WindowManager.CloseAsync();
             }
             catch (Exception ex)
             {

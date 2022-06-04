@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using Caliban.Nano.Container;
 using Caliban.Nano.Contracts;
@@ -13,25 +12,19 @@ namespace Caliban.Nano.Tests.Events
     [TestClass]
     public sealed class EventLoggerTests
     {
-        private IContainer? Container { get; set; }
-
         [TestInitialize]
         public void Initialize()
         {
-            Container = new NanoContainer();
-
-            IoC.Resolve = Container.Resolve;
+            IoC.Container = new NanoContainer();
         }
 
         [TestMethod]
         public void RaisePassedTest()
         {
-            ArgumentNullException.ThrowIfNull(Container);
-
             var events = new EventAggregator();
             var logger = new MockLogger();
 
-            Container.Register<IEventAggregator>(events);
+            IoC.Container.Bind<IEventAggregator>(events);
             
             events.Subscribe<LogEvent>((LogEvent e) => Assert.AreEqual(e.Message, "Message"));
 
@@ -41,8 +34,6 @@ namespace Caliban.Nano.Tests.Events
         [TestMethod]
         public void RaiseFailedTest()
         {
-            ArgumentNullException.ThrowIfNull(Container);
-
             using var writer = new StringWriter();
             var logger = new MockLogger();
 

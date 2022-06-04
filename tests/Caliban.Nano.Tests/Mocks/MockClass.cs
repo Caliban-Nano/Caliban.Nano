@@ -18,6 +18,8 @@ namespace Caliban.Nano.Tests.Mocks
 
         #region Notify Properties
 
+        public MockModel Model { get; set; } = new();
+
         public bool Notify
         {
             get => _notify;
@@ -33,13 +35,13 @@ namespace Caliban.Nano.Tests.Mocks
         public bool Value1
         {
             get => _value;
-            set => SetValue(ref _value, value);
+            set => SetProperty(ref _value, value);
         }
 
         public bool Value2
         {
             get => _value;
-            set => SetValue(ref _value, value, "Value1", "Value2");
+            set => SetProperty(ref _value, value, "Value1", "Value2");
         }
 
         private bool _notify;
@@ -58,8 +60,17 @@ namespace Caliban.Nano.Tests.Mocks
         {
             _dependency = dependencyA;
             DependencyB = dependencyB;
+
+            Model.PropertyChanged += NotifyPropertyChanged;
         }
 
         #endregion
+    }
+
+    internal sealed class MockClassEmpty : IMock { }
+
+    internal sealed class MockClassPrivate
+    {
+        private MockClassPrivate() { }
     }
 }

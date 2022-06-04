@@ -16,10 +16,11 @@ Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.O
 
 ## IoC.Get<T>() Method
 
-Locates a service for the requested type.
+Locates a service for the given type.
 
 ```csharp
-public static T Get<T>();
+public static T Get<T>()
+    where T : class;
 ```
 #### Type parameters
 
@@ -27,7 +28,7 @@ public static T Get<T>();
 
 `T`
 
-The requested type.
+The type.
 
 #### Returns
 [T](Caliban.Nano.IoC.md#Caliban.Nano.IoC.Get_T_().T 'Caliban.Nano.IoC.Get<T>().T')  

@@ -4,7 +4,7 @@ using Caliban.Nano.Tests.Mocks;
 using Caliban.Nano.UI;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Caliban.Nano.Tests.Root
+namespace Caliban.Nano.Tests
 {
     [TestClass]
     public class BootstrapTests
@@ -25,11 +25,15 @@ namespace Caliban.Nano.Tests.Root
 
             Assert.AreEqual(1, TypeFinder.Sources.Count);
 
-            bootstrap.AddSource(GetType().Assembly);
+            bootstrap.Import(GetType().Assembly);
 
             Assert.AreEqual(2, TypeFinder.Sources.Count);
 
             Assert.ThrowsException<TypeLoadException>(() => IoC.Get<IMock>());
+
+            bootstrap.Register<MockClass, MockClass>();
+
+            Assert.IsInstanceOfType(IoC.Get<MockClass>(), typeof(MockClass));
 
             bootstrap.Register<IMock>(new MockClass());
 

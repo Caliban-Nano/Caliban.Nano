@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using Caliban.Nano.Contracts;
 using Caliban.Nano.Events;
-using Caliban.Nano.Hello.Shell;
+using Caliban.Nano.Hello.UI.Shell;
 
 namespace Caliban.Nano.Hello
 {

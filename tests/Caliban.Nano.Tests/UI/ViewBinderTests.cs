@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using Caliban.Nano.Tests.Mocks;
 using Caliban.Nano.UI;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -82,6 +83,14 @@ namespace Caliban.Nano.Tests.UI
             }
 
             [TestMethod]
+            public void GetPathWithModelTest()
+            {
+                var path = ViewBinder.BindingUtils.GetPathWithModel("Text");
+
+                Assert.AreEqual(path, "Model.Text");
+            }
+
+            [TestMethod]
             public void GetPathWithItemTest()
             {
                 var path = ViewBinder.BindingUtils.GetPathWithItem("Items");
@@ -95,6 +104,23 @@ namespace Caliban.Nano.Tests.UI
                 var path = ViewBinder.BindingUtils.GetPathWithView("Content");
 
                 Assert.AreEqual(path, "Content.View");
+            }
+
+            [TestMethod]
+            public void GetInstancePropertyPassedTest()
+            {
+                var op = ViewBinder.BindingUtils.GetInstanceProperty("Notify", new MockClass());
+
+                Assert.IsNotNull(op);
+                Assert.AreEqual(op, typeof(MockClass).GetProperty("Notify"));
+            }
+
+            [TestMethod]
+            public void GetInstancePropertyFailedTest()
+            {
+                var op = ViewBinder.BindingUtils.GetInstanceProperty("Unknown", new MockClass());
+
+                Assert.IsNull(op);
             }
 
             [TestMethod]

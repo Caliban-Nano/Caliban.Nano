@@ -1,4 +1,7 @@
-﻿namespace Caliban.Nano
+﻿using Caliban.Nano.Container;
+using Caliban.Nano.Contracts;
+
+namespace Caliban.Nano
 {
     /// <summary>
     /// An implementation of the service locator pattern.
@@ -6,19 +9,19 @@
     public static class IoC
     {
         /// <summary>
-        /// The internal service resolve method (must be initialized).
+        /// The internal service container.
         /// </summary>
-        internal static Func<object, object> Resolve =
-            _ => throw new NotImplementedException();
+        internal static IContainer Container { get; set; }
+            = new NanoContainer();
 
         /// <summary>
-        /// Locates a service for the requested type.
+        /// Locates a service for the given type.
         /// </summary>
-        /// <typeparam name="T">The requested type.</typeparam>
+        /// <typeparam name="T">The type.</typeparam>
         /// <returns>The located service.</returns>
-        public static T Get<T>()
+        public static T Get<T>() where T : class
         {
-            return (T)Resolve(typeof(T));
+            return (T)Container.Resolve(typeof(T));
         }
     }
 }

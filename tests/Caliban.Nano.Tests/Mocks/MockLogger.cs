@@ -5,6 +5,7 @@ namespace Caliban.Nano.Tests.Mocks
 {
     internal sealed class MockLogger : ILogger
     {
+        public void Dispose() { }
         public void Info(string _) { }
         public void Warn(string _) { }
         public void Error(string _) { }

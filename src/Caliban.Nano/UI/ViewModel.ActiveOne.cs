@@ -8,11 +8,9 @@ namespace Caliban.Nano.UI
         /// <summary>
         /// A composition conductor for single active view models.
         /// </summary>
-        public abstract class ActiveOne : ViewModel
+        public abstract class ActiveOne : ViewModel, IParent
         {
-            /// <summary>
-            /// Occures when the active item changed.
-            /// </summary>
+            /// <inheritdoc />
             public event Action<IViewModel> ActiveChanged;
 
             /// <summary>
@@ -20,24 +18,19 @@ namespace Caliban.Nano.UI
             /// </summary>
             public IViewModel? ActiveItem => Items.FirstOrDefault(x => x.IsActive);
 
-            /// <summary>
-            /// Collection of child view model items.
-            /// </summary>
-            public ObservableCollection<IViewModel> Items { get; private set; } = new();
+            /// <inheritdoc />
+            public ObservableCollection<IViewModel> Items { get; protected set; } = new();
 
             /// <summary>
             /// Initializes a new instance of this class with bounded event.
             /// </summary>
-            public ActiveOne()
+            /// <param name="parent">The optional parent view model.</param>
+            public ActiveOne(IViewModel? parent = null) : base(parent)
             {
                 ActiveChanged += (_) => NotifyPropertyChanged(() => ActiveItem);
             }
 
-            /// <summary>
-            /// (Awaitable) Activates the given view model item.
-            /// </summary>
-            /// <param name="item">The view model item.</param>
-            /// <returns>True if the activation was successful; otherwise false.</returns>
+            /// <inheritdoc />
             public virtual async Task<bool> ActivateItem(IViewModel item)
             {
                 if (ActiveItem is not null && !await ActiveItem.OnDeactivate())
@@ -60,12 +53,7 @@ namespace Caliban.Nano.UI
                 return true;
             }
 
-            /// <summary>
-            /// (Awaitable) Deactivates the given view model item.
-            /// </summary>
-            /// <param name="item">The view model item.</param>
-            /// <param name="close">If the item should be removed.</param>
-            /// <returns>True if the deactivation was successful; otherwise false.</returns>
+            /// <inheritdoc />
             public virtual async Task<bool> DeactivateItem(IViewModel item, bool close = false)
             {
                 if (!await item.OnDeactivate())

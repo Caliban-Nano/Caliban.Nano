@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="Caliban.Nano.Hello.Hello.HelloView"
+﻿<UserControl x:Class="Caliban.Nano.Hello.UI.Hello.HelloView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Caliban.Nano.Hello.Hello"
+      xmlns:local="clr-namespace:Caliban.Nano.Hello.UI.Hello"
       mc:Ignorable="d">
     <DockPanel Height="auto" FocusManager.FocusedElement="{Binding ElementName=Input}" Style="{StaticResource Panel}">
         <TextBox

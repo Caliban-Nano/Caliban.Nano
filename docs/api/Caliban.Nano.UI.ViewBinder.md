@@ -23,7 +23,7 @@ public static readonly List<(Type,Resolver)> Scope;
 ```
 
 #### Field Value
-[System.Collections.Generic.List&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')[&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.ValueTuple 'System.ValueTuple')[System.Type](https://docs.microsoft.com/en-us/dotnet/api/System.Type 'System.Type')[,](https://docs.microsoft.com/en-us/dotnet/api/System.ValueTuple 'System.ValueTuple')[Resolver(FrameworkElement, object)](Caliban.Nano.UI.ViewBinder.md#Caliban.Nano.UI.ViewBinder.Resolver(System.Windows.FrameworkElement,object) 'Caliban.Nano.UI.ViewBinder.Resolver(System.Windows.FrameworkElement, object)')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.ValueTuple 'System.ValueTuple')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')
+[System.Collections.Generic.List&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')[&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.ValueTuple 'System.ValueTuple')[System.Type](https://docs.microsoft.com/en-us/dotnet/api/System.Type 'System.Type')[,](https://docs.microsoft.com/en-us/dotnet/api/System.ValueTuple 'System.ValueTuple')[Resolver(FrameworkElement, IViewModel)](Caliban.Nano.UI.ViewBinder.md#Caliban.Nano.UI.ViewBinder.Resolver(System.Windows.FrameworkElement,Caliban.Nano.Contracts.IViewModel) 'Caliban.Nano.UI.ViewBinder.Resolver(System.Windows.FrameworkElement, Caliban.Nano.Contracts.IViewModel)')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.ValueTuple 'System.ValueTuple')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')
 ### Methods
 
 <a name='Caliban.Nano.UI.ViewBinder.AddResolver_T_(Caliban.Nano.UI.ViewBinder.Resolver)'></a>
@@ -47,29 +47,29 @@ The control type.
 
 <a name='Caliban.Nano.UI.ViewBinder.AddResolver_T_(Caliban.Nano.UI.ViewBinder.Resolver).resolver'></a>
 
-`resolver` [Resolver(FrameworkElement, object)](Caliban.Nano.UI.ViewBinder.md#Caliban.Nano.UI.ViewBinder.Resolver(System.Windows.FrameworkElement,object) 'Caliban.Nano.UI.ViewBinder.Resolver(System.Windows.FrameworkElement, object)')
+`resolver` [Resolver(FrameworkElement, IViewModel)](Caliban.Nano.UI.ViewBinder.md#Caliban.Nano.UI.ViewBinder.Resolver(System.Windows.FrameworkElement,Caliban.Nano.Contracts.IViewModel) 'Caliban.Nano.UI.ViewBinder.Resolver(System.Windows.FrameworkElement, Caliban.Nano.Contracts.IViewModel)')
 
 The resolver method.
 
-<a name='Caliban.Nano.UI.ViewBinder.Bind(object,object)'></a>
+<a name='Caliban.Nano.UI.ViewBinder.Bind(object,Caliban.Nano.Contracts.IViewModel)'></a>
 
-## ViewBinder.Bind(object, object) Method
+## ViewBinder.Bind(object, IViewModel) Method
 
 Recursive binds a view to a view model.
 
 ```csharp
-public static void Bind(object view, object viewModel);
+public static void Bind(object view, Caliban.Nano.Contracts.IViewModel viewModel);
 ```
 #### Parameters
 
-<a name='Caliban.Nano.UI.ViewBinder.Bind(object,object).view'></a>
+<a name='Caliban.Nano.UI.ViewBinder.Bind(object,Caliban.Nano.Contracts.IViewModel).view'></a>
 
 `view` [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')
 
 The view to bind.
 
-<a name='Caliban.Nano.UI.ViewBinder.Bind(object,object).viewModel'></a>
+<a name='Caliban.Nano.UI.ViewBinder.Bind(object,Caliban.Nano.Contracts.IViewModel).viewModel'></a>
 
-`viewModel` [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')
+`viewModel` [IViewModel](Caliban.Nano.Contracts.IViewModel.md 'Caliban.Nano.Contracts.IViewModel')
 
 The view model to bind.

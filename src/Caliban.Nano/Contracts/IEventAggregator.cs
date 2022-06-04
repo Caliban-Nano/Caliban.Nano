@@ -12,21 +12,21 @@ namespace Caliban.Nano.Contracts
         /// </summary>
         /// <typeparam name="T">The message type.</typeparam>
         /// <returns>True if the type has a handler; otherwise false.</returns>
-        bool HasHandler<T>();
+        bool HasHandler<T>() where T : notnull;
 
         /// <summary>
         /// Subscribes a handler to a type.
         /// </summary>
         /// <typeparam name="T">The message type.</typeparam>
         /// <param name="handler">The event handler.</param>
-        void Subscribe<T>([NotNull] object handler);
+        void Subscribe<T>([NotNull] object handler) where T : notnull;
 
         /// <summary>
         /// Unsubscribes a handler from a type.
         /// </summary>
         /// <typeparam name="T">The message type.</typeparam>
         /// <param name="handler">The event handler.</param>
-        void Unsubscribe<T>([NotNull] object handler);
+        void Unsubscribe<T>([NotNull] object handler) where T : notnull;
 
         /// <summary>
         /// Publishes a message to all subscribed handlers.

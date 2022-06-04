@@ -1,9 +1,10 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using Caliban.Nano.Contracts;
-using Caliban.Nano.Hello.Hello;
+using Caliban.Nano.Hello.UI.Hello;
 using Caliban.Nano.UI;
 
-namespace Caliban.Nano.Hello.Shell
+namespace Caliban.Nano.Hello.UI.Shell
 {
     public sealed class ShellViewModel : ViewModel.ActiveOne, IWindow, IHandle<string>
     {
@@ -14,13 +15,11 @@ namespace Caliban.Nano.Hello.Shell
         {
             Events = events;
             Events.Subscribe<string>(this);
-
-            HelloAsync();
         }
 
-        public async void HelloAsync()
+        public override Task<bool> OnActivate()
         {
-            await ActivateItem(new HelloViewModel());
+            return ActivateItem(new HelloViewModel());
         }
 
         public void Handle(string name)

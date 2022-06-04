@@ -5,12 +5,22 @@ using System.Runtime.CompilerServices;
 namespace Caliban.Nano.UI
 {
     /// <summary>
-    /// Base implementation of the INotifyPropertyChanged interface.
+    /// Chainable implementation of the INotifyPropertyChanged interface.
     /// </summary>
     public abstract class NotifyBase : INotifyPropertyChanged
     {
         /// <inheritdoc />
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        /// <summary>
+        /// Notifies clients that a property value has changed.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
+        protected virtual void NotifyPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(e.PropertyName));
+        }
 
         /// <summary>
         /// Notifies clients that a property value has changed.
@@ -40,7 +50,7 @@ namespace Caliban.Nano.UI
         /// <param name="name">The property name.</param>
         /// <param name="others">Other names to notify about.</param>
         /// <returns>True if the value could be set; otherwise false.</returns>
-        protected virtual bool SetValue<T>(ref T field, T value, [CallerMemberName] string? name = null, params string[] others)
+        protected virtual bool SetProperty<T>(ref T field, T value, [CallerMemberName] string? name = null, params string[] others)
         {
             if (!EqualityComparer<T>.Default.Equals(field, value))
             {
@@ -55,8 +65,10 @@ namespace Caliban.Nano.UI
 
                 return true;
             }
-
-            return false;
+            else
+            {
+                return false;
+            }
         }
     }
 }

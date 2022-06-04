@@ -13,8 +13,6 @@ namespace Caliban.Nano.Tests.UI
         public void Initialize()
         {
             TypeFinder.Sources.Add(GetType().Assembly);
-
-            IoC.Resolve = new NanoContainer().Resolve;
         }
 
         [TestMethod]
@@ -33,6 +31,15 @@ namespace Caliban.Nano.Tests.UI
 
             Assert.IsNotNull(view);
             Assert.IsInstanceOfType(view, typeof(MockView));
+        }
+
+        [TestMethod]
+        public void FindModelTest()
+        {
+            var model = TypeFinder.FindModel(typeof(MockModel));
+
+            Assert.IsNotNull(model);
+            Assert.IsInstanceOfType(model, typeof(MockModel));
         }
 
         [TestMethod]

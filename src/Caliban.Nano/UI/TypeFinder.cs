@@ -17,7 +17,7 @@ namespace Caliban.Nano.UI
         /// Type name transformation rule.
         /// </summary>
         public static Func<string, string> Rule { get; set; }
-            = name => Regex.Replace(name, @"(View)(Model)?$", "");
+            = name => Regex.Replace(name, @"(View)(Model)?|(Model)?$", "");
 
         /// <summary>
         /// Returns a view model instance for the requested type.
@@ -34,6 +34,14 @@ namespace Caliban.Nano.UI
         /// <returns>A view instance.</returns>
         public static object FindView(Type type)
             => FindType(Rule(type.Name) + "View");
+
+        /// <summary>
+        /// Returns a model instance for the requested type.
+        /// </summary>
+        /// <param name="type">The model type.</param>
+        /// <returns>A model instance.</returns>
+        public static object FindModel(Type type)
+            => FindType(Rule(type.Name) + "Model");
 
         /// <summary>
         /// Returns an injected instance for the requested type.
@@ -54,7 +62,7 @@ namespace Caliban.Nano.UI
                 throw new TypeLoadException($"Type {name} could not be found");
             }
 
-            return IoC.Resolve(type);
+            return IoC.Container.Create(type);
         }
     }
 }

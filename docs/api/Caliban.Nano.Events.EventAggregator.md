@@ -35,7 +35,8 @@ Implements [Dispose()](https://docs.microsoft.com/en-us/dotnet/api/System.IDispo
 Returns if a handler is subscribed to the type.
 
 ```csharp
-public virtual bool HasHandler<T>();
+public virtual bool HasHandler<T>()
+    where T : notnull;
 ```
 #### Type parameters
 
@@ -85,7 +86,8 @@ Implements [Publish&lt;T&gt;(T)](Caliban.Nano.Contracts.IEventAggregator.md#Cali
 Subscribes a handler to a type.
 
 ```csharp
-public virtual void Subscribe<T>(object handler);
+public virtual void Subscribe<T>(object handler)
+    where T : notnull;
 ```
 #### Type parameters
 
@@ -111,7 +113,8 @@ Implements [Subscribe&lt;T&gt;(object)](Caliban.Nano.Contracts.IEventAggregator.
 Unsubscribes a handler from a type.
 
 ```csharp
-public virtual void Unsubscribe<T>(object handler);
+public virtual void Unsubscribe<T>(object handler)
+    where T : notnull;
 ```
 #### Type parameters
 

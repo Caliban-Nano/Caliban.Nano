@@ -12,65 +12,50 @@ namespace Caliban.Nano.Container
         /// <inheritdoc />
         public event Action<object>? Resolved = null;
 
-        private readonly Dictionary<Type, object> _storage = new();
+        private readonly Dictionary<Type, object> _bindings = new();
 
         /// <summary>
-        /// Initializes a new self registered instance of this class.
+        /// Initializes a new self bound instance of this class.
         /// </summary>
         public NanoContainer()
         {
-            Register<IContainer>(this);
+            Bind<IContainer>(this);
         }
 
         /// <summary>
-        /// Clears the container storage on dispose.
+        /// Clears the container bindings on dispose.
         /// </summary>
         public void Dispose()
         {
-            lock (_storage)
+            lock (_bindings)
             {
-                _storage.Clear();
+                _bindings.Clear();
             }
         }
 
         /// <inheritdoc />
-        public object Resolve<T>()
+        public object Resolve<T>() where T : class
         {
             return Resolve(typeof(T));
         }
 
         /// <inheritdoc />
-        public object Resolve([NotNull] object request)
+        public object Resolve([NotNull] Type type)
         {
-            object? instance = request;
-
-            // Resolve or create an instance if the request is a type
-
-            if (request is Type type)
+            if (!LockGetValue(type, out var value) || value is null)
             {
-                if (!LockGetValue(type, out instance) || instance is null)
-                {
-                    var ctor = SelectConstructor(type);
-
-                    if (ctor is null)
-                    {
-                        throw new TypeLoadException($"Type {type.Name} has no constructor");
-                    }
-
-                    instance = ctor.Invoke(DetermineParameters(ctor));
-                }
+                throw new TypeLoadException($"Type {type.Name} could not resolved");
             }
 
-            // Inject properties into the instance
+            var instance = value;
 
-            var properties = instance.GetType().GetProperties();
-
-            foreach (var property in properties.Where(p => p.CanWrite))
+            if (value is Type @class)
             {
-                if (LockGetValue(property.PropertyType, out var value))
-                {
-                    property.SetValue(instance, value);
-                }
+                instance = Create(@class);
+            }
+            else
+            {
+                Build(instance);
             }
 
             Resolved?.Invoke(instance);
@@ -79,56 +64,99 @@ namespace Caliban.Nano.Container
         }
 
         /// <inheritdoc />
-        public void Register<T>([NotNull] object instance)
+        public bool CanResolve<T>() where T : class
         {
-            lock (_storage)
+            lock (_bindings)
             {
-                _storage.Add(typeof(T), instance);
+                return _bindings.ContainsKey(typeof(T));
             }
         }
 
         /// <inheritdoc />
-        public bool IsRegistered<T>()
+        public object Create([NotNull] Type type)
         {
-            lock (_storage)
+            var ctor = SelectConstructor(type);
+
+            if (ctor is null)
             {
-                return _storage.ContainsKey(typeof(T));
+                throw new TypeLoadException($"Type {type.Name} has no constructor");
+            }
+
+            var instance = ctor.Invoke(DetermineParameters(ctor));
+
+            Build(instance);
+
+            return instance;
+        }
+
+        /// <inheritdoc />
+        public void Build([NotNull] object instance)
+        {
+            var properties = instance.GetType().GetProperties();
+
+            foreach (var property in properties.Where(p => p.CanWrite))
+            {
+                if (LockGetValue(property.PropertyType, out var value))
+                {
+                    if (value is Type type)
+                    {
+                        value = Create(type);
+                    }
+
+                    property.SetValue(instance, value);
+                }
             }
         }
 
         /// <inheritdoc />
-        public void Unregister<T>()
+        public void Bind<T>([NotNull] object @object) where T : class
         {
-            lock (_storage)
+            lock (_bindings)
             {
-                _storage.Remove(typeof(T));
+                _bindings.Add(typeof(T), @object);
+            }
+        }
+
+        /// <inheritdoc />
+        public void Unbind<T>() where T : class
+        {
+            lock (_bindings)
+            {
+                _bindings.Remove(typeof(T));
             }
         }
 
         private bool LockGetValue(Type type, out object? value)
         {
-            lock (_storage)
+            lock (_bindings)
             {
-                return _storage.TryGetValue(type, out value);
+                return _bindings.TryGetValue(type, out value);
             }
         }
 
         private ConstructorInfo? SelectConstructor(Type type)
         {
-            lock (_storage)
+            lock (_bindings)
             {
+                var selector = (ConstructorInfo c) => c.GetParameters()
+                    .Count(p => _bindings.ContainsKey(p.ParameterType));
+
                 return type.GetConstructors()
-                    .OrderBy(c => c.GetParameters().Count(p => _storage.ContainsKey(p.ParameterType)))
+                    .OrderBy(selector)
                     .LastOrDefault();
             }
         }
 
         private object?[] DetermineParameters(ConstructorInfo info)
         {
-            lock (_storage)
+            lock (_bindings)
             {
+                var selector = (ParameterInfo p) => _bindings.ContainsKey(p.ParameterType)
+                    ? Resolve(p.ParameterType)
+                    : null;
+
                 return info.GetParameters()
-                    .Select(p => _storage.TryGetValue(p.ParameterType, out var value) ? value : null)
+                    .Select(selector)
                     .ToArray();
             }
         }

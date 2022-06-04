@@ -20,18 +20,116 @@ Implements [IContainer](Caliban.Nano.Contracts.IContainer.md 'Caliban.Nano.Contr
 
 ## NanoContainer() Constructor
 
-Initializes a new self registered instance of this class.
+Initializes a new self bound instance of this class.
 
 ```csharp
 public NanoContainer();
 ```
 ### Methods
 
+<a name='Caliban.Nano.Container.NanoContainer.Bind_T_(object)'></a>
+
+## NanoContainer.Bind<T>(object) Method
+
+Binds the type to the type or instance.
+
+```csharp
+public void Bind<T>(object @object)
+    where T : class;
+```
+#### Type parameters
+
+<a name='Caliban.Nano.Container.NanoContainer.Bind_T_(object).T'></a>
+
+`T`
+
+The type.
+#### Parameters
+
+<a name='Caliban.Nano.Container.NanoContainer.Bind_T_(object).object'></a>
+
+`object` [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')
+
+The type or instance.
+
+Implements [Bind&lt;T&gt;(object)](Caliban.Nano.Contracts.IContainer.md#Caliban.Nano.Contracts.IContainer.Bind_T_(object) 'Caliban.Nano.Contracts.IContainer.Bind<T>(object)')
+
+<a name='Caliban.Nano.Container.NanoContainer.Build(object)'></a>
+
+## NanoContainer.Build(object) Method
+
+Builds up an instance.
+
+```csharp
+public void Build(object instance);
+```
+#### Parameters
+
+<a name='Caliban.Nano.Container.NanoContainer.Build(object).instance'></a>
+
+`instance` [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')
+
+The instance.
+
+Implements [Build(object)](Caliban.Nano.Contracts.IContainer.md#Caliban.Nano.Contracts.IContainer.Build(object) 'Caliban.Nano.Contracts.IContainer.Build(object)')
+
+<a name='Caliban.Nano.Container.NanoContainer.CanResolve_T_()'></a>
+
+## NanoContainer.CanResolve<T>() Method
+
+Returns if the type can be resolved.
+
+```csharp
+public bool CanResolve<T>()
+    where T : class;
+```
+#### Type parameters
+
+<a name='Caliban.Nano.Container.NanoContainer.CanResolve_T_().T'></a>
+
+`T`
+
+The type.
+
+Implements [CanResolve&lt;T&gt;()](Caliban.Nano.Contracts.IContainer.md#Caliban.Nano.Contracts.IContainer.CanResolve_T_() 'Caliban.Nano.Contracts.IContainer.CanResolve<T>()')
+
+#### Returns
+[System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')  
+True if the type can be resolved; otherwise false.
+
+<a name='Caliban.Nano.Container.NanoContainer.Create(System.Type)'></a>
+
+## NanoContainer.Create(Type) Method
+
+Returns a new type instance.
+
+```csharp
+public object Create(System.Type type);
+```
+#### Parameters
+
+<a name='Caliban.Nano.Container.NanoContainer.Create(System.Type).type'></a>
+
+`type` [System.Type](https://docs.microsoft.com/en-us/dotnet/api/System.Type 'System.Type')
+
+The type.
+
+Implements [Create(Type)](Caliban.Nano.Contracts.IContainer.md#Caliban.Nano.Contracts.IContainer.Create(System.Type) 'Caliban.Nano.Contracts.IContainer.Create(System.Type)')
+
+#### Returns
+[System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')  
+The created instance.
+
+#### Exceptions
+
+[System.TypeLoadException](https://docs.microsoft.com/en-us/dotnet/api/System.TypeLoadException 'System.TypeLoadException')  
+Thrown if the type could not be created.
+
 <a name='Caliban.Nano.Container.NanoContainer.Dispose()'></a>
 
 ## NanoContainer.Dispose() Method
 
-Clears the container storage on dispose.
+Clears the container bindings on dispose.
 
 ```csharp
 public void Dispose();
@@ -39,91 +137,43 @@ public void Dispose();
 
 Implements [Dispose()](https://docs.microsoft.com/en-us/dotnet/api/System.IDisposable.Dispose 'System.IDisposable.Dispose')
 
-<a name='Caliban.Nano.Container.NanoContainer.IsRegistered_T_()'></a>
+<a name='Caliban.Nano.Container.NanoContainer.Resolve(System.Type)'></a>
 
-## NanoContainer.IsRegistered<T>() Method
+## NanoContainer.Resolve(Type) Method
 
-Returns if the type is registered.
-
-```csharp
-public bool IsRegistered<T>();
-```
-#### Type parameters
-
-<a name='Caliban.Nano.Container.NanoContainer.IsRegistered_T_().T'></a>
-
-`T`
-
-The type.
-
-Implements [IsRegistered&lt;T&gt;()](Caliban.Nano.Contracts.IContainer.md#Caliban.Nano.Contracts.IContainer.IsRegistered_T_() 'Caliban.Nano.Contracts.IContainer.IsRegistered<T>()')
-
-#### Returns
-[System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')  
-True if the type is registered; otherwise false.
-
-<a name='Caliban.Nano.Container.NanoContainer.Register_T_(object)'></a>
-
-## NanoContainer.Register<T>(object) Method
-
-Registers an instance for a type.
+Resolves a bound type by returning an existing instance or creating a new one.
 
 ```csharp
-public void Register<T>(object instance);
-```
-#### Type parameters
-
-<a name='Caliban.Nano.Container.NanoContainer.Register_T_(object).T'></a>
-
-`T`
-
-The type.
-#### Parameters
-
-<a name='Caliban.Nano.Container.NanoContainer.Register_T_(object).instance'></a>
-
-`instance` [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')
-
-The instance.
-
-Implements [Register&lt;T&gt;(object)](Caliban.Nano.Contracts.IContainer.md#Caliban.Nano.Contracts.IContainer.Register_T_(object) 'Caliban.Nano.Contracts.IContainer.Register<T>(object)')
-
-<a name='Caliban.Nano.Container.NanoContainer.Resolve(object)'></a>
-
-## NanoContainer.Resolve(object) Method
-
-Resolves a registered instance or creates a new if none is registered.
-
-```csharp
-public object Resolve(object request);
+public object Resolve(System.Type type);
 ```
 #### Parameters
 
-<a name='Caliban.Nano.Container.NanoContainer.Resolve(object).request'></a>
+<a name='Caliban.Nano.Container.NanoContainer.Resolve(System.Type).type'></a>
 
-`request` [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')
+`type` [System.Type](https://docs.microsoft.com/en-us/dotnet/api/System.Type 'System.Type')
 
-The requested type.
+The type.
 
-Implements [Resolve(object)](Caliban.Nano.Contracts.IContainer.md#Caliban.Nano.Contracts.IContainer.Resolve(object) 'Caliban.Nano.Contracts.IContainer.Resolve(object)')
+Implements [Resolve(Type)](Caliban.Nano.Contracts.IContainer.md#Caliban.Nano.Contracts.IContainer.Resolve(System.Type) 'Caliban.Nano.Contracts.IContainer.Resolve(System.Type)')
 
 #### Returns
 [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')  
-The resolved or created instance.
+The bound or created instance.
 
 #### Exceptions
 
 [System.TypeLoadException](https://docs.microsoft.com/en-us/dotnet/api/System.TypeLoadException 'System.TypeLoadException')  
-Thrown if the request could not be loaded.
+Thrown if the type could not be created.
 
 <a name='Caliban.Nano.Container.NanoContainer.Resolve_T_()'></a>
 
 ## NanoContainer.Resolve<T>() Method
 
-Resolves a registered instance or creates a new if none is registered.
+Resolves a bound type by returning an existing instance or creating a new one.
 
 ```csharp
-public object Resolve<T>();
+public object Resolve<T>()
+    where T : class;
 ```
 #### Type parameters
 
@@ -137,38 +187,39 @@ Implements [Resolve&lt;T&gt;()](Caliban.Nano.Contracts.IContainer.md#Caliban.Nan
 
 #### Returns
 [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')  
-The resolved or created instance.
+The bound or created instance.
 
 #### Exceptions
 
 [System.TypeLoadException](https://docs.microsoft.com/en-us/dotnet/api/System.TypeLoadException 'System.TypeLoadException')  
-Thrown if the type could not be loaded.
+Thrown if the type could not be created.
 
-<a name='Caliban.Nano.Container.NanoContainer.Unregister_T_()'></a>
+<a name='Caliban.Nano.Container.NanoContainer.Unbind_T_()'></a>
 
-## NanoContainer.Unregister<T>() Method
+## NanoContainer.Unbind<T>() Method
 
-Unregisters all instances from a type.
+Unbinds the type.
 
 ```csharp
-public void Unregister<T>();
+public void Unbind<T>()
+    where T : class;
 ```
 #### Type parameters
 
-<a name='Caliban.Nano.Container.NanoContainer.Unregister_T_().T'></a>
+<a name='Caliban.Nano.Container.NanoContainer.Unbind_T_().T'></a>
 
 `T`
 
 The type.
 
-Implements [Unregister&lt;T&gt;()](Caliban.Nano.Contracts.IContainer.md#Caliban.Nano.Contracts.IContainer.Unregister_T_() 'Caliban.Nano.Contracts.IContainer.Unregister<T>()')
+Implements [Unbind&lt;T&gt;()](Caliban.Nano.Contracts.IContainer.md#Caliban.Nano.Contracts.IContainer.Unbind_T_() 'Caliban.Nano.Contracts.IContainer.Unbind<T>()')
 ### Events
 
 <a name='Caliban.Nano.Container.NanoContainer.Resolved'></a>
 
 ## NanoContainer.Resolved Event
 
-Occures when an instance is resolved.
+Occures when an object is resolved.
 
 ```csharp
 public event Action<object>? Resolved;

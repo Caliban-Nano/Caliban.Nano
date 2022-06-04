@@ -7,6 +7,7 @@ An interface for a general type separated message handler.
 
 ```csharp
 public interface IHandle<T>
+    where T : notnull
 ```
 #### Type parameters
 

@@ -7,6 +7,7 @@ A simple wrapper for raising an event externally.
 
 ```csharp
 public class EventRaiser<T>
+    where T : notnull
 ```
 #### Type parameters
 
