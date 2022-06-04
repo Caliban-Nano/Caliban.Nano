@@ -2,6 +2,6 @@
 {
     public sealed class Message : IMessage
     {
-        public string Content => "Hello World!";
+        public string Content => "Ninject Sample";
     }
 }
