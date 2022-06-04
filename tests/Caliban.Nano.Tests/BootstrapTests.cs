@@ -25,7 +25,7 @@ namespace Caliban.Nano.Tests
 
             Assert.AreEqual(1, TypeFinder.Sources.Count);
 
-            bootstrap.AddSource(GetType().Assembly);
+            bootstrap.Import(GetType().Assembly);
 
             Assert.AreEqual(2, TypeFinder.Sources.Count);
 

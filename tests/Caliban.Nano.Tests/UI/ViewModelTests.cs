@@ -23,6 +23,17 @@ namespace Caliban.Nano.Tests.UI
         }
 
         [TestMethod]
+        public void ConstructorTest()
+        {
+            var parent = new MockViewModel();
+            var child = new MockViewModel(parent);
+
+            Assert.IsNull(parent.Parent);
+            Assert.IsNotNull(child.Parent);
+            Assert.AreEqual(child.Parent, parent);
+        }
+
+        [TestMethod]
         public void BindPassedTest()
         {
             ArgumentNullException.ThrowIfNull(Mock);
@@ -31,6 +42,7 @@ namespace Caliban.Nano.Tests.UI
             Assert.IsNotNull(Mock.Model);
             Assert.IsFalse(Mock.IsActive);
             Assert.IsTrue(Mock.CanClose);
+            Assert.IsNull(Mock.Parent);
         }
 
         [TestMethod]
@@ -47,6 +59,7 @@ namespace Caliban.Nano.Tests.UI
             Assert.IsNull(mock.Model);
             Assert.IsFalse(mock.IsActive);
             Assert.IsTrue(mock.CanClose);
+            Assert.IsNull(mock.Parent);
             Assert.IsTrue(writer.ToString().Contains("Type MockSoloView could not be found"));
         }
 
@@ -68,6 +81,42 @@ namespace Caliban.Nano.Tests.UI
             Assert.IsNotNull(Mock.ModelAs<MockModel>());
             Assert.IsInstanceOfType(Mock.ModelAs<MockModel>(), typeof(MockModel));
             Assert.ThrowsException<InvalidCastException>(() => Mock.ModelAs<ViewModel>());
+        }
+
+        [TestMethod]
+        public async Task CloseTest()
+        {
+            ArgumentNullException.ThrowIfNull(Mock);
+
+            Assert.IsFalse(Mock.IsActive);
+            Assert.IsTrue(await Mock.OnActivate());
+            Assert.IsTrue(Mock.IsActive);
+            Assert.IsTrue(await Mock.Close());
+            Assert.IsFalse(Mock.IsActive);
+        }
+
+        [TestMethod]
+        public async Task CloseItemAllTest()
+        {
+            var parent = new MockOneViewModel();
+            var child = new MockViewModel(parent);
+
+            Assert.IsTrue(await parent.ActivateItem(child));
+            Assert.IsTrue(parent.Items.Contains(child));
+            Assert.IsTrue(await child.Close());
+            Assert.IsFalse(parent.Items.Contains(child));
+        }
+
+        [TestMethod]
+        public async Task CloseItemOneTest()
+        {
+            var parent = new MockAllViewModel();
+            var child = new MockViewModel(parent);
+
+            Assert.IsTrue(await parent.ActivateItem(child));
+            Assert.IsTrue(parent.Items.Contains(child));
+            Assert.IsTrue(await child.Close());
+            Assert.IsFalse(parent.Items.Contains(child));
         }
 
         [TestMethod]
