@@ -29,15 +29,15 @@ namespace Caliban.Nano.Data
         }
 
         /// <inheritdoc />
-        public virtual void Load()
+        public virtual Task Load()
         {
-            HasChanged = false;
+            return Task.Run(() => HasChanged = false);
         }
 
         /// <inheritdoc />
-        public virtual void Save()
+        public virtual Task Save()
         {
-            HasChanged = false;
+            return Task.Run(() => HasChanged = false);
         }
 
         /// <summary>
