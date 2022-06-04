@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using Caliban.Nano.Contracts;
+﻿using Caliban.Nano.Contracts;
 
 namespace Caliban.Nano.UI
 {
@@ -55,14 +54,6 @@ namespace Caliban.Nano.UI
             if (Parent is IParent parent)
             {
                 return parent.DeactivateItem(this, true);
-            }
-
-            if (View is Window window)
-            {
-                if (CanClose)
-                {
-                    window.Close();
-                }
             }
 
             return OnDeactivate();
