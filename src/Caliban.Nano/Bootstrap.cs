@@ -28,11 +28,11 @@ namespace Caliban.Nano
         }
 
         /// <summary>
-        /// Adds an assembly to the type finder.
+        /// Imports the assembly for the type finder.
         /// </summary>
-        /// <param name="assembly">The new assembly.</param>
+        /// <param name="assembly">The assembly.</param>
         /// <returns>The bootstrap instance.</returns>
-        public Bootstrap AddSource([NotNull] Assembly assembly)
+        public Bootstrap Import([NotNull] Assembly assembly)
         {
             TypeFinder.Sources.Add(assembly);
 
@@ -80,7 +80,7 @@ namespace Caliban.Nano
         {
             try
             {
-                await WindowManager.ShowWindowAsync<T>(settings);
+                await WindowManager.ShowAsync<T>(settings);
             }
             catch (Exception ex)
             {
@@ -96,7 +96,7 @@ namespace Caliban.Nano
         {
             try
             {
-                await WindowManager.CloseWindowAsync(true);
+                await WindowManager.CloseAsync();
             }
             catch (Exception ex)
             {
