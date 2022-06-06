@@ -13,6 +13,9 @@ System.ComponentModel.INotifyPropertyChanged
 
 Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; Model
 
+Derived  
+&#8627; [Repository](Caliban.Nano.Data.Model.Repository.md 'Caliban.Nano.Data.Model.Repository')
+
 Implements [IModel](Caliban.Nano.Contracts.IModel.md 'Caliban.Nano.Contracts.IModel'), [System.ComponentModel.INotifyPropertyChanged](https://docs.microsoft.com/en-us/dotnet/api/System.ComponentModel.INotifyPropertyChanged 'System.ComponentModel.INotifyPropertyChanged')
 ### Constructors
 
@@ -84,38 +87,6 @@ The value key.
 #### Returns
 [T](Caliban.Nano.Data.Model.md#Caliban.Nano.Data.Model.Get_T_(string).T 'Caliban.Nano.Data.Model.Get<T>(string).T')  
 The model value.
-
-<a name='Caliban.Nano.Data.Model.Load()'></a>
-
-## Model.Load() Method
-
-(Awaitable) Loads the model and resets changed state.
-
-```csharp
-public virtual System.Threading.Tasks.Task<bool> Load();
-```
-
-Implements [Load()](Caliban.Nano.Contracts.IModel.md#Caliban.Nano.Contracts.IModel.Load() 'Caliban.Nano.Contracts.IModel.Load()')
-
-#### Returns
-[System.Threading.Tasks.Task&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')[System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')  
-True if loading was successful; otherwise false.
-
-<a name='Caliban.Nano.Data.Model.Save()'></a>
-
-## Model.Save() Method
-
-(Awaitable) Saves the model and resets changed state.
-
-```csharp
-public virtual System.Threading.Tasks.Task<bool> Save();
-```
-
-Implements [Save()](Caliban.Nano.Contracts.IModel.md#Caliban.Nano.Contracts.IModel.Save() 'Caliban.Nano.Contracts.IModel.Save()')
-
-#### Returns
-[System.Threading.Tasks.Task&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')[System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')  
-True if saving was successful; otherwise false.
 
 <a name='Caliban.Nano.Data.Model.Set_T_(T,string,string[])'></a>
 

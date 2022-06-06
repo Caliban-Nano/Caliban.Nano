@@ -28,32 +28,3 @@ bool HasChanged { get; }
 
 #### Property Value
 [System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')
-### Methods
-
-<a name='Caliban.Nano.Contracts.IModel.Load()'></a>
-
-## IModel.Load() Method
-
-(Awaitable) Loads the model and resets changed state.
-
-```csharp
-System.Threading.Tasks.Task<bool> Load();
-```
-
-#### Returns
-[System.Threading.Tasks.Task&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')[System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')  
-True if loading was successful; otherwise false.
-
-<a name='Caliban.Nano.Contracts.IModel.Save()'></a>
-
-## IModel.Save() Method
-
-(Awaitable) Saves the model and resets changed state.
-
-```csharp
-System.Threading.Tasks.Task<bool> Save();
-```
-
-#### Returns
-[System.Threading.Tasks.Task&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')[System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')  
-True if saving was successful; otherwise false.
