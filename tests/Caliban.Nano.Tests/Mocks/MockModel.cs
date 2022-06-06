@@ -18,4 +18,8 @@ namespace Caliban.Nano.Tests.Mocks
 
         public void SetHasChanged(bool value) => HasChanged = value;
     }
+    internal sealed class MockModelRepository : Model.Repository
+    {
+        public void SetHasChanged(bool value) => HasChanged = value;
+    }
 }

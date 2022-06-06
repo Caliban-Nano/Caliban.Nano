@@ -11,17 +11,5 @@ namespace Caliban.Nano.Contracts
         /// If the model has changed.
         /// </summary>
         bool HasChanged { get; }
-
-        /// <summary>
-        /// (Awaitable) Loads the model and resets changed state.
-        /// </summary>
-        /// <returns>True if loading was successful; otherwise false.</returns>
-        Task<bool> Load();
-
-        /// <summary>
-        /// (Awaitable) Saves the model and resets changed state.
-        /// </summary>
-        /// <returns>True if saving was successful; otherwise false.</returns>
-        Task<bool> Save();
     }
 }

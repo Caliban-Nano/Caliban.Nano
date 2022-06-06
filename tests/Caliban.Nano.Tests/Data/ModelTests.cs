@@ -46,30 +46,6 @@ namespace Caliban.Nano.Tests.Data
         }
 
         [TestMethod]
-        public async Task LoadTest()
-        {
-            var mock = new MockModel();
-
-            mock.SetHasChanged(true);
-
-            Assert.IsTrue(mock.HasChanged);
-            Assert.IsTrue(await mock.Load());
-            Assert.IsFalse(mock.HasChanged);
-        }
-
-        [TestMethod]
-        public async Task SaveTest()
-        {
-            var mock = new MockModel();
-
-            mock.SetHasChanged(true);
-
-            Assert.IsTrue(mock.HasChanged);
-            Assert.IsTrue(await mock.Save());
-            Assert.IsFalse(mock.HasChanged);
-        }
-
-        [TestMethod]
         public void GetDefaultTest()
         {
             var mock = new MockModel();
@@ -106,6 +82,58 @@ namespace Caliban.Nano.Tests.Data
             mock.Value1 = true;
 
             Assert.IsTrue(mock.Value1);
+        }
+
+        [TestClass]
+        public sealed class RepositoryTests
+        {
+            [TestMethod]
+            public async Task RequestedTest()
+            {
+                var mock = new MockModelRepository();
+
+                mock.Requested += (m) => Assert.IsFalse(m.HasChanged);
+
+                await mock.Request();
+            }
+
+            [TestMethod]
+            public async Task PersistedTest()
+            {
+                var mock = new MockModelRepository();
+
+                mock.Persisted += (m) => Assert.IsFalse(m.HasChanged);
+
+                await mock.Persist();
+            }
+
+            [TestMethod]
+            public async Task RequestTest()
+            {
+                var mock = new MockModelRepository();
+
+                mock.SetHasChanged(true);
+
+                Assert.IsTrue(mock.HasChanged);
+                
+                await mock.Request();
+                
+                Assert.IsFalse(mock.HasChanged);
+            }
+
+            [TestMethod]
+            public async Task PersistTest()
+            {
+                var mock = new MockModelRepository();
+
+                mock.SetHasChanged(true);
+
+                Assert.IsTrue(mock.HasChanged);
+
+                await mock.Persist();
+                
+                Assert.IsFalse(mock.HasChanged);
+            }
         }
     }
 }

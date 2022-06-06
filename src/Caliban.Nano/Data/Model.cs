@@ -7,7 +7,7 @@ namespace Caliban.Nano.Data
     /// <summary>
     /// A base model.
     /// </summary>
-    public abstract class Model : IModel
+    public abstract partial class Model : IModel
     {
         /// <inheritdoc />
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -26,18 +26,6 @@ namespace Caliban.Nano.Data
         public Model()
         {
             PropertyChanged += (_, _) => HasChanged = true;
-        }
-
-        /// <inheritdoc />
-        public virtual Task<bool> Load()
-        {
-            return Task.Run(() => !(HasChanged = false));
-        }
-
-        /// <inheritdoc />
-        public virtual Task<bool> Save()
-        {
-            return Task.Run(() => !(HasChanged = false));
         }
 
         /// <summary>
