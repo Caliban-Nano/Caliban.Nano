@@ -100,7 +100,7 @@ Decouple view models with the built in composition pattern.
 ```
 
 ```cs
-public class EditorViewModel : ViewModel.ActiveOne
+public class EditorViewModel : ViewModel.Single
 {
     public async Task NewTabAsync()
     {
