@@ -1,41 +1,41 @@
 #### [Caliban.Nano](index.md 'index')
 ### [Caliban.Nano.UI](Caliban.Nano.UI.md 'Caliban.Nano.UI').[ViewModel](Caliban.Nano.UI.ViewModel.md 'Caliban.Nano.UI.ViewModel')
 
-## ViewModel.ActiveAll Class
+## ViewModel.Multiple Class
 
 A composition conductor for multiple active view models.
 
 ```csharp
-public abstract class ViewModel.ActiveAll : Caliban.Nano.UI.ViewModel,
+public abstract class ViewModel.Multiple : Caliban.Nano.UI.ViewModel,
 Caliban.Nano.Contracts.IParent
 ```
 
-Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; [NotifyBase](Caliban.Nano.UI.NotifyBase.md 'Caliban.Nano.UI.NotifyBase') &#129106; [ViewModel](Caliban.Nano.UI.ViewModel.md 'Caliban.Nano.UI.ViewModel') &#129106; ActiveAll
+Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; [NotifyBase](Caliban.Nano.Data.NotifyBase.md 'Caliban.Nano.Data.NotifyBase') &#129106; [ViewModel](Caliban.Nano.UI.ViewModel.md 'Caliban.Nano.UI.ViewModel') &#129106; Multiple
 
 Implements [IParent](Caliban.Nano.Contracts.IParent.md 'Caliban.Nano.Contracts.IParent')
 ### Constructors
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveAll.ActiveAll(Caliban.Nano.Contracts.IViewModel)'></a>
+<a name='Caliban.Nano.UI.ViewModel.Multiple.Multiple(Caliban.Nano.Contracts.IViewModel)'></a>
 
-## ActiveAll(IViewModel) Constructor
+## Multiple(IViewModel) Constructor
 
 Initializes a new instance of this class with bounded event.
 
 ```csharp
-public ActiveAll(Caliban.Nano.Contracts.IViewModel? parent=null);
+public Multiple(Caliban.Nano.Contracts.IViewModel? parent=null);
 ```
 #### Parameters
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveAll.ActiveAll(Caliban.Nano.Contracts.IViewModel).parent'></a>
+<a name='Caliban.Nano.UI.ViewModel.Multiple.Multiple(Caliban.Nano.Contracts.IViewModel).parent'></a>
 
 `parent` [IViewModel](Caliban.Nano.Contracts.IViewModel.md 'Caliban.Nano.Contracts.IViewModel')
 
 The optional parent view model.
 ### Properties
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveAll.ActiveItems'></a>
+<a name='Caliban.Nano.UI.ViewModel.Multiple.ActiveItems'></a>
 
-## ViewModel.ActiveAll.ActiveItems Property
+## ViewModel.Multiple.ActiveItems Property
 
 Active child view model items.
 
@@ -46,9 +46,9 @@ public System.Collections.Generic.IEnumerable<Caliban.Nano.Contracts.IViewModel>
 #### Property Value
 [System.Collections.Generic.IEnumerable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1 'System.Collections.Generic.IEnumerable`1')[IViewModel](Caliban.Nano.Contracts.IViewModel.md 'Caliban.Nano.Contracts.IViewModel')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1 'System.Collections.Generic.IEnumerable`1')
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveAll.Items'></a>
+<a name='Caliban.Nano.UI.ViewModel.Multiple.Items'></a>
 
-## ViewModel.ActiveAll.Items Property
+## ViewModel.Multiple.Items Property
 
 Collection of child view model items.
 
@@ -62,9 +62,9 @@ Implements [Items](Caliban.Nano.Contracts.IParent.md#Caliban.Nano.Contracts.IPar
 [System.Collections.ObjectModel.ObservableCollection&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.ObjectModel.ObservableCollection-1 'System.Collections.ObjectModel.ObservableCollection`1')[IViewModel](Caliban.Nano.Contracts.IViewModel.md 'Caliban.Nano.Contracts.IViewModel')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.ObjectModel.ObservableCollection-1 'System.Collections.ObjectModel.ObservableCollection`1')
 ### Methods
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveAll.ActivateItem(Caliban.Nano.Contracts.IViewModel)'></a>
+<a name='Caliban.Nano.UI.ViewModel.Multiple.ActivateItem(Caliban.Nano.Contracts.IViewModel)'></a>
 
-## ViewModel.ActiveAll.ActivateItem(IViewModel) Method
+## ViewModel.Multiple.ActivateItem(IViewModel) Method
 
 (Awaitable) Activates the given view model item.
 
@@ -73,7 +73,7 @@ public virtual System.Threading.Tasks.Task<bool> ActivateItem(Caliban.Nano.Contr
 ```
 #### Parameters
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveAll.ActivateItem(Caliban.Nano.Contracts.IViewModel).item'></a>
+<a name='Caliban.Nano.UI.ViewModel.Multiple.ActivateItem(Caliban.Nano.Contracts.IViewModel).item'></a>
 
 `item` [IViewModel](Caliban.Nano.Contracts.IViewModel.md 'Caliban.Nano.Contracts.IViewModel')
 
@@ -85,9 +85,9 @@ Implements [ActivateItem(IViewModel)](Caliban.Nano.Contracts.IParent.md#Caliban.
 [System.Threading.Tasks.Task&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')[System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')  
 True if the activation was successful; otherwise false.
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveAll.DeactivateItem(Caliban.Nano.Contracts.IViewModel,bool)'></a>
+<a name='Caliban.Nano.UI.ViewModel.Multiple.DeactivateItem(Caliban.Nano.Contracts.IViewModel,bool)'></a>
 
-## ViewModel.ActiveAll.DeactivateItem(IViewModel, bool) Method
+## ViewModel.Multiple.DeactivateItem(IViewModel, bool) Method
 
 (Awaitable) Deactivates the given view model item.
 
@@ -96,13 +96,13 @@ public virtual System.Threading.Tasks.Task<bool> DeactivateItem(Caliban.Nano.Con
 ```
 #### Parameters
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveAll.DeactivateItem(Caliban.Nano.Contracts.IViewModel,bool).item'></a>
+<a name='Caliban.Nano.UI.ViewModel.Multiple.DeactivateItem(Caliban.Nano.Contracts.IViewModel,bool).item'></a>
 
 `item` [IViewModel](Caliban.Nano.Contracts.IViewModel.md 'Caliban.Nano.Contracts.IViewModel')
 
 The view model item.
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveAll.DeactivateItem(Caliban.Nano.Contracts.IViewModel,bool).close'></a>
+<a name='Caliban.Nano.UI.ViewModel.Multiple.DeactivateItem(Caliban.Nano.Contracts.IViewModel,bool).close'></a>
 
 `close` [System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')
 
@@ -115,9 +115,9 @@ Implements [DeactivateItem(IViewModel, bool)](Caliban.Nano.Contracts.IParent.md#
 True if the deactivation was successful; otherwise false.
 ### Events
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveAll.ActiveChanged'></a>
+<a name='Caliban.Nano.UI.ViewModel.Multiple.ActiveChanged'></a>
 
-## ViewModel.ActiveAll.ActiveChanged Event
+## ViewModel.Multiple.ActiveChanged Event
 
 Occures when the active item changed.
 

@@ -6,12 +6,12 @@
 A base model.
 
 ```csharp
-public abstract class Model :
+public abstract class Model : Caliban.Nano.Data.NotifyBase,
 Caliban.Nano.Contracts.IModel,
 System.ComponentModel.INotifyPropertyChanged
 ```
 
-Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; Model
+Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; [NotifyBase](Caliban.Nano.Data.NotifyBase.md 'Caliban.Nano.Data.NotifyBase') &#129106; Model
 
 Derived  
 &#8627; [Repository](Caliban.Nano.Data.Model.Repository.md 'Caliban.Nano.Data.Model.Repository')

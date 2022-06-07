@@ -10,8 +10,8 @@ public interface IParent
 ```
 
 Derived  
-&#8627; [ActiveAll](Caliban.Nano.UI.ViewModel.ActiveAll.md 'Caliban.Nano.UI.ViewModel.ActiveAll')  
-&#8627; [ActiveOne](Caliban.Nano.UI.ViewModel.ActiveOne.md 'Caliban.Nano.UI.ViewModel.ActiveOne')
+&#8627; [Multiple](Caliban.Nano.UI.ViewModel.Multiple.md 'Caliban.Nano.UI.ViewModel.Multiple')  
+&#8627; [Single](Caliban.Nano.UI.ViewModel.Single.md 'Caliban.Nano.UI.ViewModel.Single')
 ### Properties
 
 <a name='Caliban.Nano.Contracts.IParent.Items'></a>

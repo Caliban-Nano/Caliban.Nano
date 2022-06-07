@@ -1,41 +1,41 @@
 #### [Caliban.Nano](index.md 'index')
 ### [Caliban.Nano.UI](Caliban.Nano.UI.md 'Caliban.Nano.UI').[ViewModel](Caliban.Nano.UI.ViewModel.md 'Caliban.Nano.UI.ViewModel')
 
-## ViewModel.ActiveOne Class
+## ViewModel.Single Class
 
 A composition conductor for single active view models.
 
 ```csharp
-public abstract class ViewModel.ActiveOne : Caliban.Nano.UI.ViewModel,
+public abstract class ViewModel.Single : Caliban.Nano.UI.ViewModel,
 Caliban.Nano.Contracts.IParent
 ```
 
-Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; [NotifyBase](Caliban.Nano.UI.NotifyBase.md 'Caliban.Nano.UI.NotifyBase') &#129106; [ViewModel](Caliban.Nano.UI.ViewModel.md 'Caliban.Nano.UI.ViewModel') &#129106; ActiveOne
+Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; [NotifyBase](Caliban.Nano.Data.NotifyBase.md 'Caliban.Nano.Data.NotifyBase') &#129106; [ViewModel](Caliban.Nano.UI.ViewModel.md 'Caliban.Nano.UI.ViewModel') &#129106; Single
 
 Implements [IParent](Caliban.Nano.Contracts.IParent.md 'Caliban.Nano.Contracts.IParent')
 ### Constructors
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveOne.ActiveOne(Caliban.Nano.Contracts.IViewModel)'></a>
+<a name='Caliban.Nano.UI.ViewModel.Single.Single(Caliban.Nano.Contracts.IViewModel)'></a>
 
-## ActiveOne(IViewModel) Constructor
+## Single(IViewModel) Constructor
 
 Initializes a new instance of this class with bounded event.
 
 ```csharp
-public ActiveOne(Caliban.Nano.Contracts.IViewModel? parent=null);
+public Single(Caliban.Nano.Contracts.IViewModel? parent=null);
 ```
 #### Parameters
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveOne.ActiveOne(Caliban.Nano.Contracts.IViewModel).parent'></a>
+<a name='Caliban.Nano.UI.ViewModel.Single.Single(Caliban.Nano.Contracts.IViewModel).parent'></a>
 
 `parent` [IViewModel](Caliban.Nano.Contracts.IViewModel.md 'Caliban.Nano.Contracts.IViewModel')
 
 The optional parent view model.
 ### Properties
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveOne.ActiveItem'></a>
+<a name='Caliban.Nano.UI.ViewModel.Single.ActiveItem'></a>
 
-## ViewModel.ActiveOne.ActiveItem Property
+## ViewModel.Single.ActiveItem Property
 
 Active child view model item.
 
@@ -46,9 +46,9 @@ public Caliban.Nano.Contracts.IViewModel? ActiveItem { get; }
 #### Property Value
 [IViewModel](Caliban.Nano.Contracts.IViewModel.md 'Caliban.Nano.Contracts.IViewModel')
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveOne.Items'></a>
+<a name='Caliban.Nano.UI.ViewModel.Single.Items'></a>
 
-## ViewModel.ActiveOne.Items Property
+## ViewModel.Single.Items Property
 
 Collection of child view model items.
 
@@ -62,9 +62,9 @@ Implements [Items](Caliban.Nano.Contracts.IParent.md#Caliban.Nano.Contracts.IPar
 [System.Collections.ObjectModel.ObservableCollection&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.ObjectModel.ObservableCollection-1 'System.Collections.ObjectModel.ObservableCollection`1')[IViewModel](Caliban.Nano.Contracts.IViewModel.md 'Caliban.Nano.Contracts.IViewModel')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.ObjectModel.ObservableCollection-1 'System.Collections.ObjectModel.ObservableCollection`1')
 ### Methods
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveOne.ActivateItem(Caliban.Nano.Contracts.IViewModel)'></a>
+<a name='Caliban.Nano.UI.ViewModel.Single.ActivateItem(Caliban.Nano.Contracts.IViewModel)'></a>
 
-## ViewModel.ActiveOne.ActivateItem(IViewModel) Method
+## ViewModel.Single.ActivateItem(IViewModel) Method
 
 (Awaitable) Activates the given view model item.
 
@@ -73,7 +73,7 @@ public virtual System.Threading.Tasks.Task<bool> ActivateItem(Caliban.Nano.Contr
 ```
 #### Parameters
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveOne.ActivateItem(Caliban.Nano.Contracts.IViewModel).item'></a>
+<a name='Caliban.Nano.UI.ViewModel.Single.ActivateItem(Caliban.Nano.Contracts.IViewModel).item'></a>
 
 `item` [IViewModel](Caliban.Nano.Contracts.IViewModel.md 'Caliban.Nano.Contracts.IViewModel')
 
@@ -85,9 +85,9 @@ Implements [ActivateItem(IViewModel)](Caliban.Nano.Contracts.IParent.md#Caliban.
 [System.Threading.Tasks.Task&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')[System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')  
 True if the activation was successful; otherwise false.
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveOne.DeactivateItem(Caliban.Nano.Contracts.IViewModel,bool)'></a>
+<a name='Caliban.Nano.UI.ViewModel.Single.DeactivateItem(Caliban.Nano.Contracts.IViewModel,bool)'></a>
 
-## ViewModel.ActiveOne.DeactivateItem(IViewModel, bool) Method
+## ViewModel.Single.DeactivateItem(IViewModel, bool) Method
 
 (Awaitable) Deactivates the given view model item.
 
@@ -96,13 +96,13 @@ public virtual System.Threading.Tasks.Task<bool> DeactivateItem(Caliban.Nano.Con
 ```
 #### Parameters
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveOne.DeactivateItem(Caliban.Nano.Contracts.IViewModel,bool).item'></a>
+<a name='Caliban.Nano.UI.ViewModel.Single.DeactivateItem(Caliban.Nano.Contracts.IViewModel,bool).item'></a>
 
 `item` [IViewModel](Caliban.Nano.Contracts.IViewModel.md 'Caliban.Nano.Contracts.IViewModel')
 
 The view model item.
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveOne.DeactivateItem(Caliban.Nano.Contracts.IViewModel,bool).close'></a>
+<a name='Caliban.Nano.UI.ViewModel.Single.DeactivateItem(Caliban.Nano.Contracts.IViewModel,bool).close'></a>
 
 `close` [System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')
 
@@ -115,9 +115,9 @@ Implements [DeactivateItem(IViewModel, bool)](Caliban.Nano.Contracts.IParent.md#
 True if the deactivation was successful; otherwise false.
 ### Events
 
-<a name='Caliban.Nano.UI.ViewModel.ActiveOne.ActiveChanged'></a>
+<a name='Caliban.Nano.UI.ViewModel.Single.ActiveChanged'></a>
 
-## ViewModel.ActiveOne.ActiveChanged Event
+## ViewModel.Single.ActiveChanged Event
 
 Occures when the active item changed.
 

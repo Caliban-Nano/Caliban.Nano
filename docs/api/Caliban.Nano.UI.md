@@ -5,12 +5,11 @@
 | Classes | |
 | :--- | :--- |
 | [Command&lt;T&gt;](Caliban.Nano.UI.Command_T_.md 'Caliban.Nano.UI.Command<T>') | A functional relay command. |
-| [NotifyBase](Caliban.Nano.UI.NotifyBase.md 'Caliban.Nano.UI.NotifyBase') | Chainable implementation of the INotifyPropertyChanged interface. |
 | [TypeFinder](Caliban.Nano.UI.TypeFinder.md 'Caliban.Nano.UI.TypeFinder') | A very optimistic type finder. |
 | [ViewBinder](Caliban.Nano.UI.ViewBinder.md 'Caliban.Nano.UI.ViewBinder') | A recursive view to view model binder. |
 | [ViewModel](Caliban.Nano.UI.ViewModel.md 'Caliban.Nano.UI.ViewModel') | A base view model. |
-| [ViewModel.ActiveAll](Caliban.Nano.UI.ViewModel.ActiveAll.md 'Caliban.Nano.UI.ViewModel.ActiveAll') | A composition conductor for multiple active view models. |
-| [ViewModel.ActiveOne](Caliban.Nano.UI.ViewModel.ActiveOne.md 'Caliban.Nano.UI.ViewModel.ActiveOne') | A composition conductor for single active view models. |
+| [ViewModel.Multiple](Caliban.Nano.UI.ViewModel.Multiple.md 'Caliban.Nano.UI.ViewModel.Multiple') | A composition conductor for multiple active view models. |
+| [ViewModel.Single](Caliban.Nano.UI.ViewModel.Single.md 'Caliban.Nano.UI.ViewModel.Single') | A composition conductor for single active view models. |
 | [WindowManager](Caliban.Nano.UI.WindowManager.md 'Caliban.Nano.UI.WindowManager') | A primitive window manager for single window applications. |
 ### Delegates
 

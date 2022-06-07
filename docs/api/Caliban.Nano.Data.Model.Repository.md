@@ -10,7 +10,7 @@ public abstract class Model.Repository : Caliban.Nano.Data.Model,
 Caliban.Nano.Contracts.IRepository
 ```
 
-Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; [Model](Caliban.Nano.Data.Model.md 'Caliban.Nano.Data.Model') &#129106; Repository
+Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; [NotifyBase](Caliban.Nano.Data.NotifyBase.md 'Caliban.Nano.Data.NotifyBase') &#129106; [Model](Caliban.Nano.Data.Model.md 'Caliban.Nano.Data.Model') &#129106; Repository
 
 Implements [IRepository](Caliban.Nano.Contracts.IRepository.md 'Caliban.Nano.Contracts.IRepository')
 ### Constructors

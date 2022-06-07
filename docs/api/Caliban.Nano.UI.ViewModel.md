@@ -6,15 +6,15 @@
 A base view model.
 
 ```csharp
-public abstract class ViewModel : Caliban.Nano.UI.NotifyBase,
+public abstract class ViewModel : Caliban.Nano.Data.NotifyBase,
 Caliban.Nano.Contracts.IViewModel
 ```
 
-Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; [NotifyBase](Caliban.Nano.UI.NotifyBase.md 'Caliban.Nano.UI.NotifyBase') &#129106; ViewModel
+Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; [NotifyBase](Caliban.Nano.Data.NotifyBase.md 'Caliban.Nano.Data.NotifyBase') &#129106; ViewModel
 
 Derived  
-&#8627; [ActiveAll](Caliban.Nano.UI.ViewModel.ActiveAll.md 'Caliban.Nano.UI.ViewModel.ActiveAll')  
-&#8627; [ActiveOne](Caliban.Nano.UI.ViewModel.ActiveOne.md 'Caliban.Nano.UI.ViewModel.ActiveOne')
+&#8627; [Multiple](Caliban.Nano.UI.ViewModel.Multiple.md 'Caliban.Nano.UI.ViewModel.Multiple')  
+&#8627; [Single](Caliban.Nano.UI.ViewModel.Single.md 'Caliban.Nano.UI.ViewModel.Single')
 
 Implements [IViewModel](Caliban.Nano.Contracts.IViewModel.md 'Caliban.Nano.Contracts.IViewModel')
 ### Constructors
