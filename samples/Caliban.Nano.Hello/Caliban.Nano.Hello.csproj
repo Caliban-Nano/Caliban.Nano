@@ -8,6 +8,7 @@
     <BaseOutputPath>..\..\artifacts</BaseOutputPath>
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
     <ApplicationIcon>app.ico</ApplicationIcon>
+    <EnableNETAnalyzers>False</EnableNETAnalyzers>
   </PropertyGroup>
 
   <ItemGroup>

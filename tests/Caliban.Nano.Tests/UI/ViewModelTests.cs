@@ -53,14 +53,14 @@ namespace Caliban.Nano.Tests.UI
 
             Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
-            var mock = new MockSoloViewModel();
+            var mock = new MockOnlyViewModel();
 
             Assert.IsNull(mock.View);
             Assert.IsNull(mock.Model);
             Assert.IsFalse(mock.IsActive);
             Assert.IsTrue(mock.CanClose);
             Assert.IsNull(mock.Parent);
-            Assert.IsTrue(writer.ToString().Contains("Type MockSoloView could not be found"));
+            Assert.IsTrue(writer.ToString().Contains("Type MockOnlyView could not be found"));
         }
 
         [TestMethod]
@@ -98,7 +98,7 @@ namespace Caliban.Nano.Tests.UI
         [TestMethod]
         public async Task CloseItemAllTest()
         {
-            var parent = new MockOneViewModel();
+            var parent = new MockSingleViewModel();
             var child = new MockViewModel(parent);
 
             Assert.IsTrue(await parent.ActivateItem(child));
@@ -110,7 +110,7 @@ namespace Caliban.Nano.Tests.UI
         [TestMethod]
         public async Task CloseItemOneTest()
         {
-            var parent = new MockAllViewModel();
+            var parent = new MockMultipleViewModel();
             var child = new MockViewModel(parent);
 
             Assert.IsTrue(await parent.ActivateItem(child));
@@ -142,16 +142,16 @@ namespace Caliban.Nano.Tests.UI
         }
 
         [TestClass]
-        public sealed class ActiveAllTests
+        public sealed class MultipleTests
         {
-            private ViewModel.ActiveAll? Mock { get; set; }
+            private ViewModel.Multiple? Mock { get; set; }
 
             [TestInitialize]
             public void Initialize()
             {
                 TypeFinder.Sources.Add(GetType().Assembly);
 
-                Mock = new MockAllViewModel();
+                Mock = new MockMultipleViewModel();
             }
 
             [TestMethod]
@@ -292,16 +292,16 @@ namespace Caliban.Nano.Tests.UI
         }
 
         [TestClass]
-        public sealed class ActiveOneTests
+        public sealed class SingleTests
         {
-            private ViewModel.ActiveOne? Mock { get; set; }
+            private ViewModel.Single? Mock { get; set; }
 
             [TestInitialize]
             public void Initialize()
             {
                 TypeFinder.Sources.Add(GetType().Assembly);
 
-                Mock = new MockOneViewModel();
+                Mock = new MockSingleViewModel();
             }
 
             [TestMethod]

@@ -8,9 +8,9 @@ namespace Caliban.Nano.Tests.Mocks
     {
         public MockViewModel(IViewModel? parent = null) : base(parent) { }
     }
-    internal sealed class MockAllViewModel : ViewModel.ActiveAll { }
-    internal sealed class MockOneViewModel : ViewModel.ActiveOne { }
-    internal sealed class MockSoloViewModel : ViewModel { }
+    internal sealed class MockMultipleViewModel : ViewModel.Multiple { }
+    internal sealed class MockSingleViewModel : ViewModel.Single { }
+    internal sealed class MockOnlyViewModel : ViewModel { }
     internal sealed class MockFailViewModel : ViewModel
     {
         private readonly bool _doActivate;

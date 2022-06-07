@@ -8,7 +8,7 @@ namespace Caliban.Nano.UI
         /// <summary>
         /// A composition conductor for single active view models.
         /// </summary>
-        public abstract class ActiveOne : ViewModel, IParent
+        public abstract class Single : ViewModel, IParent
         {
             /// <inheritdoc />
             public event Action<IViewModel> ActiveChanged;
@@ -25,7 +25,7 @@ namespace Caliban.Nano.UI
             /// Initializes a new instance of this class with bounded event.
             /// </summary>
             /// <param name="parent">The optional parent view model.</param>
-            public ActiveOne(IViewModel? parent = null) : base(parent)
+            public Single(IViewModel? parent = null) : base(parent)
             {
                 ActiveChanged += (_) => NotifyPropertyChanged(() => ActiveItem);
             }

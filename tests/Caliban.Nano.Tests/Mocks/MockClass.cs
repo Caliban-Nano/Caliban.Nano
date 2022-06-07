@@ -1,5 +1,5 @@
 ﻿using System;
-using Caliban.Nano.UI;
+using Caliban.Nano.Data;
 
 namespace Caliban.Nano.Tests.Mocks
 {

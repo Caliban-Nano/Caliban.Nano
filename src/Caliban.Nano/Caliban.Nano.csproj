@@ -20,9 +20,10 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Company>Caliban.Nano</Company>
     <PackageTags>caliban;nano;wpf;mvvm;framework;dependency-injection;event-aggregation;service-locator;automatic-binding</PackageTags>
-    <VersionPrefix>1.6.0</VersionPrefix>
+    <VersionPrefix>1.7.0</VersionPrefix>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <DocumentationFile>..\..\docs\api.xml</DocumentationFile>
+    <EnableNETAnalyzers>False</EnableNETAnalyzers>
   </PropertyGroup>
 
   <ItemGroup>
