@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using Caliban.Nano.Contracts;
 
 namespace Caliban.Nano.Data
@@ -7,11 +6,8 @@ namespace Caliban.Nano.Data
     /// <summary>
     /// A base model.
     /// </summary>
-    public abstract partial class Model : IModel
+    public abstract partial class Model : NotifyBase, IModel
     {
-        /// <inheritdoc />
-        public event PropertyChangedEventHandler? PropertyChanged;
-
         /// <inheritdoc />
         public bool HasChanged { get; protected set; } = false;
 
@@ -69,11 +65,11 @@ namespace Caliban.Nano.Data
                     _values[name] = value;
                 }
 
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+                NotifyPropertyChanged(name);
 
                 foreach (var other in others)
                 {
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(other));
+                    NotifyPropertyChanged(other);
                 }
             }
         }
