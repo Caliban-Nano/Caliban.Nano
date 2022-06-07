@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
-namespace Caliban.Nano.UI
+namespace Caliban.Nano.Data
 {
     /// <summary>
     /// Chainable implementation of the INotifyPropertyChanged interface.
@@ -52,23 +52,21 @@ namespace Caliban.Nano.UI
         /// <returns>True if the value could be set; otherwise false.</returns>
         protected virtual bool SetProperty<T>(ref T field, T value, [CallerMemberName] string? name = null, params string[] others)
         {
-            if (!EqualityComparer<T>.Default.Equals(field, value))
+            if (EqualityComparer<T>.Default.Equals(field, value))
             {
-                field = value;
-
-                NotifyPropertyChanged(name);
-
-                foreach (var other in others)
-                {
-                    NotifyPropertyChanged(other);
-                }
-
-                return true;
+                return false; // Nothing changed
             }
-            else
+
+            field = value;
+
+            NotifyPropertyChanged(name);
+
+            foreach (var other in others)
             {
-                return false;
+                NotifyPropertyChanged(other);
             }
+
+            return true;
         }
     }
 }

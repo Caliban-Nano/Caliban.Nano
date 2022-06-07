@@ -2,7 +2,7 @@
 using Caliban.Nano.Tests.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Caliban.Nano.Tests.UI
+namespace Caliban.Nano.Tests.Data
 {
     [TestClass]
     public sealed class NotifyBaseTests
